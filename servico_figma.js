@@ -109,8 +109,7 @@ const link = (fr, x, y, w, h, destId) => {
       type: 'NODE',
       destinationId: destId,
       navigation: 'NAVIGATE',
-      transition: {type:'SMART_ANIMATE', easing:{type:'EASE_IN_AND_OUT'}, duration:0.3},
-      preserveScrollPosition: false
+      transition: null
     }],
     trigger: {type:'ON_CLICK'}
   }];
