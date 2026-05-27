@@ -105,13 +105,13 @@ const link = (fr, x, y, w, h, destId) => {
   n.resize(Math.max(w,1), Math.max(h,1));
   n.fills = [];
   n.reactions = [{
-    action: {
+    actions: [{
       type: 'NODE',
       destinationId: destId,
       navigation: 'NAVIGATE',
       transition: {type:'SMART_ANIMATE', easing:{type:'EASE_IN_AND_OUT'}, duration:0.3},
       preserveScrollPosition: false
-    },
+    }],
     trigger: {type:'ON_CLICK'}
   }];
   fr.appendChild(n);
