@@ -1,6 +1,6 @@
 // ============================================================
 //  ServiCo v2 — Enhanced 3-Role Prototype
-//  19 Screens: Customer(8) + Provider(6) + Admin(5)
+//  19 Screens on ONE PAGE — 3 rows (Customer / Provider / Admin)
 // ============================================================
 
 const W = 390, H = 844;
@@ -69,9 +69,9 @@ const tx = async (p,s,x,y,sz,c,sty,a) => {
   return n;
 };
 
-const mk = (pg,x,nm) => {
+const mk = (pg,x,nm,row=0) => {
   const f = figma.createFrame();
-  f.name=nm; f.x=x; f.y=0;
+  f.name=nm; f.x=x; f.y=row*960;
   f.resize(W,H); f.fills=sf(BG); f.clipsContent=true;
   pg.appendChild(f);
   return f;
@@ -97,7 +97,7 @@ const lnk = (fr,x,y,w,h,dest) => {
   n.resize(Math.max(w,1),Math.max(h,1));
   n.fills = [];
   n.reactions = [{
-    actions:[{type:'NODE',destinationId:dest,navigation:'NAVIGATE',transition:null}],
+    actions:[{type:'NODE', destinationId:dest, navigation:'NAVIGATE'}],
     trigger:{type:'ON_CLICK'}
   }];
   fr.appendChild(n);
@@ -203,21 +203,19 @@ const NAV_A = async (f,a) => {
   }
 };
 
-// ── Page Setup ───────────────────────────────────────────────
+// ── Single Page Setup ────────────────────────────────────────
+// All 19 screens on one page in 3 rows
 const root = figma.root;
-root.children[0].name = '01 Customer';
-const custPage = root.children[0];
-
-const provPage = root.children.length < 2 ? figma.createPage() : root.children[1];
-provPage.name = '02 Service Provider';
-
-const adminPage = root.children.length < 3 ? figma.createPage() : root.children[2];
-adminPage.name = '03 Admin';
+const pg = root.children[0];
+pg.name = 'ServiCo — All Screens';
+// alias so all mk() calls use the same page
+const custPage = pg;
+const provPage = pg;
+const adminPage = pg;
 
 // ════════════════════════════════════════════════════════════
-//  CUSTOMER — 8 Screens
+//  CUSTOMER — Row 1  (y = 0)
 // ════════════════════════════════════════════════════════════
-await figma.setCurrentPageAsync(custPage);
 
 // C1: LOGIN
 const C1 = async () => {
@@ -686,13 +684,12 @@ figma.viewport.scrollAndZoomIntoView(custPage.children);
 console.log('Customer screens done (8/19)');
 
 // ════════════════════════════════════════════════════════════
-//  PROVIDER — 6 Screens
+//  PROVIDER — Row 2  (y = 960)
 // ════════════════════════════════════════════════════════════
-await figma.setCurrentPageAsync(provPage);
 
 // P1: PROVIDER LOGIN
 const P1 = async () => {
-  const f = mk(provPage,0,'P1 Provider Login');
+  const f = mk(provPage,0,'P1 Provider Login',1);
   tg(f,{r:.06,g:.09,b:.03},H);
   bx(f,155,52,80,80,OG,.1,40); bx(f,163,60,64,64,OG,.14,32); bx(f,171,68,48,48,OG,1,24);
   await tx(f,'S',186,80,22,BK,'Bold');
@@ -725,7 +722,7 @@ const P1 = async () => {
 
 // P2: PROVIDER DASHBOARD
 const P2 = async () => {
-  const f = mk(provPage,450,'P2 Dashboard');
+  const f = mk(provPage,450,'P2 Dashboard',1);
   tg(f,{r:.05,g:.10,b:.03},240);
   await SB(f);
   // Header
@@ -786,7 +783,7 @@ const P2 = async () => {
 
 // P3: REQUEST DETAIL
 const P3 = async () => {
-  const f = mk(provPage,900,'P3 Request Detail');
+  const f = mk(provPage,900,'P3 Request Detail',1);
   tg(f,{r:.05,g:.10,b:.03},190);
   await SB(f);
   await HDR(f,'New Request');
@@ -844,7 +841,7 @@ const P3 = async () => {
 
 // P4: ACTIVE JOBS
 const P4 = async () => {
-  const f = mk(provPage,1350,'P4 Active Jobs');
+  const f = mk(provPage,1350,'P4 Active Jobs',1);
   await SB(f);
   await tx(f,'My Jobs',20,50,20,WH,'Bold');
   await tx(f,'Wed 27 May',292,52,11,GR);
@@ -897,7 +894,7 @@ const P4 = async () => {
 
 // P5: JOB DETAIL
 const P5 = async () => {
-  const f = mk(provPage,1800,'P5 Job Detail');
+  const f = mk(provPage,1800,'P5 Job Detail',1);
   await SB(f);
   await HDR(f,'Job #7284','In Progress');
   bx(f,272,46,92,30,GN,.15,15); bx(f,280,56,8,8,GN,1,4); await tx(f,'In Progress',294,53,10,GN,'Semi Bold');
@@ -955,7 +952,7 @@ const P5 = async () => {
 
 // P6: EARNINGS
 const P6 = async () => {
-  const f = mk(provPage,2250,'P6 Earnings');
+  const f = mk(provPage,2250,'P6 Earnings',1);
   tg(f,{r:.03,g:.09,b:.04},240);
   await SB(f);
   await tx(f,'Earnings',20,50,20,WH,'Bold');
@@ -1016,17 +1013,15 @@ lnk(p4,32,218,132,24,p5.id);
 for (let i=0;i<3;i++) lnk(p4,268,288+i*90,72,46,p5.id);
 lnk(p5,192,660,178,52,p6.id);
 
-figma.viewport.scrollAndZoomIntoView(provPage.children);
 console.log('Provider screens done (14/19)');
 
 // ════════════════════════════════════════════════════════════
-//  ADMIN — 5 Screens
+//  ADMIN — Row 3  (y = 1920)
 // ════════════════════════════════════════════════════════════
-await figma.setCurrentPageAsync(adminPage);
 
 // A1: ADMIN DASHBOARD
 const A1 = async () => {
-  const f = mk(adminPage,0,'A1 Admin Dashboard');
+  const f = mk(adminPage,0,'A1 Admin Dashboard',2);
   tg(f,{r:.09,g:.04,b:.18},240);
   await SB(f);
   // Header
@@ -1094,7 +1089,7 @@ const A1 = async () => {
 
 // A2: USER MANAGEMENT
 const A2 = async () => {
-  const f = mk(adminPage,450,'A2 User Management');
+  const f = mk(adminPage,450,'A2 User Management',2);
   await SB(f);
   await HDR(f,'User Management');
   // Tabs
@@ -1140,7 +1135,7 @@ const A2 = async () => {
 
 // A3: ORDERS MONITOR
 const A3 = async () => {
-  const f = mk(adminPage,900,'A3 Orders Monitor');
+  const f = mk(adminPage,900,'A3 Orders Monitor',2);
   await SB(f);
   await tx(f,'Orders Monitor',20,50,20,WH,'Bold');
   await tx(f,'1,284 today',272,52,10,GR);
@@ -1184,7 +1179,7 @@ const A3 = async () => {
 
 // A4: COMPLAINTS
 const A4 = async () => {
-  const f = mk(adminPage,1350,'A4 Complaints');
+  const f = mk(adminPage,1350,'A4 Complaints',2);
   await SB(f);
   await tx(f,'Complaints',20,50,20,WH,'Bold');
   bx(f,278,46,82,30,RD,.15,15); await tx(f,'14 Open',289,54,11,RD,'Semi Bold');
@@ -1227,7 +1222,7 @@ const A4 = async () => {
 
 // A5: ANALYTICS
 const A5 = async () => {
-  const f = mk(adminPage,1800,'A5 Analytics');
+  const f = mk(adminPage,1800,'A5 Analytics',2);
   tg(f,{r:.09,g:.04,b:.18},220);
   await SB(f);
   await tx(f,'Analytics',20,50,20,WH,'Bold');
@@ -1312,7 +1307,7 @@ lnk(a3,274,170,68,22,a4.id);
 lnk(a4,216,200,70,22,a1.id);
 lnk(a5,284,742,86,16,a1.id);
 
-figma.viewport.scrollAndZoomIntoView(adminPage.children);
+figma.viewport.scrollAndZoomIntoView(pg.children);
 
 console.log('====================================');
 console.log('ServiCo v2 Complete! All 19 screens built.');
