@@ -6432,7 +6432,7 @@ const C60 = async () => {
   await tx(f,'🎁',28,106,36,GN);
   await tx(f,'ServiCo',78,106,22,WH,'Bold');
   await tx(f,'Gift Card',78,132,16,GN,'Semi Bold');
-  await tx(f,'• • • •   • • • •   • • • •   XXXX',28,184,11,WH,.5);
+  await tx(f,'• • • •   • • • •   • • • •   XXXX',28,184,11,WH,'Regular',.5);
   // Amount picker
   await tx(f,'Select Amount',20,228,13,WH,'Semi Bold');
   const amounts=['₹250','₹500','₹1,000','₹2,000'];
