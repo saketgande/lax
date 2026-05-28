@@ -1174,7 +1174,7 @@ const C20 = async () => {
     const isp=m.from==='prov';
     const maxw=240, bw=Math.min(maxw, m.t.length*6.8+24);
     const bx2=isp?20:W-20-bw;
-    bx(f,bx2,cy2,bw,40,isp?CARD:CY,1,isp?[16,16,16,4]:[16,16,4,16]);
+    bx(f,bx2,cy2,bw,40,isp?CARD:CY,1,16);
     await tx(f,m.t, bx2+10,cy2+12, 11, isp?LG:BK);
     await tx(f,m.tm, bx2+(isp?0:bw-42),cy2+44, 9, GR);
     cy2+=62;
@@ -2159,7 +2159,7 @@ const P15 = async () => {
     const isp=m.from==='prov';
     const bw=Math.min(230, m.t.length*6.5+24);
     const bx2=isp?20:W-20-bw;
-    bx(f,bx2,pcy,bw,40,isp?CARD:OG,1,isp?[16,16,16,4]:[16,16,4,16]);
+    bx(f,bx2,pcy,bw,40,isp?CARD:OG,1,16);
     await tx(f,m.t, bx2+10,pcy+12, 11, isp?LG:BK);
     await tx(f,m.tm, bx2+(isp?0:bw-28),pcy+44, 9, GR);
     pcy+=60;
