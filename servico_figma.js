@@ -97,7 +97,13 @@ const lnk = (fr,x,y,w,h,dest) => {
   n.resize(Math.max(w,1),Math.max(h,1));
   n.fills = [];
   n.reactions = [{
-    actions:[{type:'NODE', destinationId:dest, navigation:'NAVIGATE'}],
+    actions:[{
+      type:'NODE',
+      destinationId:dest,
+      navigation:'NAVIGATE',
+      transition:{type:'DISSOLVE', easing:{type:'EASE_IN_AND_OUT'}, duration:0.3},
+      preserveScrollPosition:false
+    }],
     trigger:{type:'ON_CLICK'}
   }];
   fr.appendChild(n);
@@ -668,19 +674,6 @@ const C8 = async () => {
 // Build customer screens
 const c1=await C1(), c2=await C2(), c3=await C3(), c4=await C4();
 const c5=await C5(), c6=await C6(), c7=await C7(), c8=await C8();
-
-// Customer prototype links
-lnk(c1,20,472,350,52,c3.id);
-lnk(c1,248,684,132,18,c2.id);
-lnk(c2,20,696,350,52,c3.id);
-for (let i=0;i<6;i++){const col=i%3,row=Math.floor(i/3); lnk(c3,20+col*120,358+row*94,110,84,c4.id);}
-lnk(c3,20,584,170,86,c4.id); lnk(c3,200,584,170,86,c4.id);
-for (let i=0;i<4;i++) lnk(c4,268,262+i*122,80,52,c5.id);
-lnk(c5,18,792,354,36,c6.id);
-lnk(c6,20,654,350,52,c7.id);
-lnk(c7,190,736,180,44,c8.id);
-
-figma.viewport.scrollAndZoomIntoView(custPage.children);
 console.log('Customer screens done (8/19)');
 
 // ════════════════════════════════════════════════════════════
@@ -1005,14 +998,6 @@ const P6 = async () => {
 
 const p1=await P1(), p2=await P2(), p3=await P3();
 const p4=await P4(), p5=await P5(), p6=await P6();
-
-lnk(p1,20,460,350,52,p2.id);
-lnk(p2,82,404,70,22,p3.id); lnk(p2,82,512,70,22,p3.id);
-lnk(p3,194,678,176,54,p4.id);
-lnk(p4,32,218,132,24,p5.id);
-for (let i=0;i<3;i++) lnk(p4,268,288+i*90,72,46,p5.id);
-lnk(p5,192,660,178,52,p6.id);
-
 console.log('Provider screens done (14/19)');
 
 // ════════════════════════════════════════════════════════════
@@ -1296,22 +1281,47 @@ const A5 = async () => {
 };
 
 const a1=await A1(), a2=await A2(), a3=await A3(), a4=await A4(), a5=await A5();
+console.log('Admin screens done (19/19)');
 
-// Admin prototype links
-lnk(a1,20,440,164,48,a2.id);
-lnk(a1,198,440,164,48,a3.id);
-lnk(a1,20,620,164,48,a4.id);
-lnk(a1,198,620,164,48,a5.id);
-lnk(a2,274,238,66,24,a3.id);
-lnk(a3,274,170,68,22,a4.id);
-lnk(a4,216,200,70,22,a1.id);
-lnk(a5,284,742,86,16,a1.id);
+// ── All 19 screens built — now add prototype links ───────────
+// Wrapped in try/catch so a failed link never blocks screen rendering
+try {
+  // Customer flow
+  lnk(c1,20,472,350,52,c3.id);
+  lnk(c1,248,684,132,18,c2.id);
+  lnk(c2,20,696,350,52,c3.id);
+  for (let i=0;i<6;i++){const col=i%3,row=Math.floor(i/3); lnk(c3,20+col*120,358+row*94,110,84,c4.id);}
+  lnk(c3,20,584,170,86,c4.id); lnk(c3,200,584,170,86,c4.id);
+  for (let i=0;i<4;i++) lnk(c4,268,262+i*122,80,52,c5.id);
+  lnk(c5,18,792,354,36,c6.id);
+  lnk(c6,20,654,350,52,c7.id);
+  lnk(c7,190,736,180,44,c8.id);
+  // Provider flow
+  lnk(p1,20,460,350,52,p2.id);
+  lnk(p2,82,404,70,22,p3.id); lnk(p2,82,512,70,22,p3.id);
+  lnk(p3,194,678,176,54,p4.id);
+  lnk(p4,32,218,132,24,p5.id);
+  for (let i=0;i<3;i++) lnk(p4,268,288+i*90,72,46,p5.id);
+  lnk(p5,192,660,178,52,p6.id);
+  // Admin flow
+  lnk(a1,20,440,164,48,a2.id);
+  lnk(a1,198,440,164,48,a3.id);
+  lnk(a1,20,620,164,48,a4.id);
+  lnk(a1,198,620,164,48,a5.id);
+  lnk(a2,274,238,66,24,a3.id);
+  lnk(a3,274,170,68,22,a4.id);
+  lnk(a4,216,200,70,22,a1.id);
+  lnk(a5,284,742,86,16,a1.id);
+  console.log('Prototype links added');
+} catch(e) {
+  console.error('Links skipped (reactions API error):', e.message);
+}
 
 figma.viewport.scrollAndZoomIntoView(pg.children);
 
 console.log('====================================');
-console.log('ServiCo v2 Complete! All 19 screens built.');
-console.log('Page 1 (Customer):  C1>C2>C3>C4>C5>C6>C7>C8');
-console.log('Page 2 (Provider):  P1>P2>P3>P4>P5>P6');
-console.log('Page 3 (Admin):     A1>A2>A3>A4>A5');
+console.log('ServiCo v2 Complete! All 19 screens on one page.');
+console.log('Row 1 (y=0):    C1 C2 C3 C4 C5 C6 C7 C8  — Customer');
+console.log('Row 2 (y=960):  P1 P2 P3 P4 P5 P6        — Provider');
+console.log('Row 3 (y=1920): A1 A2 A3 A4 A5            — Admin');
 console.log('====================================');
