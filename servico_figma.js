@@ -4987,7 +4987,7 @@ const C51 = async () => {
     const lines=Math.ceil(approxLen/28), bh=lines*18+20;
     const bw=Math.min(maxW, approxLen*6.5+24);
     const bx_=isUser?W-20-bw:20;
-    bx(f,bx_,ypos,bw,bh,isUser?CY:CARD,1,isUser?[0,16,16,16]:16);
+    bx(f,bx_,ypos,bw,bh,isUser?CY:CARD,1,16);
     await tx(f,m.text.substring(0,40),bx_+10,ypos+8,10,isUser?BK:LG);
     if(m.text.length>40) await tx(f,m.text.substring(40,80),bx_+10,ypos+24,10,isUser?BK:LG);
     if(m.text.length>80) await tx(f,m.text.substring(80),bx_+10,ypos+40,10,isUser?BK:LG);
