@@ -2700,7 +2700,7 @@ const A6 = async () => {
     const dy=oy+114+(k.docs.length*26);
     bx(f,20,dy,350,36,CARD,1,12);
     await tx(f,'Admin Note (optional):', 28,dy+8, 10, GR);
-    await tx(f,'Enter review notes here...', 28,dy+22, 10, GR,.35);
+    await tx(f,'Enter review notes here...', 28,dy+22, 10, GR,'Regular',.35);
     bx(f,20,dy+44,158,42,{r:.22,g:.06,b:.06},1,21);
     await tx(f,'Reject', 70,dy+60, 13, RD,'Bold');
     bx(f,194,dy+44,176,42,GN,1,21); bx(f,195,dy+45,174,1,WH,.2,20);
