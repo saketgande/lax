@@ -1462,7 +1462,7 @@ const c13=await C13(), c14=await C14();
 const c15=await C15(), c16=await C16(), c17=await C17(), c18=await C18();
 const c19=await C19(), c20=await C20(), c21=await C21(), c22=await C22();
 const c23=await C23(), c24=await C24(), c25=await C25(), c26=await C26();
-console.log('Customer screens done (26/59)');
+console.log('Customer screens done (26/84) — extended screens built after Provider & Admin definitions');
 
 // ════════════════════════════════════════════════════════════
 //  PROVIDER — Row 2  (y = 960)
@@ -2378,7 +2378,7 @@ const p7=await P7(), p8=await P8(), p9=await P9(), p10=await P10();
 const p11=await P11(), p12=await P12(), p13=await P13(), p14=await P14();
 const p15=await P15(), p16=await P16(), p17=await P17(), p18=await P18();
 const p19=await P19();
-console.log('Provider screens done (45/59)');
+console.log('Provider screens done (45/84) — extended screens built after Admin definitions');
 
 // ════════════════════════════════════════════════════════════
 //  ADMIN — Row 3  (y = 1920)
@@ -3100,11 +3100,1327 @@ const A14 = async () => {
   return f;
 };
 
+// ════════════════════════════════════════════════════════════
+//  CUSTOMER — Additional Screens  C27–C36
+// ════════════════════════════════════════════════════════════
+
+// C27: MAP VIEW — Browse providers spatially
+const C27 = async () => {
+  const f = mk(custPage,11700,'C27 Map View');
+  await SB(f);
+  // Map background
+  bx(f,0,0,W,H,{r:.05,g:.09,b:.06},1);
+  // Grid lines simulating map tiles
+  for (let i=0;i<8;i++) bx(f,0,i*110,W,1,{r:.12,g:.17,b:.12},.6);
+  for (let i=0;i<5;i++) bx(f,i*100,0,1,H,{r:.12,g:.17,b:.12},.6);
+  // Roads
+  bx(f,0,320,W,8,{r:.14,g:.18,b:.14},1); bx(f,180,0,8,H,{r:.14,g:.18,b:.14},1);
+  bx(f,0,560,W,5,{r:.12,g:.16,b:.12},1); bx(f,90,0,5,H,{r:.12,g:.16,b:.12},1);
+  // Provider pins
+  const pins=[
+    {x:140,y:180,nm:'Ravi Auto Spa',rt:'4.9',pr:'₹299',c:CY},
+    {x:240,y:270,nm:'Vijay Clean',rt:'4.7',pr:'₹199',c:OG},
+    {x:80,y:400,nm:'SparkShine',rt:'4.8',pr:'₹349',c:GN},
+    {x:300,y:480,nm:'AquaWash',rt:'4.6',pr:'₹149',c:PK},
+    {x:180,y:600,nm:'ProWash',rt:'4.5',pr:'₹249',c:AM},
+  ];
+  for (const p of pins){
+    bx(f,p.x-16,p.y-36,32,32,p.c,.9,16); bx(f,p.x-2,p.y-4,4,12,p.c,1,2);
+    await tx(f,'★',p.x-8,p.y-30,14,WH,'Bold');
+    // Popup on first pin
+    if(p.c===CY){
+      bx(f,p.x-60,p.y-78,130,38,CARD,1,8); bx(f,p.x-60,p.y-78,130,2,CY,.7,2);
+      await tx(f,p.nm,p.x-54,p.y-72,9,WH,'Semi Bold');
+      await tx(f,'★ '+p.rt+'  '+p.pr,p.x-54,p.y-58,8,LG);
+    }
+  }
+  // User location pin
+  bx(f,183,317,14,14,BL,1,7); bx(f,185,319,10,10,WH,.6,5);
+  bx(f,189,325,2,8,BL,1,1);
+  // Top search bar
+  bx(f,16,50,318,44,CARD,1,22); bx(f,16,50,318,1,WH,.08,22);
+  await tx(f,'🔍',26,63,14,GR);
+  await tx(f,'Search services near you',48,63,12,GR);
+  bx(f,280,58,58,28,CY,.15,14); await tx(f,'Filter',286,64,9,CY,'Semi Bold');
+  // Bottom sheet — featured providers
+  bx(f,0,660,W,184,DP,1,0); bx(f,0,660,W,1,EDGE,.5);
+  bx(f,172,668,46,4,EDGE,1,2);
+  await tx(f,'Nearby Providers',16,678,14,WH,'Bold');
+  await tx(f,'5 within 3 km',290,682,10,GR);
+  const provList=[{nm:'Ravi Auto Spa',dist:'0.8 km',rt:'4.9',pr:'₹299'},{nm:'SparkShine',dist:'1.2 km',rt:'4.8',pr:'₹349'}];
+  for (let i=0;i<provList.length;i++){
+    const p=provList[i], oy=702+i*66;
+    CD(f,16,oy,358,58,10); bx(f,16,oy,3,58,CY,1,2);
+    bx(f,24,oy+9,40,40,SURF,1,20);
+    await tx(f,'🚗',28,oy+17,20,WH);
+    await tx(f,p.nm,74,oy+10,12,WH,'Semi Bold');
+    await tx(f,'★ '+p.rt+'  •  '+p.dist,74,oy+28,10,GR);
+    await tx(f,p.pr,300,oy+18,13,CY,'Bold');
+  }
+  await LBL(f,'C27 / MAP VIEW');
+  return f;
+};
+
+// C28: SEARCH RESULTS
+const C28 = async () => {
+  const f = mk(custPage,12150,'C28 Search Results');
+  bx(f,0,0,W,108,SURF,1);
+  await SB(f);
+  // Search bar active
+  bx(f,16,44,318,44,CARD,1,22); bx(f,16,44,318,1,CY,.4,22);
+  await tx(f,'←',22,54,16,CY,'Bold');
+  await tx(f,'car wash',52,56,13,WH);
+  bx(f,316,50,18,18,GR,.3,9); await tx(f,'✕',319,53,10,GR);
+  // Recent searches
+  await tx(f,'Recent Searches',20,102,11,GR);
+  const recents=['AC Repair','Bike Service','Deep Cleaning','Tyre Change'];
+  for (let i=0;i<recents.length;i++){
+    bx(f,20+i*88,118,80,28,CARD,1,14); bx(f,20+i*88,118,80,1,EDGE,.3,14);
+    await tx(f,'🕐',26+i*88,124,10,GR); await tx(f,recents[i],42+i*88,125,9,GR);
+  }
+  // Filter chips
+  await tx(f,'Car Wash',20,162,11,LG);
+  bx(f,90,156,64,24,CY,.15,12); bx(f,90,156,64,1,CY,.4,12);
+  await tx(f,'★ 4.5+',96,161,9,CY,'Semi Bold');
+  bx(f,162,156,58,24,CARD,1,12); await tx(f,'₹0–500',166,161,9,GR);
+  bx(f,228,156,54,24,CARD,1,12); await tx(f,'Today',232,161,9,GR);
+  bx(f,290,156,64,24,CARD,1,12); await tx(f,'Nearest',294,161,9,GR);
+  // Result count
+  await tx(f,'24 providers found',20,194,12,LG);
+  await tx(f,'Sort: Recommended ▾',256,194,10,CY);
+  DIV(f,210);
+  // Results list
+  const results=[
+    {nm:'Ravi Auto Spa',svc:'Car Wash & Polish',rt:'4.9',rv:432,dist:'0.8 km',pr:'₹299',tag:'Best Rated',tc:ST},
+    {nm:'AquaWash Pro',svc:'Premium Car Wash',rt:'4.7',rv:218,dist:'1.4 km',pr:'₹199',tag:'Fastest',tc:GN},
+    {nm:'SparkShine',svc:'Full Detailing',rt:'4.8',rv:367,dist:'2.1 km',pr:'₹349',tag:'Top Pick',tc:CY},
+    {nm:'GlossyWash',svc:'Basic + Interior',rt:'4.5',rv:129,dist:'2.8 km',pr:'₹149',tag:'Budget',tc:AM},
+  ];
+  for (let i=0;i<results.length;i++){
+    const r=results[i], oy=218+i*140;
+    CD(f,20,oy,350,128,12);
+    bx(f,20,oy,350,128,WH,.02,12);
+    // Thumbnail
+    bx(f,28,oy+12,80,80,SURF,1,8); bx(f,34,oy+24,68,56,EDGE,.4,6);
+    await tx(f,'🚗',56,oy+34,28,CY);
+    await BDG(f,28,oy+8,r.tag,r.tc);
+    // Details
+    await tx(f,r.nm,118,oy+16,14,WH,'Bold');
+    await tx(f,r.svc,118,oy+34,10,GR);
+    await tx(f,'★ '+r.rt,118,oy+52,11,ST,'Semi Bold');
+    await tx(f,'('+r.rv+' reviews)',152,oy+54,9,GR);
+    await tx(f,'📍 '+r.dist,118,oy+70,10,GR);
+    await tx(f,r.pr,280,oy+16,16,CY,'Bold');
+    await tx(f,'per session',270,oy+36,8,GR);
+    await BTN(f,210,oy+86,148,'Book Now',CY);
+  }
+  await NAV_C(f,1);
+  await LBL(f,'C28 / SEARCH RESULTS');
+  return f;
+};
+
+// C29: EDIT PROFILE
+const C29 = async () => {
+  const f = mk(custPage,12600,'C29 Edit Profile');
+  bx(f,0,0,W,130,SURF,1);
+  await SB(f);
+  await HDR(f,'Edit Profile');
+  // Avatar upload
+  bx(f,155,84,80,80,CY,.1,40); bx(f,155,84,80,80,CY,.08,40);
+  await AV(f,155,84,80,'RM',CY);
+  bx(f,213,128,28,28,OG,1,14); await tx(f,'📷',218,133,12,WH);
+  await tx(f,'Change Photo',145,170,12,CY);
+  // Form fields
+  await INP(f,20,196,350,'Full Name','Ramprasad Mokka',CY);
+  await INP(f,20,272,350,'Mobile Number','+91 98765 43210',CY);
+  await INP(f,20,348,350,'Email Address','ramprasad@gmail.com',CY);
+  await INP(f,20,424,350,'Date of Birth','12 March 1990',CY);
+  // Gender
+  await tx(f,'Gender',20,486,11,LG);
+  const genders=['Male','Female','Other'];
+  for (let i=0;i<genders.length;i++){
+    const sel=i===0;
+    bx(f,20+i*120,502,110,40,sel?CY:CARD,sel?.15:1,20);
+    if(sel){bx(f,20+i*120,502,110,1,CY,.5,20);}
+    await tx(f,genders[i],46+i*120,517,12,sel?CY:GR,sel?'Semi Bold':'Regular');
+  }
+  await INP(f,20,558,350,'City / Area','Banjara Hills, Hyderabad',CY);
+  // Language
+  await tx(f,'Preferred Language',20,622,11,LG);
+  bx(f,20,638,350,48,CARD,1,12); bx(f,20,638,350,1,WH,.05,12); bx(f,20,638,3,48,CY,1,2);
+  await tx(f,'English',36,654,13,LG); await tx(f,'▾',334,654,13,GR);
+  await tx(f,'Telugu  •  Hindi  •  +2 more',36,670,9,GR);
+  await BTN(f,20,706,350,'Save Changes',CY);
+  await LBL(f,'C29 / EDIT PROFILE');
+  return f;
+};
+
+// C30: PAYMENT METHODS
+const C30 = async () => {
+  const f = mk(custPage,13050,'C30 Payment Methods');
+  await SB(f);
+  await HDR(f,'Payment Methods','Manage your saved options');
+  bx(f,0,0,W,44,SURF,1);
+  // Wallet balance card
+  bx(f,20,92,350,88,NV,1,16); bx(f,20,92,350,1,CY,.3,16);
+  bx(f,20,92,350,88,CY,.05,16);
+  await tx(f,'ServiCo Wallet',28,104,13,LG);
+  await tx(f,'₹ 1,250.00',28,122,26,WH,'Bold');
+  await tx(f,'Available Balance',28,154,10,GR);
+  bx(f,270,110,80,32,CY,.15,16); bx(f,270,110,80,1,CY,.3,16);
+  await tx(f,'+ Add Money',276,118,9,CY,'Semi Bold');
+  // Saved cards
+  await tx(f,'Saved Cards',20,196,13,WH,'Semi Bold');
+  const cards=[
+    {type:'VISA',num:'•••• •••• •••• 4521',exp:'12/26',c:BL,def:true},
+    {type:'MASTERCARD',num:'•••• •••• •••• 8834',exp:'09/25',c:OG,def:false},
+  ];
+  for (let i=0;i<cards.length;i++){
+    const card=cards[i], oy=216+i*96;
+    CD(f,20,oy,350,84,12); bx(f,20,oy,350,84,card.c,.05,12);
+    bx(f,28,oy+14,48,32,card.c,.2,6);
+    await tx(f,card.type,32,oy+24,8,card.c,'Bold');
+    await tx(f,card.num,90,oy+22,13,WH,'Semi Bold');
+    await tx(f,'Exp: '+card.exp,90,oy+42,10,GR);
+    if(card.def) await BDG(f,260,oy+14,'Default',GN);
+    bx(f,316,oy+32,28,20,RD,.15,10); await tx(f,'Del',320,oy+37,8,RD);
+  }
+  // UPI
+  await tx(f,'UPI',20,414,13,WH,'Semi Bold');
+  CD(f,20,434,350,64,12);
+  await tx(f,'ramprasad@upi',36,450,13,WH); await tx(f,'Primary UPI ID',36,468,10,GR);
+  await BDG(f,278,448,'Active',GN);
+  // BNPL
+  await tx(f,'Buy Now Pay Later',20,512,13,WH,'Semi Bold');
+  CD(f,20,532,350,64,12); bx(f,20,532,350,64,PK,.04,12);
+  await tx(f,'ServiCo BNPL — ₹5,000 limit',36,548,12,WH);
+  await tx(f,'₹0 used  •  ₹5,000 available',36,566,10,GR);
+  await BDG(f,278,548,'Active',PK);
+  // Add new
+  bx(f,20,612,350,52,CARD,1,26); bx(f,20,612,350,1,CY,.2,26);
+  bx(f,20,612,350,52,CY,.05,26);
+  await tx(f,'+ Add New Payment Method',100,626,13,CY,'Semi Bold');
+  // Auto-pay toggle
+  CD(f,20,678,350,64,12);
+  await tx(f,'Auto-pay for Subscriptions',36,694,13,WH,'Semi Bold');
+  await tx(f,'Charge saved card automatically',36,712,10,GR);
+  bx(f,306,698,36,20,GN,1,10); bx(f,322,700,16,16,WH,1,8);
+  await LBL(f,'C30 / PAYMENT METHODS');
+  return f;
+};
+
+// C31: COMPLAINT / ISSUE FILING
+const C31 = async () => {
+  const f = mk(custPage,13500,'C31 Complaint Filing');
+  await SB(f);
+  await HDR(f,'Report an Issue','Booking #SVC-2024-8821');
+  bx(f,0,0,W,44,SURF,1);
+  // Booking reference
+  CD(f,20,92,350,72,12);
+  await tx(f,'Booking Reference',28,106,11,GR);
+  await tx(f,'#SVC-2024-8821  —  Car Wash',28,122,13,WH,'Semi Bold');
+  await tx(f,'Ravi Auto Spa  •  Today 2:00 PM  •  ₹299',28,142,10,GR);
+  // Issue type
+  await tx(f,'What went wrong?',20,180,13,WH,'Semi Bold');
+  const issues=['Service not completed','Quality was poor','Provider was late','Overcharged','Safety concern','Provider misconduct'];
+  for (let i=0;i<issues.length;i++){
+    const sel=i===1, oy=200+i*50;
+    CD(f,20,oy,350,42,8);
+    if(sel){bx(f,20,oy,350,42,RD,.08,8); bx(f,20,oy,3,42,RD,1,2);}
+    bx(f,322,oy+11,20,20,sel?RD:EDGE,sel?.3:.15,10);
+    if(sel){bx(f,328,oy+15,8,8,RD,1,4);}
+    await tx(f,issues[i],40,oy+13,12,sel?RD:LG,sel?'Semi Bold':'Regular');
+  }
+  // Description
+  await tx(f,'Describe the issue',20,508,13,WH,'Semi Bold');
+  bx(f,20,528,350,100,CARD,1,12); bx(f,20,528,350,1,WH,.05,12); bx(f,20,528,3,100,RD,.7,2);
+  await tx(f,'The car was returned with scratches on the\nleft side door that were not there before.',28,540,11,LG);
+  // Photo evidence
+  await tx(f,'Attach Evidence (optional)',20,642,13,WH,'Semi Bold');
+  const evBoxes=['Photo 1','Photo 2','+ Add'];
+  for (let i=0;i<evBoxes.length;i++){
+    bx(f,20+i*120,660,110,72,CARD,1,8); bx(f,20+i*120,660,110,1,EDGE,.3,8);
+    await tx(f,evBoxes[i],i===2?56+i*120:44+i*120,690,10,i===2?CY:GR,i===2?'Semi Bold':'Regular');
+  }
+  await BTN(f,20,752,350,'Submit Complaint',RD);
+  await LBL(f,'C31 / COMPLAINT FILING');
+  return f;
+};
+
+// C32: REFUND STATUS
+const C32 = async () => {
+  const f = mk(custPage,13950,'C32 Refund Status');
+  await SB(f);
+  await HDR(f,'Refund Status');
+  bx(f,0,0,W,44,SURF,1);
+  // Status hero
+  bx(f,130,90,130,130,GN,.08,65);
+  await tx(f,'₹',174,102,28,GN,'Bold');
+  await tx(f,'↩',180,120,38,GN,'Bold');
+  await tx(f,'Refund Initiated',100,236,18,WH,'Bold');
+  await tx(f,'₹ 299.00',140,262,22,GN,'Bold');
+  await tx(f,'Expected in 3–5 business days',80,292,11,GR);
+  // Details card
+  CD(f,20,320,350,140,12);
+  const refDets=[['Booking ID','#SVC-2024-8821'],['Service','Car Wash - Premium'],['Refund Reason','Service not completed'],['Initiated On','28 May 2024, 4:30 PM'],['To Account','VISA •••• 4521']];
+  for (let i=0;i<refDets.length;i++){
+    await tx(f,refDets[i][0],32,336+i*24,10,GR);
+    await tx(f,refDets[i][1],200,336+i*24,10,LG,'Semi Bold');
+  }
+  // Timeline
+  await tx(f,'Refund Timeline',20,476,13,WH,'Semi Bold');
+  const steps=[
+    {label:'Complaint Received',dt:'28 May 2:30 PM',done:true},
+    {label:'Refund Approved',dt:'28 May 4:30 PM',done:true},
+    {label:'Bank Processing',dt:'Est. 29–30 May',done:false},
+    {label:'Amount Credited',dt:'Est. 31 May',done:false},
+  ];
+  for (let i=0;i<steps.length;i++){
+    const s=steps[i], oy=498+i*64;
+    bx(f,36,oy,20,20,s.done?GN:EDGE,1,10);
+    if(s.done) await tx(f,'✓',40,oy+3,11,WH,'Bold');
+    if(i<steps.length-1) bx(f,45,oy+20,2,44,s.done?GN:EDGE,.5);
+    await tx(f,s.label,66,oy+1,12,s.done?WH:GR,s.done?'Semi Bold':'Regular');
+    await tx(f,s.dt,66,oy+18,10,s.done?GN:GR);
+  }
+  await BTN2(f,20,764,350,'Contact Support',CY);
+  await LBL(f,'C32 / REFUND STATUS');
+  return f;
+};
+
+// C33: RECOMMENDATIONS / EXPLORE
+const C33 = async () => {
+  const f = mk(custPage,14400,'C33 Explore & Discover');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  // Header
+  bx(f,0,44,W,56,SURF,1); bx(f,0,100,W,1,EDGE,.3);
+  await tx(f,'Explore',20,54,22,WH,'Bold');
+  await tx(f,'Discover services for you',20,78,11,GR);
+  bx(f,330,50,36,36,SURF,1,18); await tx(f,'🔍',340,57,14,GR);
+  // Personalized banner
+  bx(f,20,110,350,100,NV,1,16); bx(f,20,110,350,100,CY,.06,16);
+  bx(f,20,110,350,3,CY,1,2);
+  await tx(f,'Personalized For You',28,122,13,CY,'Semi Bold');
+  await tx(f,'Based on your 12 past bookings',28,140,10,GR);
+  await tx(f,'★ Car Wash  |  AC Repair  |  Tyre Service',28,160,11,LG);
+  await BTN(f,224,178,136,'View All',CY);
+  // Trending
+  await tx(f,'Trending Near You 🔥',20,226,14,WH,'Bold');
+  const trending=[
+    {nm:'Deep Interior Clean',pr:'₹399',bk:'2.1k bookings'},
+    {nm:'Ceramic Coating',pr:'₹999',bk:'1.3k bookings'},
+    {nm:'AC Gas Refill',pr:'₹599',bk:'3.4k bookings'},
+  ];
+  for (let i=0;i<trending.length;i++){
+    const t=trending[i], ox=20+i*122;
+    CD(f,ox,248,114,100,10);
+    bx(f,ox,248,114,3,OG,1,2);
+    bx(f,ox+8,258,50,40,SURF,1,8);
+    await tx(f,'🔥',ox+18,266,22,OG);
+    await tx(f,t.nm,ox+6,304,9,WH,'Semi Bold');
+    await tx(f,t.pr,ox+6,320,12,CY,'Bold');
+    await tx(f,t.bk,ox+6,336,8,GR);
+  }
+  // Seasonal offers
+  await tx(f,'Monsoon Specials 🌧',20,364,14,WH,'Bold');
+  bx(f,20,384,350,88,{r:.01,g:.06,b:.14},1,12); bx(f,20,384,350,88,BL,.1,12);
+  bx(f,20,384,350,3,BL,.7,2);
+  await tx(f,'20% off on Waterproofing Services',28,396,13,WH,'Semi Bold');
+  await tx(f,'Use code: MONSOON20  •  Ends 30 May',28,416,10,GR);
+  bx(f,28,436,120,28,BL,.2,14); bx(f,28,436,120,1,BL,.4,14);
+  await tx(f,'Claim Offer →',34,443,10,BL,'Semi Bold');
+  // Recently viewed
+  await tx(f,'Recently Viewed',20,488,14,WH,'Bold');
+  const recent=[
+    {nm:'Ravi Auto Spa',tag:'4.9 ★',c:CY},
+    {nm:'AquaWash Pro',tag:'4.7 ★',c:OG},
+    {nm:'SparkShine',tag:'4.8 ★',c:GN},
+  ];
+  for (let i=0;i<recent.length;i++){
+    const r=recent[i], ox=20+i*122;
+    CD(f,ox,508,114,80,10); bx(f,ox,508,114,3,r.c,1,2);
+    bx(f,ox+8,518,50,36,SURF,1,8);
+    await tx(f,'🚗',ox+18,524,18,r.c);
+    await tx(f,r.nm,ox+4,560,8,WH,'Semi Bold');
+    await tx(f,r.tag,ox+4,575,8,r.c);
+  }
+  // Top categories
+  await tx(f,'All Categories',20,604,14,WH,'Bold');
+  const cats=[['🚗','Car Wash'],['❄','AC Repair'],['🔧','Mechanic'],['🏠','Home Clean'],['⚡','Electrical'],['🔩','Plumbing']];
+  for (let i=0;i<cats.length;i++){
+    const col=i%3, row=Math.floor(i/3), ox=20+col*122, oy=624+row*80;
+    CD(f,ox,oy,114,72,10);
+    await tx(f,cats[i][0],ox+44,oy+10,24,WH);
+    await tx(f,cats[i][1],ox+8,oy+48,9,LG);
+  }
+  await NAV_C(f,1);
+  await LBL(f,'C33 / EXPLORE & DISCOVER');
+  return f;
+};
+
+// C34: LOYALTY & REWARDS
+const C34 = async () => {
+  const f = mk(custPage,14850,'C34 Loyalty & Rewards');
+  await SB(f);
+  await HDR(f,'Rewards & Loyalty');
+  bx(f,0,0,W,44,SURF,1);
+  // Gold tier card
+  bx(f,20,90,350,120,{r:.14,g:.10,b:.01},1,16); bx(f,20,90,350,120,ST,.12,16);
+  bx(f,20,90,350,3,ST,.8,2);
+  for (let i=0;i<6;i++) bx(f,20+i*60,90,30,120,ST,.03,0);
+  await tx(f,'🏆',28,106,28,ST);
+  await tx(f,'GOLD MEMBER',66,102,11,ST,'Bold');
+  await tx(f,'Ramprasad Mokka',66,120,15,WH,'Bold');
+  await tx(f,'Member since Jan 2023',66,140,9,GR);
+  await tx(f,'2,840',250,100,28,ST,'Bold'); await tx(f,'Points',254,130,10,GR);
+  // Progress to Platinum
+  await tx(f,'Progress to Platinum',28,166,10,GR);
+  bx(f,28,180,294,6,SURF,1,3); bx(f,28,180,204,6,ST,1,3);
+  await tx(f,'2,840 / 4,000 pts',28,192,9,GR); await tx(f,'1,160 pts to go',262,192,9,ST);
+  // Points history
+  await tx(f,'Points History',20,222,13,WH,'Semi Bold');
+  const hist=[
+    {ev:'Car Wash - Premium',pts:'+50',dt:'Today',c:GN},
+    {ev:'Referral Bonus',pts:'+200',dt:'Yesterday',c:PK},
+    {ev:'Redeemed — ₹100 off',pts:'-100',dt:'25 May',c:RD},
+    {ev:'AC Repair Booking',pts:'+120',dt:'20 May',c:GN},
+    {ev:'First Review Bonus',pts:'+50',dt:'15 May',c:GN},
+  ];
+  for (let i=0;i<hist.length;i++){
+    const h=hist[i], oy=242+i*56;
+    DIV(f,oy); CD(f,20,oy+2,350,50,8);
+    await tx(f,h.ev,32,oy+12,12,WH,'Semi Bold');
+    await tx(f,h.dt,32,oy+30,10,GR);
+    await tx(f,h.pts,302,oy+18,14,h.c,'Bold');
+  }
+  // Redeem section
+  await tx(f,'Redeem Points',20,534,13,WH,'Semi Bold');
+  const redeems=[
+    {pts:'500 pts','val':'₹50 off',c:CY},
+    {pts:'1000 pts','val':'₹120 off',c:OG},
+    {pts:'2000 pts','val':'Free Service',c:GN},
+  ];
+  for (let i=0;i<redeems.length;i++){
+    const r=redeems[i], ox=20+i*122;
+    CD(f,ox,554,114,84,10); bx(f,ox,554,114,3,r.c,1,2);
+    await tx(f,r.val,ox+10,564,13,r.c,'Bold');
+    await tx(f,r.pts,ox+8,582,9,GR);
+    bx(f,ox+8,598,98,24,r.c,.15,12); bx(f,ox+8,598,98,1,r.c,.3,12);
+    await tx(f,'Redeem',ox+34,604,9,r.c,'Semi Bold');
+  }
+  // Tiers
+  await tx(f,'Membership Tiers',20,654,13,WH,'Semi Bold');
+  const tiers=[{nm:'Bronze',c:AM,pts:'0–999'},{nm:'Silver',c:LG,pts:'1k–2.4k'},{nm:'Gold',c:ST,pts:'2.5k–4k'},{nm:'Platinum',c:CY,pts:'4k+'}];
+  for (let i=0;i<tiers.length;i++){
+    const t=tiers[i], ox=20+i*90;
+    bx(f,ox,672,80,56,t.c,i===2?.2:.06,8); bx(f,ox,672,80,2,t.c,i===2?.8:.3,2);
+    await tx(f,t.nm,ox+8,682,9,t.c,i===2?'Bold':'Regular');
+    await tx(f,t.pts,ox+4,698,8,i===2?t.c:GR);
+    if(i===2){await tx(f,'YOU',ox+26,712,7,ST,'Bold');}
+  }
+  await LBL(f,'C34 / LOYALTY & REWARDS');
+  return f;
+};
+
+// C35: INVOICE / RECEIPT
+const C35 = async () => {
+  const f = mk(custPage,15300,'C35 Invoice & Receipt');
+  await SB(f);
+  await HDR(f,'Invoice','Booking #SVC-2024-8821');
+  bx(f,0,0,W,44,SURF,1);
+  // Invoice card
+  CD(f,20,90,350,440,16);
+  // Header
+  bx(f,20,90,350,60,CY,.1,16); bx(f,20,90,350,3,CY,1,2);
+  await tx(f,'INVOICE',36,102,18,CY,'Bold');
+  await tx(f,'#SVC-INV-2024-8821',36,124,10,GR);
+  await tx(f,'28 May 2024  •  4:30 PM',230,124,9,GR);
+  // From/To
+  await tx(f,'FROM',36,166,9,GR,'Bold');
+  await tx(f,'Ravi Auto Spa',36,180,12,WH,'Semi Bold');
+  await tx(f,'Banjara Hills, Hyderabad',36,196,10,GR);
+  await tx(f,'GST: 36ABCDE1234F1Z5',36,210,9,GR);
+  await tx(f,'TO',240,166,9,GR,'Bold');
+  await tx(f,'Ramprasad Mokka',240,180,12,WH,'Semi Bold');
+  await tx(f,'+91 98765 43210',240,196,10,GR);
+  await tx(f,'ramprasad@gmail.com',240,210,9,GR);
+  DIV(f,232);
+  // Services table
+  await tx(f,'SERVICE',36,244,9,GR,'Bold');
+  await tx(f,'AMOUNT',296,244,9,GR,'Bold');
+  DIV(f,258);
+  const lineItems=[
+    ['Premium Car Wash','₹249'],
+    ['Interior Vacuuming','₹50'],
+    ['Dashboard Polish (add-on)','₹50'],
+  ];
+  for (let i=0;i<lineItems.length;i++){
+    const oy=268+i*28;
+    await tx(f,lineItems[i][0],36,oy,11,LG);
+    await tx(f,lineItems[i][1],304,oy,11,LG,'Semi Bold');
+  }
+  DIV(f,356);
+  const summary=[['Subtotal','₹349'],['GST (18%)','₹62.82'],['Promo (FIRST10)','–₹34.90'],];
+  for(let i=0;i<summary.length;i++){
+    await tx(f,summary[i][0],36,366+i*24,11,GR);
+    await tx(f,summary[i][1],286,366+i*24,11,GR,'Semi Bold');
+  }
+  DIV(f,438);
+  await tx(f,'TOTAL PAID',36,450,12,WH,'Bold');
+  await tx(f,'₹ 376.92',254,448,16,CY,'Bold');
+  await tx(f,'Paid via VISA •••• 4521',36,470,10,GR);
+  await BDG(f,220,466,'Payment Successful',GN);
+  DIV(f,492);
+  await tx(f,'Thank you for using ServiCo! 🙏',68,502,11,GR);
+  // Action buttons
+  bx(f,20,548,168,48,CARD,1,24); bx(f,20,548,168,1,CY,.3,24);
+  await tx(f,'📥  Download PDF',42,564,11,CY,'Semi Bold');
+  bx(f,202,548,168,48,CARD,1,24); bx(f,202,548,168,1,GN,.3,24);
+  await tx(f,'📤  Share Receipt',224,564,11,GN,'Semi Bold');
+  // Rate & Rebook
+  await tx(f,'How was your experience?',20,614,12,LG);
+  const stars=[1,2,3,4,5];
+  for (let i=0;i<stars.length;i++) await tx(f,'★',22+i*34,632,24,i<4?ST:EDGE,'Bold');
+  await BTN(f,20,684,350,'Book Again',CY);
+  await LBL(f,'C35 / INVOICE & RECEIPT');
+  return f;
+};
+
+// C36: BOOKING ADD-ONS / EXTRAS
+const C36 = async () => {
+  const f = mk(custPage,15750,'C36 Booking Add-ons');
+  await SB(f);
+  await HDR(f,'Add-on Services','Customise your booking');
+  bx(f,0,0,W,44,SURF,1);
+  // Base service chip
+  CD(f,20,90,350,56,10); bx(f,20,90,3,56,CY,1,2);
+  await tx(f,'Base: Premium Car Wash',32,102,12,WH,'Semi Bold');
+  await tx(f,'₹249  •  40 mins  •  Ravi Auto Spa',32,120,10,GR);
+  // Add-on category tabs
+  await tx(f,'Exterior',20,160,11,CY,'Semi Bold');
+  bx(f,20,174,66,3,CY,1,2);
+  await tx(f,'Interior',96,160,11,GR);
+  await tx(f,'Protection',162,160,11,GR);
+  await tx(f,'Detailing',238,160,11,GR);
+  DIV(f,178);
+  // Add-on items
+  const addons=[
+    {nm:'Interior Vacuum',desc:'Deep vacuum + dust removal',pr:'+₹50',dur:'+15 min',sel:true},
+    {nm:'Dashboard Polish',desc:'Dashboard + console clean & shine',pr:'+₹50',dur:'+10 min',sel:true},
+    {nm:'Tyre Dressing',desc:'Tyre shine + wheel arch clean',pr:'+₹80',dur:'+20 min',sel:false},
+    {nm:'Seat Shampoo',desc:'Full seat deep clean & dry',pr:'+₹150',dur:'+30 min',sel:false},
+    {nm:'Engine Bay Clean',desc:'Degreasing & pressure wash',pr:'+₹200',dur:'+45 min',sel:false},
+  ];
+  for (let i=0;i<addons.length;i++){
+    const a=addons[i], oy=190+i*92;
+    CD(f,20,oy,350,84,10);
+    if(a.sel){bx(f,20,oy,350,84,CY,.05,10); bx(f,20,oy,3,84,CY,1,2);}
+    bx(f,28,oy+14,48,48,a.sel?CY:EDGE,a.sel?.15:.08,8);
+    await tx(f,a.sel?'✓':'➕',38,oy+26,20,a.sel?CY:GR,'Bold');
+    await tx(f,a.nm,86,oy+14,13,WH,'Semi Bold');
+    await tx(f,a.desc,86,oy+32,10,GR);
+    await tx(f,a.dur,86,oy+50,10,GR);
+    await tx(f,a.pr,292,oy+14,13,a.sel?CY:LG,'Bold');
+    // Toggle
+    bx(f,314,oy+30,28,16,a.sel?CY:EDGE,a.sel?1:.3,8);
+    bx(f,a.sel?326:316,oy+32,12,12,WH,1,6);
+  }
+  // Order summary
+  bx(f,0,660,W,104,SURF,1); bx(f,0,660,W,1,EDGE,.5);
+  await tx(f,'Order Summary',20,672,12,WH,'Semi Bold');
+  await tx(f,'Base service + 2 add-ons',20,690,10,GR);
+  await tx(f,'₹ 349',280,668,20,CY,'Bold');
+  await tx(f,'Est. total  •  55 mins',280,690,9,GR);
+  await BTN(f,20,710,350,'Confirm & Proceed to Payment',CY);
+  await LBL(f,'C36 / BOOKING ADD-ONS');
+  return f;
+};
+
+// ════════════════════════════════════════════════════════════
+//  PROVIDER — Additional Screens  P20–P26
+// ════════════════════════════════════════════════════════════
+
+// P20: AVAILABILITY & SERVICE AREA SETUP (Onboarding Step 4)
+const P20 = async () => {
+  const f = mk(provPage,8550,'P20 Availability Setup',1);
+  bx(f,0,0,W,H,BG,1);
+  await SB(f);
+  await tx(f,'Step 4 of 4',20,50,11,OG,'Semi Bold');
+  await tx(f,'Availability &',20,68,24,WH,'Bold');
+  await tx(f,'Service Area',20,96,24,WH,'Bold');
+  // Progress bar
+  bx(f,20,126,350,4,SURF,1,4); bx(f,20,126,350,4,OG,1,4);
+  // Working days
+  await tx(f,'Working Days',20,148,13,WH,'Semi Bold');
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const daysSel=[true,true,true,true,true,true,false];
+  for (let i=0;i<days.length;i++){
+    const ox=20+i*52, sel=daysSel[i];
+    bx(f,ox,168,44,40,sel?OG:CARD,sel?1:1,8);
+    if(sel)bx(f,ox,168,44,2,WH,.2,2);
+    await tx(f,days[i],ox+6,180,9,sel?BK:GR,sel?'Bold':'Regular');
+  }
+  // Time slots
+  await tx(f,'Working Hours',20,222,13,WH,'Semi Bold');
+  bx(f,20,240,160,48,CARD,1,12); bx(f,20,240,160,1,WH,.05,12);
+  await tx(f,'Start Time',28,252,10,GR); await tx(f,'8:00 AM',28,266,14,WH,'Semi Bold');
+  await tx(f,'▾',160,264,14,GR);
+  bx(f,190,240,160,48,CARD,1,12); bx(f,190,240,160,1,WH,.05,12);
+  await tx(f,'End Time',198,252,10,GR); await tx(f,'8:00 PM',198,266,14,WH,'Semi Bold');
+  await tx(f,'▾',330,264,14,GR);
+  // Service radius
+  await tx(f,'Service Radius',20,304,13,WH,'Semi Bold');
+  await tx(f,'How far will you travel for jobs?',20,322,11,GR);
+  bx(f,20,338,350,6,SURF,1,4); bx(f,20,338,245,6,OG,1,4);
+  bx(f,255,332,18,18,OG,1,9); bx(f,259,336,10,10,WH,1,5);
+  await tx(f,'7 km radius',150,350,11,GR);
+  // Service areas map
+  await tx(f,'Coverage Area',20,376,13,WH,'Semi Bold');
+  bx(f,20,394,350,160,{r:.04,g:.08,b:.05},1,12);
+  // Simplified map
+  bx(f,20,394,350,160,{r:.06,g:.10,b:.06},.7,12);
+  for (let i=0;i<5;i++) bx(f,20,394+i*32,350,1,{r:.09,g:.13,b:.09},.5);
+  for (let i=0;i<5;i++) bx(f,20+i*88,394,1,160,{r:.09,g:.13,b:.09},.5);
+  // Coverage circle overlay
+  bx(f,115,434,160,80,OG,.08,80);
+  bx(f,120,439,150,70,OG,.06,75);
+  bx(f,192,470,8,8,OG,1,4);
+  await tx(f,'Your location',168,484,9,OG,'Semi Bold');
+  // Service area tags
+  await tx(f,'Covered Areas:',20,566,11,GR);
+  const areas=['Banjara Hills','Jubilee Hills','Madhapur','Gachibowli'];
+  for (let i=0;i<areas.length;i++){
+    const w=areas[i].length*6.5+18;
+    const ox = i<2 ? 130+i*(w+8) : 130+(areas[i-2].length*6.5+26);
+    const oy = i<2 ? 562 : 582;
+    bx(f,ox,oy,w,22,OG,.15,11); bx(f,ox,oy,w,1,OG,.3,11);
+    await tx(f,areas[i],ox+8,oy+6,9,OG,'Semi Bold');
+  }
+  // Breaks / unavailability
+  await tx(f,'Lunch Break',20,606,13,WH,'Semi Bold');
+  bx(f,20,624,350,48,CARD,1,12); bx(f,20,624,350,1,WH,.05,12);
+  await tx(f,'1:00 PM – 2:00 PM (daily)',36,642,12,LG); await tx(f,'▾',334,642,14,GR);
+  await BTN(f,20,692,350,'Complete Setup & Go Live',OG);
+  await tx(f,'You can update this anytime from Settings',60,752,10,GR);
+  await LBL(f,'P20 / AVAILABILITY SETUP');
+  return f;
+};
+
+// P21: PROVIDER EDIT PROFILE
+const P21 = async () => {
+  const f = mk(provPage,9000,'P21 Provider Edit Profile',1);
+  await SB(f);
+  await HDR(f,'Edit Profile','Provider Account');
+  bx(f,0,0,W,44,SURF,1);
+  // Avatar
+  bx(f,155,84,80,80,OG,.1,40);
+  await AV(f,155,84,80,'RK',OG);
+  bx(f,213,128,28,28,OG,1,14); await tx(f,'📷',218,133,12,WH);
+  await tx(f,'Ravi Kumar',130,170,14,WH,'Bold');
+  await tx(f,'Partner ID: PRV-2024-0042  •  Verified ✓',80,190,9,GN);
+  // Form
+  await INP(f,20,210,350,'Full Name','Ravi Kumar',OG);
+  await INP(f,20,286,350,'Mobile','9876543210',OG);
+  await INP(f,20,362,350,'Email','ravi.kumar@gmail.com',OG);
+  await INP(f,20,438,350,'Years of Experience','5 years',OG);
+  // Specializations
+  await tx(f,'Specializations',20,502,11,LG);
+  const specs=['Car Wash','Tyre Service','Oil Change','Detailing'];
+  for(let i=0;i<specs.length;i++){
+    const sel=i<3;
+    bx(f,20+i*90,518,82,28,sel?OG:CARD,sel?.15:1,14);
+    if(sel)bx(f,20+i*90,518,82,1,OG,.3,14);
+    await tx(f,specs[i],26+i*90,524,9,sel?OG:GR,sel?'Semi Bold':'Regular');
+  }
+  // Bio
+  await tx(f,'Bio / About',20,560,11,LG);
+  bx(f,20,578,350,80,CARD,1,12); bx(f,20,578,350,1,WH,.05,12); bx(f,20,578,3,80,OG,1,2);
+  await tx(f,'5+ years of experience in car detailing\nand wash services. Passionate about\ngiving cars a showroom finish.',28,590,10,LG);
+  // Service area
+  await INP(f,20,672,350,'Primary Area','Banjara Hills, Hyderabad',OG);
+  await BTN(f,20,752,350,'Save Profile',OG);
+  await NAV_P(f,3);
+  await LBL(f,'P21 / EDIT PROFILE');
+  return f;
+};
+
+// P22: SERVICE/PACKAGE EDITOR
+const P22 = async () => {
+  const f = mk(provPage,9450,'P22 Service Editor',1);
+  await SB(f);
+  await HDR(f,'My Services','Manage your offerings');
+  bx(f,0,0,W,44,SURF,1);
+  // Add new service button
+  bx(f,20,90,350,44,OG,.15,22); bx(f,20,90,350,1,OG,.4,22);
+  await tx(f,'+ Add New Service / Package',100,104,12,OG,'Semi Bold');
+  // Service list
+  const services=[
+    {nm:'Basic Car Wash',dur:'30 min',pr:'₹149',active:true,bk:342},
+    {nm:'Premium Wash + Polish',dur:'60 min',pr:'₹299',active:true,bk:218},
+    {nm:'Full Interior Detailing',dur:'90 min',pr:'₹499',active:true,bk:87},
+    {nm:'Engine Bay Cleaning',dur:'45 min',pr:'₹349',active:false,bk:12},
+  ];
+  for (let i=0;i<services.length;i++){
+    const s=services[i], oy=146+i*132;
+    CD(f,20,oy,350,124,12);
+    if(!s.active)bx(f,20,oy,350,124,BG,.5,12);
+    await tx(f,s.nm,32,oy+12,13,s.active?WH:GR,'Semi Bold');
+    await tx(f,s.dur+'  •  '+s.bk+' bookings',32,oy+30,10,GR);
+    // Price edit
+    bx(f,32,oy+48,120,38,SURF,1,8); bx(f,32,oy+48,3,38,OG,.7,2);
+    await tx(f,'Price',38,oy+52,9,GR);
+    await tx(f,s.pr,38,oy+64,16,OG,'Bold');
+    // Actions
+    bx(f,170,oy+48,72,38,SURF,1,8); await tx(f,'✏ Edit',180,oy+62,10,CY);
+    bx(f,252,oy+48,60,38,SURF,1,8); await tx(f,'📋 Copy',258,oy+62,10,GR);
+    bx(f,322,oy+48,44,38,s.active?GN:EDGE,s.active?.15:.08,8);
+    await tx(f,s.active?'ON':'OFF',328,oy+62,9,s.active?GN:GR,'Semi Bold');
+    // Rating
+    await tx(f,'★ 4.8  ('+Math.floor(s.bk*.6)+' reviews)',32,oy+98,10,ST);
+    await BDG(f,222,oy+94,s.active?'Active':'Paused',s.active?GN:GR);
+  }
+  await NAV_P(f,0);
+  await LBL(f,'P22 / SERVICE EDITOR');
+  return f;
+};
+
+// P23: IN-JOB PHOTO DOCUMENTATION
+const P23 = async () => {
+  const f = mk(provPage,9900,'P23 Photo Documentation',1);
+  await SB(f);
+  await HDR(f,'Job Documentation','#JOB-2024-5521');
+  bx(f,0,0,W,44,SURF,1);
+  // Job info banner
+  CD(f,20,90,350,48,10); bx(f,20,90,3,48,AM,1,2);
+  await tx(f,'Ramprasad Mokka  •  Premium Wash',32,100,12,WH,'Semi Bold');
+  await tx(f,'Sedan White  •  TS 09 AB 1234',32,116,10,GR);
+  // Before photos
+  await tx(f,'BEFORE Photos (Required)',20,154,12,WH,'Semi Bold');
+  await tx(f,'3/4 required',296,158,9,GN);
+  const beforeSlots=[{done:true},{done:true},{done:true},{done:false}];
+  for (let i=0;i<beforeSlots.length;i++){
+    const ox=20+i*88, b=beforeSlots[i];
+    bx(f,ox,172,80,80,b.done?SURF:CARD,1,8);
+    if(b.done){
+      bx(f,ox,172,80,80,{r:.1,g:.12,b:.1},.7,8);
+      bx(f,ox+28,172,24,80,WH,.03,4);
+      await BDG(f,ox+4,242,'✓',GN);
+    } else {
+      bx(f,ox,172,80,80,EDGE,.15,8); bx(f,ox,172,80,1,EDGE,.3,8);
+      await tx(f,'+',ox+32,196,24,GR,'Bold');
+    }
+    await tx(f,['Front L','Front R','Rear','Interior'][i],ox+4,258,8,GR);
+  }
+  // After photos
+  await tx(f,'AFTER Photos (Required)',20,278,12,WH,'Semi Bold');
+  await tx(f,'0/4 required',296,282,9,GR);
+  for (let i=0;i<4;i++){
+    const ox=20+i*88;
+    bx(f,ox,296,80,80,EDGE,.1,8); bx(f,ox,296,80,1,EDGE,.2,8);
+    await tx(f,'+',ox+32,320,24,GR,'Bold');
+    await tx(f,['Front L','Front R','Rear','Interior'][i],ox+4,382,8,GR);
+  }
+  // Checklist
+  await tx(f,'Completion Checklist',20,400,13,WH,'Semi Bold');
+  const checks=[
+    {task:'Exterior washed & dried',done:true},
+    {task:'Windows cleaned (inside & out)',done:true},
+    {task:'Interior vacuumed',done:true},
+    {task:'Dashboard wiped & polished',done:false},
+    {task:'Tyre shine applied',done:false},
+    {task:'Final inspection completed',done:false},
+  ];
+  for(let i=0;i<checks.length;i++){
+    const c=checks[i], oy=420+i*48;
+    CD(f,20,oy,350,40,8);
+    bx(f,28,oy+10,22,22,c.done?GN:EDGE,c.done?.25:.08,5);
+    if(c.done)await tx(f,'✓',32,oy+12,11,GN,'Bold');
+    await tx(f,c.task,60,oy+13,12,c.done?WH:GR,c.done?'Semi Bold':'Regular');
+  }
+  // Notes
+  await tx(f,'Job Notes (optional)',20,710,12,WH,'Semi Bold');
+  bx(f,20,728,350,60,CARD,1,10); bx(f,20,728,350,1,WH,.05,10);
+  await tx(f,'Add any notes about the job...',28,748,11,GR);
+  await BTN(f,20,798,350,'Submit & Complete Job',GN);
+  await LBL(f,'P23 / PHOTO DOCUMENTATION');
+  return f;
+};
+
+// P24: PAYOUT HISTORY DETAIL
+const P24 = async () => {
+  const f = mk(provPage,10350,'P24 Payout Detail',1);
+  await SB(f);
+  await HDR(f,'Payout Details','Settlement #PAY-2024-0089');
+  bx(f,0,0,W,44,SURF,1);
+  // Hero amount
+  bx(f,20,90,350,100,NV,1,16); bx(f,20,90,350,100,OG,.1,16); bx(f,20,90,350,3,OG,.7,2);
+  await tx(f,'Settled Amount',28,102,11,GR);
+  await tx(f,'₹ 4,821.00',28,120,28,WH,'Bold');
+  await tx(f,'Settled on 28 May 2024 at 11:30 AM',28,156,10,GR);
+  await BDG(f,270,110,'Credited',GN);
+  await tx(f,'To: HDFC •••• 8834',28,172,10,GR);
+  // Breakdown
+  await tx(f,'Earning Breakdown',20,206,13,WH,'Semi Bold');
+  CD(f,20,224,350,200,12);
+  const breakdown=[
+    ['Gross Earnings (8 jobs)','₹5,680'],
+    ['Platform Commission (15%)','–₹852'],
+    ['GST on Commission (18%)','–₹153.36'],
+    ['Performance Bonus','₹200'],
+    ['Referral Credit','₹0'],
+    ['Adjustment / Penalty','₹0'],
+  ];
+  for(let i=0;i<breakdown.length;i++){
+    const oy=234+i*30;
+    await tx(f,breakdown[i][0],32,oy,11,GR);
+    await tx(f,breakdown[i][1],290,oy,11,i===0||i===3?GN:i>0&&i<3?RD:LG,'Semi Bold');
+  }
+  DIV(f,416); await tx(f,'Net Payout',32,422,12,WH,'Semi Bold'); await tx(f,'₹4,821.00',278,420,14,OG,'Bold');
+  // Jobs in this payout
+  await tx(f,'Jobs in this Settlement (8)',20,452,13,WH,'Semi Bold');
+  const jobs=[
+    {id:'JOB-5521',svc:'Premium Wash',earn:'₹299',cust:'Ramprasad M.'},
+    {id:'JOB-5498',svc:'Interior Detail',earn:'₹499',cust:'Priya Reddy'},
+    {id:'JOB-5476',svc:'Basic Wash',earn:'₹149',cust:'Kiran Kumar'},
+    {id:'JOB-5453',svc:'Full Service',earn:'₹799',cust:'Anitha S.'},
+  ];
+  for(let i=0;i<jobs.length;i++){
+    const j=jobs[i], oy=472+i*66;
+    CD(f,20,oy,350,58,8);
+    await tx(f,j.id,32,oy+8,10,GR);
+    await tx(f,j.svc,32,oy+24,12,WH,'Semi Bold');
+    await tx(f,j.cust,32,oy+40,10,GR);
+    await tx(f,j.earn,298,oy+22,14,OG,'Bold');
+  }
+  await BTN2(f,20,742,350,'Download Settlement Report',OG);
+  await NAV_P(f,2);
+  await LBL(f,'P24 / PAYOUT DETAIL');
+  return f;
+};
+
+// P25: INCENTIVES & BONUSES
+const P25 = async () => {
+  const f = mk(provPage,10800,'P25 Incentives & Bonuses',1);
+  await SB(f);
+  await HDR(f,'Incentives & Bonuses');
+  bx(f,0,0,W,44,SURF,1);
+  // Current earnings highlight
+  bx(f,20,90,350,88,{r:.08,g:.06,b:.01},1,16); bx(f,20,90,350,88,AM,.15,16); bx(f,20,90,350,3,AM,1,2);
+  await tx(f,'Bonus Earned This Month 🏆',28,102,12,AM,'Semi Bold');
+  await tx(f,'₹ 1,200',28,120,26,WH,'Bold');
+  await tx(f,'From 3 active bonus schemes',28,154,10,GR);
+  // Active schemes
+  await tx(f,'Active Bonus Schemes',20,194,13,WH,'Semi Bold');
+  const schemes=[
+    {nm:'Peak Hour Surge',desc:'Earn 2x on jobs 8–10 AM & 6–8 PM',pr:'2× rate',prog:3,goal:5,c:OG},
+    {nm:'Weekend Warrior',desc:'Complete 5+ jobs on Sat–Sun',pr:'₹300 bonus',prog:4,goal:5,c:PK},
+    {nm:'5-Star Streak',desc:'Get 10 consecutive 5-star ratings',pr:'₹500 bonus',prog:7,goal:10,c:ST},
+    {nm:'Top Provider of Month',desc:'Rank #1 in your area',pr:'₹2,000',prog:2,goal:1,c:CY},
+  ];
+  for(let i=0;i<schemes.length;i++){
+    const s=schemes[i], oy=212+i*110;
+    CD(f,20,oy,350,102,12); bx(f,20,oy,3,102,s.c,1,2);
+    await tx(f,s.nm,32,oy+12,13,WH,'Semi Bold');
+    await tx(f,s.desc,32,oy+30,10,GR);
+    // Progress bar
+    bx(f,32,oy+52,240,6,SURF,1,4);
+    const pct=Math.min(s.prog/s.goal,1);
+    if(pct>0)bx(f,32,oy+52,Math.round(240*pct),6,s.c,1,4);
+    await tx(f,s.prog+'/'+s.goal,280,oy+48,10,s.c,'Semi Bold');
+    await tx(f,'Reward: '+s.pr,32,oy+68,10,GR);
+    await BDG(f,260,oy+64,pct>=1?'Completed!':'In Progress',pct>=1?GN:s.c);
+  }
+  // Completed bonuses
+  await tx(f,'Recently Earned',20,660,13,WH,'Semi Bold');
+  const earned=[{nm:'Referral Bonus',amt:'₹200',dt:'25 May'},{nm:'Quick Acceptance Bonus',amt:'₹50',dt:'22 May'}];
+  for(let i=0;i<earned.length;i++){
+    CD(f,20,678+i*62,350,54,8);
+    await tx(f,earned[i].nm,32,678+i*62+12,12,WH,'Semi Bold');
+    await tx(f,earned[i].dt,32,678+i*62+30,10,GR);
+    await tx(f,earned[i].amt,298,678+i*62+18,14,GN,'Bold');
+  }
+  await NAV_P(f,2);
+  await LBL(f,'P25 / INCENTIVES & BONUSES');
+  return f;
+};
+
+// P26: TRAINING & RESOURCES
+const P26 = async () => {
+  const f = mk(provPage,11250,'P26 Training & Resources',1);
+  await SB(f);
+  await HDR(f,'Training & Resources');
+  bx(f,0,0,W,44,SURF,1);
+  // Completion progress
+  bx(f,20,90,350,64,SURF,1,12); bx(f,20,90,350,64,OG,.05,12);
+  await tx(f,'Training Progress',28,102,12,OG,'Semi Bold');
+  await tx(f,'8 of 12 modules completed',28,120,11,GR);
+  bx(f,28,138,294,6,EDGE,1,4); bx(f,28,138,196,6,OG,1,4);
+  await tx(f,'67%',316,134,9,OG,'Semi Bold');
+  // Mandatory modules
+  await tx(f,'Mandatory Modules',20,168,13,WH,'Semi Bold');
+  const mandatory=[
+    {nm:'Safety & Health Standards',dur:'15 min',done:true},
+    {nm:'Customer Service Excellence',dur:'20 min',done:true},
+    {nm:'Professional Conduct',dur:'10 min',done:true},
+    {nm:'ServiCo App Walkthrough',dur:'25 min',done:false},
+  ];
+  for(let i=0;i<mandatory.length;i++){
+    const m=mandatory[i], oy=186+i*66;
+    CD(f,20,oy,350,58,10);
+    bx(f,28,oy+9,40,40,m.done?GN:SURF,m.done?.12:.08,8);
+    await tx(f,m.done?'✓':'▶',m.done?38:36,oy+19,14,m.done?GN:GR,'Bold');
+    await tx(f,m.nm,78,oy+12,12,m.done?WH:LG,'Semi Bold');
+    await tx(f,m.dur,78,oy+30,10,GR);
+    await BDG(f,262,oy+16,m.done?'Done':'Required',m.done?GN:OG);
+  }
+  // Optional courses
+  await tx(f,'Skill Upgrades (Optional)',20,456,13,WH,'Semi Bold');
+  const optional=[
+    {nm:'Advanced Car Detailing',dur:'40 min',c:CY},
+    {nm:'AC & HVAC Basics',dur:'35 min',c:BL},
+    {nm:'Electric Vehicle Care',dur:'30 min',c:GN},
+    {nm:'Customer Upselling',dur:'20 min',c:AM},
+  ];
+  for(let i=0;i<optional.length;i++){
+    const m=optional[i], oy=474+i*64;
+    CD(f,20,oy,350,56,10); bx(f,20,oy,3,56,m.c,1,2);
+    bx(f,28,oy+8,40,40,m.c,.12,8);
+    await tx(f,'📖',34,oy+16,18,m.c);
+    await tx(f,m.nm,78,oy+12,12,WH,'Semi Bold');
+    await tx(f,m.dur+'  •  Certificate awarded',78,oy+30,10,GR);
+    bx(f,296,oy+14,44,28,m.c,.2,14); bx(f,296,oy+14,44,1,m.c,.4,14);
+    await tx(f,'Start',304,oy+21,9,m.c,'Semi Bold');
+  }
+  await NAV_P(f,0);
+  await LBL(f,'P26 / TRAINING & RESOURCES');
+  return f;
+};
+
+// ════════════════════════════════════════════════════════════
+//  ADMIN — Additional Screens  A15–A22
+// ════════════════════════════════════════════════════════════
+
+// A15: USER DETAIL VIEW
+const A15 = async () => {
+  const f = mk(adminPage,6300,'A15 User Detail',2);
+  await SB(f);
+  await HDR(f,'Customer Profile','#USR-2024-0042');
+  bx(f,0,0,W,44,SURF,1);
+  // User hero
+  await AV(f,20,90,64,'RM',CY);
+  await tx(f,'Ramprasad Mokka',92,96,16,WH,'Bold');
+  await tx(f,'+91 98765 43210  •  ramprasad@gmail.com',92,116,9,GR);
+  await tx(f,'Gold Member  •  Since Jan 2023',92,132,9,ST);
+  await BDG(f,92,150,'Active',GN);
+  bx(f,300,100,66,28,RD,.15,14); bx(f,300,100,66,1,RD,.3,14);
+  await tx(f,'⚑ Flag',308,108,10,RD,'Semi Bold');
+  DIV(f,174);
+  // Stats row
+  const uStats=[{v:'42',l:'Bookings'},{v:'₹12.4k',l:'Spent'},{v:'4.8',l:'Avg Rating'},{v:'2,840',l:'Points'}];
+  for(let i=0;i<uStats.length;i++) await SC(f,20+i*88,182,80,uStats[i].v,uStats[i].l,CY);
+  // Booking history
+  await tx(f,'Recent Bookings',20,276,13,WH,'Semi Bold');
+  await tx(f,'View All',304,280,10,CY);
+  const bkHist=[
+    {svc:'Premium Car Wash',dt:'28 May',pr:'₹299',st:'Completed'},
+    {svc:'AC Repair',dt:'22 May',pr:'₹599',st:'Completed'},
+    {svc:'Tyre Change',dt:'15 May',pr:'₹249',st:'Cancelled'},
+  ];
+  for(let i=0;i<bkHist.length;i++){
+    const b=bkHist[i], oy=296+i*64;
+    CD(f,20,oy,350,56,8);
+    await tx(f,b.svc,32,oy+10,12,WH,'Semi Bold');
+    await tx(f,b.dt,32,oy+28,10,GR);
+    await tx(f,b.pr,290,oy+12,13,CY,'Bold');
+    await BDG(f,246,oy+28,b.st,b.st==='Completed'?GN:b.st==='Cancelled'?RD:AM);
+  }
+  // Complaints
+  await tx(f,'Complaints / Flags',20,494,13,WH,'Semi Bold');
+  CD(f,20,512,350,56,8); bx(f,20,512,3,56,RD,1,2);
+  await tx(f,'Service not completed — Car Wash',32,524,12,WH,'Semi Bold');
+  await tx(f,'28 May 2024  •  Refund ₹299 initiated',32,542,10,GR);
+  await BDG(f,274,520,'Under Review',AM);
+  // Admin actions
+  await tx(f,'Admin Actions',20,582,13,WH,'Semi Bold');
+  const adminActs=['Send Message','Block Account','Issue Refund','Adjust Points'];
+  for(let i=0;i<adminActs.length;i++){
+    const col=i%2, row=Math.floor(i/2), ox=20+col*182, oy=600+row*52;
+    bx(f,ox,oy,174,44,CARD,1,10); bx(f,ox,oy,174,1,EDGE,.3,10);
+    await tx(f,adminActs[i],ox+30,oy+14,11,LG,'Semi Bold');
+  }
+  await NAV_A(f,1);
+  await LBL(f,'A15 / USER DETAIL');
+  return f;
+};
+
+// A16: PROVIDER DETAIL (Admin view - more detailed than A14)
+const A16 = async () => {
+  const f = mk(adminPage,6750,'A16 Provider Full Detail',2);
+  await SB(f);
+  await HDR(f,'Provider Profile','PRV-2024-0042');
+  bx(f,0,0,W,44,SURF,1);
+  // Provider hero
+  await AV(f,20,90,64,'RK',OG);
+  await tx(f,'Ravi Kumar',92,96,16,WH,'Bold');
+  await tx(f,'Car Wash Specialist  •  Banjara Hills',92,116,10,GR);
+  await BDG(f,92,136,'Verified ✓',GN); await BDG(f,152,136,'Gold Partner',ST);
+  // Risk / trust score
+  bx(f,290,96,72,44,SURF,1,10);
+  await tx(f,'Trust Score',294,100,8,GR);
+  await tx(f,'94',300,112,20,GN,'Bold'); await tx(f,'/100',322,118,9,GR);
+  DIV(f,168);
+  // Performance stats
+  const pStats=[{v:'342',l:'Jobs Done'},{v:'₹58k',l:'Earned'},{v:'4.9',l:'Rating'},{v:'97%',l:'Acceptance'}];
+  for(let i=0;i<pStats.length;i++) await SC(f,20+i*88,176,80,pStats[i].v,pStats[i].l,OG);
+  // KYC Status
+  await tx(f,'KYC & Documents',20,272,13,WH,'Semi Bold');
+  const kyc=[['Aadhaar','Verified','28 Jan 2024'],['PAN','Verified','28 Jan 2024'],['Bank Account','Verified','28 Jan 2024'],['BG Check','Cleared','15 Feb 2024']];
+  for(let i=0;i<kyc.length;i++){
+    const oy=290+i*38;
+    bx(i===0?f:f,20,oy,350,32,SURF,.5,6);
+    await tx(f,kyc[i][0],30,oy+10,11,LG);
+    await BDG(f,140,oy+8,kyc[i][1],GN);
+    await tx(f,kyc[i][2],250,oy+10,9,GR);
+  }
+  // Service coverage
+  await tx(f,'Services Offered',20,444,13,WH,'Semi Bold');
+  const svcs=['Basic Wash','Premium Wash','Interior Detail','Engine Clean'];
+  for(let i=0;i<svcs.length;i++){
+    bx(f,20+i*90,462,82,28,OG,.12,14); bx(f,20+i*90,462,82,1,OG,.3,14);
+    await tx(f,svcs[i],24+i*90,468,8,OG,'Semi Bold');
+  }
+  // Action bar
+  await tx(f,'Admin Actions',20,506,13,WH,'Semi Bold');
+  const acts=[['Suspend Partner',RD],['Adjust Rating',AM],['Send Warning',OG],['Add Bonus',GN]];
+  for(let i=0;i<acts.length;i++){
+    const col=i%2, row=Math.floor(i/2);
+    const ox=20+col*182, oy=524+row*52;
+    bx(f,ox,oy,174,44,acts[i][1],.12,10); bx(f,ox,oy,174,1,acts[i][1],.3,10);
+    await tx(f,acts[i][0],ox+18,oy+14,11,acts[i][1],'Semi Bold');
+  }
+  // Recent complaints
+  await tx(f,'Open Complaints (1)',20,636,13,WH,'Semi Bold');
+  CD(f,20,654,350,56,8); bx(f,20,654,3,56,AM,1,2);
+  await tx(f,'Customer reports overcharge — ₹50',32,666,12,WH,'Semi Bold');
+  await tx(f,'28 May 2024  •  Being investigated',32,684,10,GR);
+  await BDG(f,268,662,'Under Review',AM);
+  await NAV_A(f,1);
+  await LBL(f,'A16 / PROVIDER FULL DETAIL');
+  return f;
+};
+
+// A17: ORDER DETAIL VIEW
+const A17 = async () => {
+  const f = mk(adminPage,7200,'A17 Order Detail',2);
+  await SB(f);
+  await HDR(f,'Order Detail','#SVC-2024-8821');
+  bx(f,0,0,W,44,SURF,1);
+  // Order summary
+  bx(f,20,90,350,72,SURF,1,12); bx(f,20,90,3,72,CY,1,2);
+  await tx(f,'Premium Car Wash',32,100,14,WH,'Bold');
+  await tx(f,'Ramprasad Mokka  →  Ravi Kumar',32,120,10,GR);
+  await tx(f,'28 May 2024  •  2:00 PM  •  Banjara Hills',32,136,10,GR);
+  await BDG(f,240,100,'Completed',GN);
+  await tx(f,'₹ 299',298,98,16,CY,'Bold');
+  // Order timeline
+  await tx(f,'Order Timeline',20,176,13,WH,'Semi Bold');
+  const timeline=[
+    {ev:'Order Placed',tm:'1:42 PM',done:true,c:GN},
+    {ev:'Provider Accepted',tm:'1:45 PM',done:true,c:GN},
+    {ev:'Provider En Route',tm:'1:58 PM',done:true,c:GN},
+    {ev:'Service Started',tm:'2:05 PM',done:true,c:GN},
+    {ev:'Service Completed',tm:'2:45 PM',done:true,c:GN},
+    {ev:'Payment Received',tm:'2:46 PM',done:true,c:GN},
+  ];
+  for(let i=0;i<timeline.length;i++){
+    const t=timeline[i], oy=194+i*52;
+    bx(f,28,oy,20,20,t.c,.25,10); await tx(f,'✓',32,oy+3,10,t.c,'Bold');
+    if(i<timeline.length-1) bx(f,37,oy+20,2,32,t.c,.3);
+    await tx(f,t.ev,58,oy+3,12,WH,'Semi Bold');
+    await tx(f,t.tm,292,oy+5,10,GR);
+  }
+  // Payment
+  DIV(f,510);
+  await tx(f,'Payment Details',20,518,13,WH,'Semi Bold');
+  const payDets=[['Service Amount','₹299'],['Promo Applied','–₹0'],['Net Amount','₹299'],['Provider Payout','₹254.15'],['Platform Earn','₹44.85']];
+  for(let i=0;i<payDets.length;i++){
+    await tx(f,payDets[i][0],30,536+i*24,11,i>2?GR:LG);
+    await tx(f,payDets[i][1],296,536+i*24,11,i===3?OG:i===4?PK:LG,'Semi Bold');
+  }
+  DIV(f,660);
+  // Admin actions
+  await tx(f,'Admin Actions',20,668,13,WH,'Semi Bold');
+  bx(f,20,686,110,40,RD,.15,10); bx(f,20,686,110,1,RD,.3,10);
+  await tx(f,'Issue Refund',26,700,10,RD,'Semi Bold');
+  bx(f,138,686,110,40,AM,.15,10); bx(f,138,686,110,1,AM,.3,10);
+  await tx(f,'Flag Order',148,700,10,AM,'Semi Bold');
+  bx(f,256,686,110,40,BL,.15,10); bx(f,256,686,110,1,BL,.3,10);
+  await tx(f,'View Chat',266,700,10,BL,'Semi Bold');
+  await NAV_A(f,2);
+  await LBL(f,'A17 / ORDER DETAIL');
+  return f;
+};
+
+// A18: CONTENT MODERATION
+const A18 = async () => {
+  const f = mk(adminPage,7650,'A18 Content Moderation',2);
+  await SB(f);
+  await HDR(f,'Content Moderation','Reviews & Reports');
+  bx(f,0,0,W,44,SURF,1);
+  // Summary stats
+  const modStats=[{v:'14',l:'Flagged Reviews',c:RD},{v:'6',l:'Fake Suspected',c:AM},{v:'238',l:'Auto-Approved',c:GN}];
+  for(let i=0;i<modStats.length;i++){
+    bx(f,20+i*118,90,108,64,CARD,1,10); bx(f,20+i*118,90,108,3,modStats[i].c,1,2);
+    await tx(f,modStats[i].v,50+i*118,102,24,modStats[i].c,'Bold');
+    await tx(f,modStats[i].l,24+i*118,130,8,GR);
+  }
+  // Filter tabs
+  const tabs=['All','Flagged','Fake','Approved'];
+  for(let i=0;i<tabs.length;i++){
+    const sel=i===1;
+    bx(f,20+i*90,166,82,30,sel?RD:CARD,sel?.15:1,15);
+    if(sel)bx(f,20+i*90,166,82,1,RD,.4,15);
+    await tx(f,tabs[i],28+i*90,178,10,sel?RD:GR,sel?'Semi Bold':'Regular');
+  }
+  DIV(f,200);
+  // Review items
+  const reviews=[
+    {usr:'Kiran K.',svc:'Car Wash',rating:1,rev:'Service was terrible, car not cleaned at all.',flag:'Dispute',c:RD},
+    {usr:'Anonymous',svc:'AC Repair',rating:5,rev:'Best service ever!! 10/10 will always use!',flag:'Fake Suspected',c:AM},
+    {usr:'Meera S.',svc:'Plumbing',rating:2,rev:'Plumber arrived 2 hours late and work was shoddy.',flag:'Legitimate',c:GN},
+  ];
+  for(let i=0;i<reviews.length;i++){
+    const r=reviews[i], oy=208+i*168;
+    CD(f,20,oy,350,160,10);
+    bx(f,20,oy,3,160,r.c,1,2);
+    await tx(f,r.usr,32,oy+12,12,WH,'Semi Bold');
+    await tx(f,'for '+r.svc,32,oy+28,10,GR);
+    for(let s=0;s<5;s++) await tx(f,'★',32+s*16,oy+44,12,s<r.rating?ST:EDGE,'Bold');
+    await BDG(f,196,oy+40,r.flag,r.c);
+    bx(f,28,oy+64,294,52,SURF,.5,8);
+    await tx(f,'"'+r.rev.substring(0,60)+(r.rev.length>60?'…':'')+'"',32,oy+74,10,LG);
+    // Action row
+    bx(f,28,oy+124,88,28,GN,.15,10); bx(f,28,oy+124,88,1,GN,.3,10);
+    await tx(f,'✓ Approve',42,oy+130,9,GN,'Semi Bold');
+    bx(f,124,oy+124,88,28,RD,.15,10); bx(f,124,oy+124,88,1,RD,.3,10);
+    await tx(f,'✕ Remove',136,oy+130,9,RD,'Semi Bold');
+    bx(f,220,oy+124,88,28,AM,.15,10); bx(f,220,oy+124,88,1,AM,.3,10);
+    await tx(f,'⚑ Flag',234,oy+130,9,AM,'Semi Bold');
+    bx(f,316,oy+124,46,28,BL,.15,10); bx(f,316,oy+124,46,1,BL,.3,10);
+    await tx(f,'Chat',322,oy+130,9,BL,'Semi Bold');
+  }
+  await NAV_A(f,2);
+  await LBL(f,'A18 / CONTENT MODERATION');
+  return f;
+};
+
+// A19: INCENTIVE MANAGEMENT
+const A19 = async () => {
+  const f = mk(adminPage,8100,'A19 Incentive Management',2);
+  await SB(f);
+  await HDR(f,'Incentive Management','Provider Bonus Schemes');
+  bx(f,0,0,W,44,SURF,1);
+  // Summary
+  const incStats=[{v:'6',l:'Active Schemes',c:OG},{v:'₹48k',l:'Paid This Month',c:GN},{v:'234',l:'Beneficiaries',c:CY}];
+  for(let i=0;i<incStats.length;i++){
+    bx(f,20+i*118,90,108,64,CARD,1,10); bx(f,20+i*118,90,108,3,incStats[i].c,1,2);
+    await tx(f,incStats[i].v,44+i*118,100,22,incStats[i].c,'Bold');
+    await tx(f,incStats[i].l,26+i*118,128,8,GR);
+  }
+  bx(f,20,166,350,44,OG,.15,22); bx(f,20,166,350,1,OG,.4,22);
+  await tx(f,'+ Create New Incentive Scheme',95,181,12,OG,'Semi Bold');
+  // Scheme list
+  const schemes=[
+    {nm:'Peak Hour Surge',type:'Multiplier',val:'2× earnings 8–10 AM',active:true,uses:89},
+    {nm:'Weekend Warrior',type:'Completion Bonus',val:'₹300 for 5+ weekend jobs',active:true,uses:34},
+    {nm:'5-Star Streak Bonus',type:'Quality Bonus',val:'₹500 for 10× 5-star',active:true,uses:12},
+    {nm:'New City Launch',type:'Signup Bonus',val:'₹1,000 first 50 providers',active:false,uses:0},
+  ];
+  for(let i=0;i<schemes.length;i++){
+    const s=schemes[i], oy=222+i*120;
+    CD(f,20,oy,350,112,10);
+    bx(f,20,oy,3,112,s.active?OG:EDGE,1,2);
+    await tx(f,s.nm,32,oy+12,13,WH,'Semi Bold');
+    await tx(f,s.type,32,oy+30,10,GR);
+    await tx(f,s.val,32,oy+48,10,LG);
+    await tx(f,s.uses+' providers using',32,oy+66,10,GR);
+    await BDG(f,240,oy+12,s.active?'Active':'Paused',s.active?GN:GR);
+    bx(f,270,oy+70,36,28,CY,.15,8); await tx(f,'Edit',276,oy+79,9,CY);
+    bx(f,314,oy+70,36,28,s.active?RD:GN,s.active?.15:.15,8);
+    await tx(f,s.active?'Off':'On',s.active?318:318,oy+79,9,s.active?RD:GN);
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A19 / INCENTIVE MGMT');
+  return f;
+};
+
+// A20: GEOGRAPHIC ANALYTICS
+const A20 = async () => {
+  const f = mk(adminPage,8550,'A20 Geographic Analytics',2);
+  await SB(f);
+  await HDR(f,'Geographic Analytics','City Performance');
+  bx(f,0,0,W,44,SURF,1);
+  // City selector
+  bx(f,20,90,350,36,CARD,1,18); bx(f,20,90,350,1,PK,.3,18);
+  await tx(f,'City: Hyderabad ▾',28,101,12,LG); await tx(f,'May 2024 ▾',270,101,12,GR);
+  // Heatmap simulation
+  bx(f,20,138,350,200,{r:.04,g:.07,b:.04},1,12);
+  for(let i=0;i<7;i++) bx(f,20,138+i*28,350,1,{r:.08,g:.11,b:.08},.5);
+  for(let i=0;i<5;i++) bx(f,20+i*88,138,1,200,{r:.08,g:.11,b:.08},.5);
+  // Heatmap dots
+  const heatDots=[
+    {x:120,y:190,sz:50,c:RD,a:.5},{x:220,y:210,sz:40,c:OG,a:.45},
+    {x:90,y:260,sz:35,c:AM,a:.4},{x:280,y:175,sz:30,c:AM,a:.35},
+    {x:170,y:300,sz:28,c:GN,a:.3},{x:300,y:260,sz:20,c:GN,a:.25},
+  ];
+  for(const d of heatDots){bx(f,d.x,d.y,d.sz,d.sz,d.c,d.a,d.sz/2);}
+  await tx(f,'🔴 High Demand  🟡 Medium  🟢 Low',60,350,9,GR);
+  // Area breakdown
+  await tx(f,'Area Performance',20,374,13,WH,'Semi Bold');
+  await tx(f,'Bookings  •  Revenue  •  Providers',180,378,9,GR);
+  const areas=[
+    {nm:'Banjara Hills',bk:342,rev:'₹1.2L',prov:18,c:RD},
+    {nm:'Jubilee Hills',bk:218,rev:'₹78k',prov:12,c:OG},
+    {nm:'Madhapur / HITEC',bk:189,rev:'₹65k',prov:10,c:AM},
+    {nm:'Gachibowli',bk:156,rev:'₹54k',prov:9,c:GN},
+    {nm:'Kondapur',bk:98,rev:'₹34k',prov:6,c:GN},
+  ];
+  for(let i=0;i<areas.length;i++){
+    const a=areas[i], oy=392+i*72;
+    CD(f,20,oy,350,64,8);
+    bx(f,20,oy,4,64,a.c,1,2);
+    await tx(f,a.nm,32,oy+8,12,WH,'Semi Bold');
+    // Mini bar
+    const barW=Math.round((a.bk/342)*180);
+    bx(f,32,oy+30,180,8,SURF,1,4); bx(f,32,oy+30,barW,8,a.c,.6,4);
+    await tx(f,a.bk+' bookings',32,oy+44,9,GR);
+    await tx(f,a.rev,268,oy+10,13,CY,'Bold');
+    await tx(f,a.prov+' providers',268,oy+30,9,GR);
+  }
+  await NAV_A(f,3);
+  await LBL(f,'A20 / GEOGRAPHIC ANALYTICS');
+  return f;
+};
+
+// A21: AUDIT LOG
+const A21 = async () => {
+  const f = mk(adminPage,9000,'A21 Audit Log',2);
+  await SB(f);
+  await HDR(f,'Audit Log','All Admin Actions');
+  bx(f,0,0,W,44,SURF,1);
+  // Search & filters
+  bx(f,20,90,230,40,CARD,1,10); bx(f,20,90,230,1,WH,.05,10);
+  await tx(f,'🔍  Search actions...',30,103,11,GR);
+  bx(f,258,90,112,40,CARD,1,10); bx(f,258,90,112,1,EDGE,.3,10);
+  await tx(f,'Filter ▾',286,103,11,GR);
+  // Type filters
+  const logTypes=['All','User','Provider','Finance','System'];
+  for(let i=0;i<logTypes.length;i++){
+    const sel=i===0;
+    bx(f,20+i*74,140,66,26,sel?PK:CARD,sel?.15:1,13);
+    if(sel)bx(f,20+i*74,140,66,1,PK,.4,13);
+    await tx(f,logTypes[i],28+i*74,148,9,sel?PK:GR,sel?'Semi Bold':'Regular');
+  }
+  DIV(f,172);
+  // Log entries
+  const logs=[
+    {admin:'Suresh M.',action:'Suspended provider PRV-0088',cat:'Provider',tm:'28 May 4:45 PM',sev:'high'},
+    {admin:'Deepa R.',action:'Issued refund ₹299 for SVC-8821',cat:'Finance',tm:'28 May 4:30 PM',sev:'medium'},
+    {admin:'Suresh M.',action:'Approved KYC for PRV-0094',cat:'Provider',tm:'28 May 3:12 PM',sev:'low'},
+    {admin:'Anand K.',action:'Updated promo code MONSOON20',cat:'System',tm:'28 May 2:00 PM',sev:'low'},
+    {admin:'Deepa R.',action:'Banned user USR-0223 (fraud)',cat:'User',tm:'28 May 11:30 AM',sev:'high'},
+    {admin:'Anand K.',action:'Pushed notification to all users',cat:'System',tm:'28 May 10:00 AM',sev:'medium'},
+    {admin:'Suresh M.',action:'Exported revenue report May 2024',cat:'Finance',tm:'28 May 9:00 AM',sev:'low'},
+  ];
+  const sevColors={high:RD,medium:AM,low:GN};
+  for(let i=0;i<logs.length;i++){
+    const l=logs[i], oy=180+i*84;
+    CD(f,20,oy,350,76,8);
+    bx(f,20,oy,3,76,sevColors[l.sev],1,2);
+    await tx(f,l.admin,32,oy+8,11,WH,'Semi Bold');
+    await tx(f,l.cat,240,oy+8,9,LG);
+    await tx(f,l.action,32,oy+26,11,LG);
+    await tx(f,l.tm,32,oy+48,9,GR);
+    await BDG(f,270,oy+44,l.sev.charAt(0).toUpperCase()+l.sev.slice(1),sevColors[l.sev]);
+  }
+  await NAV_A(f,3);
+  await LBL(f,'A21 / AUDIT LOG');
+  return f;
+};
+
+// A22: API & INTEGRATION SETTINGS
+const A22 = async () => {
+  const f = mk(adminPage,9450,'A22 API & Integrations',2);
+  await SB(f);
+  await HDR(f,'API & Integrations','System Configuration');
+  bx(f,0,0,W,44,SURF,1);
+  // Warning banner
+  bx(f,20,90,350,44,{r:.14,g:.08,b:.01},1,10); bx(f,20,90,350,3,AM,1,2);
+  await tx(f,'⚠  Changes here affect live production systems.',32,102,10,AM,'Semi Bold');
+  await tx(f,'Proceed with caution.',32,118,10,GR);
+  // API Keys section
+  await tx(f,'API Keys',20,148,13,WH,'Semi Bold');
+  const apis=[
+    {nm:'Payment Gateway (Razorpay)',key:'rzp_live_••••••••••••••KL',env:'Live',c:GN},
+    {nm:'Maps & Geo (Google Maps)',key:'AIza••••••••••••••••••••',env:'Live',c:GN},
+    {nm:'SMS / OTP (MSG91)',key:'MSG91••••••••••••••',env:'Live',c:GN},
+    {nm:'Push Notifications (FCM)',key:'AAAA••••••••••••••••••',env:'Live',c:GN},
+  ];
+  for(let i=0;i<apis.length;i++){
+    const a=apis[i], oy=166+i*92;
+    CD(f,20,oy,350,84,10);
+    bx(f,20,oy,3,84,a.c,1,2);
+    await tx(f,a.nm,32,oy+10,11,WH,'Semi Bold');
+    bx(f,32,oy+28,240,28,SURF,1,6);
+    await tx(f,a.key,38,oy+35,9,GR);
+    bx(f,280,oy+28,44,28,CY,.12,8); await tx(f,'Copy',288,oy+36,9,CY);
+    bx(f,332,oy+28,30,28,OG,.12,8); await tx(f,'Edit',334,oy+36,9,OG);
+    await BDG(f,232,oy+8,a.env,a.c);
+  }
+  // Webhooks
+  await tx(f,'Webhooks',20,542,13,WH,'Semi Bold');
+  const hooks=[
+    {url:'https://api.servico.app/webhook/payment',ev:'payment.success',active:true},
+    {url:'https://api.servico.app/webhook/otp',ev:'otp.delivered',active:true},
+    {url:'https://api.servico.app/webhook/fraud',ev:'fraud.alert',active:false},
+  ];
+  for(let i=0;i<hooks.length;i++){
+    const h=hooks[i], oy=560+i*72;
+    CD(f,20,oy,350,64,8);
+    await tx(f,h.ev,32,oy+8,10,CY,'Semi Bold');
+    await tx(f,h.url.replace('https://',''),32,oy+26,8,GR);
+    bx(f,306,oy+14,36,20,h.active?GN:EDGE,h.active?1:.3,10);
+    bx(f,h.active?322:308,oy+16,16,16,WH,1,8);
+  }
+  bx(f,20,778,350,44,CY,.15,22); bx(f,20,778,350,1,CY,.4,22);
+  await tx(f,'Save All Integration Settings',90,793,12,CY,'Semi Bold');
+  await NAV_A(f,0);
+  await LBL(f,'A22 / API & INTEGRATIONS');
+  return f;
+};
+
+// ── Build ALL screens ─────────────────────────────────────
+// Customer C1–C26 (row 0) — built before new screens
+// Customer C27–C36 (row 0, continued)
+const c27=await C27(), c28=await C28(), c29=await C29(), c30=await C30();
+const c31=await C31(), c32=await C32(), c33=await C33(), c34=await C34();
+const c35=await C35(), c36=await C36();
+console.log('Customer extended screens done (36/84)');
+
+// Provider P20–P26 (row 1, continued)
+const p20=await P20(), p21=await P21(), p22=await P22(), p23=await P23();
+const p24=await P24(), p25=await P25(), p26=await P26();
+console.log('Provider extended screens done (45/84 provider)');
+
+// Admin A1–A14 + A15–A22 (row 2)
 const a1=await A1(), a2=await A2(), a3=await A3(), a4=await A4(), a5=await A5();
 const a6=await A6(), a7=await A7(), a8=await A8();
 const a9=await A9(), a10=await A10(), a11=await A11(), a12=await A12();
 const a13=await A13(), a14=await A14();
-console.log('Admin screens done (59/59)');
+const a15=await A15(), a16=await A16(), a17=await A17(), a18=await A18();
+const a19=await A19(), a20=await A20(), a21=await A21(), a22=await A22();
+console.log('All screens done (84/84)');
 
 // ── All 19 screens built — now add prototype links ───────────
 // Wrapped in try/catch so a failed link never blocks screen rendering
@@ -3183,7 +4499,60 @@ try {
   lnk(a13,16,44,36,36,a4.id);
   lnk(a14,16,44,36,36,a2.id);
 
-  console.log('Prototype links added');
+  // ── Extended Customer links ─────────────────────────────
+  lnk(c3,20,44,36,36,c27.id);              // Home map icon -> Map View
+  lnk(c3,20,90,350,44,c28.id);             // Home search bar -> Search Results
+  lnk(c27,16,50,318,44,c28.id);            // Map search -> Search Results
+  lnk(c28,20,218,350,128,c9.id);           // Search result -> Provider Detail
+  lnk(c8,16,44,36,36,c29.id);              // Profile edit button -> Edit Profile
+  lnk(c29,20,706,350,52,c8.id);            // Edit Profile save -> Profile
+  lnk(c8,20,350,350,52,c30.id);            // Profile payment methods -> Payment Methods
+  lnk(c6,20,130,350,44,c30.id);            // Payment screen -> Payment Methods
+  lnk(c11,16,44,36,36,c31.id);             // Review screen report issue -> Complaint
+  lnk(c31,20,752,350,52,c32.id);           // Complaint submit -> Refund Status
+  lnk(c32,20,764,350,48,c26.id);           // Refund -> Support
+  lnk(c3,160,226,50,36,c33.id);            // Home explore -> Recommendations
+  lnk(c33,20,248,114,100,c9.id);           // Trending card -> Provider Detail
+  lnk(c8,20,450,350,52,c34.id);            // Profile rewards -> Loyalty
+  lnk(c12,20,162,350,108,c35.id);          // My Bookings -> Invoice/Receipt
+  lnk(c35,20,684,350,52,c5.id);            // Invoice rebook -> Booking
+  lnk(c5,20,90,350,56,c36.id);             // Booking add-ons -> Add-ons screen
+  lnk(c36,20,710,350,44,c6.id);            // Add-ons confirm -> Payment
+
+  // ── Extended Provider links ─────────────────────────────
+  lnk(p13,20,696,350,52,p20.id);           // Bank Setup -> Availability (Step 4)
+  lnk(p20,20,692,350,52,p2.id);            // Availability -> Dashboard (live!)
+  lnk(p10,16,44,36,36,p21.id);             // Provider Profile -> Edit Profile
+  lnk(p21,20,752,350,52,p10.id);           // Edit Profile save -> Profile
+  lnk(p12,20,710,350,52,p22.id);           // Services Setup -> Service Editor
+  lnk(p22,16,44,36,36,p2.id);              // Service Editor -> Dashboard
+  lnk(p5,192,660,178,52,p23.id);           // Job Detail -> Photo Documentation
+  lnk(p23,20,798,350,38,p9.id);            // Photo docs submit -> Completion OTP
+  lnk(p6,16,44,36,36,p24.id);              // Earnings -> Payout Detail
+  lnk(p24,20,742,350,48,p6.id);            // Payout Detail -> Earnings
+  lnk(p6,200,650,160,44,p25.id);           // Earnings -> Incentives
+  lnk(p25,16,44,36,36,p6.id);              // Incentives -> Earnings
+  lnk(p19,20,300,350,64,p26.id);           // Provider Help -> Training
+  lnk(p26,16,44,36,36,p2.id);              // Training -> Dashboard
+
+  // ── Extended Admin links ────────────────────────────────
+  lnk(a15,16,44,36,36,a2.id);              // User Detail -> User Mgmt
+  lnk(a2,20,296,350,56,a15.id);            // User row -> User Detail
+  lnk(a16,16,44,36,36,a2.id);              // Provider Full Detail -> User Mgmt
+  lnk(a14,16,44,36,36,a16.id);             // Old Provider Detail -> new detail
+  lnk(a17,16,44,36,36,a3.id);              // Order Detail -> Orders
+  lnk(a3,20,220,350,100,a17.id);           // Order row -> Order Detail
+  lnk(a18,16,44,36,36,a3.id);              // Content Moderation back
+  lnk(a5,20,600,350,44,a18.id);            // Analytics -> Moderation
+  lnk(a19,16,44,36,36,a1.id);              // Incentive Mgmt -> Dashboard
+  lnk(a1,198,496,164,48,a19.id);           // Dashboard quick action -> Incentives
+  lnk(a20,16,44,36,36,a5.id);              // Geo Analytics -> Analytics
+  lnk(a5,20,400,350,44,a20.id);            // Analytics -> Geo
+  lnk(a21,16,44,36,36,a1.id);              // Audit Log -> Dashboard
+  lnk(a22,16,44,36,36,a10.id);             // API Settings -> Platform Settings
+  lnk(a10,20,600,350,52,a22.id);           // Platform Settings -> API Settings
+
+  console.log('Prototype links added (84 screens)');
 } catch(e) {
   console.error('Links skipped (reactions API error):', e.message);
 }
@@ -3191,26 +4560,40 @@ try {
 figma.viewport.scrollAndZoomIntoView(pg.children);
 
 console.log('============================================================');
-console.log('ServiCo v4 Complete! All 59 screens on one page.');
-console.log('Row 1 (y=0):    C1 C2 C3 C4 C5 C6 C7 C8  — Customer (existing)');
-console.log('                C9 C10 C11 C12 C13 C14     — Customer (new)');
-console.log('Row 2 (y=960):  P1 P2 P3 P4 P5 P6         — Provider (existing)');
-console.log('                P7 P8 P9 P10               — Provider (new)');
-console.log('Row 3 (y=1920): A1 A2 A3 A4 A5            — Admin (existing)');
-console.log('                A6 A7 A8                   — Admin (new)');
+console.log('ServiCo v5 — PRODUCTION COMPLETE! 84 screens on one page.');
 console.log('');
-console.log('CUSTOMER (26): Onboarding, Login, Register, OTP Login, Forgot Password,');
-console.log('               Home, Browse Services, Provider List, Provider Detail,');
-console.log('               Booking, Payment, Confirmation, Tracking, Rate+Review,');
-console.log('               Profile, My Bookings, Booking Detail, Live Chat,');
-console.log('               Notifications, Wallet+Promos, Address Book, Vehicles,');
-console.log('               Referrals, Subscription Plans, Settings, Help & Support');
-console.log('PROVIDER (19): Login, Dashboard, Request Detail, Active Jobs, Job Detail,');
-console.log('               Earnings, KYC (step2), En Route, Job Completion, Profile,');
-console.log('               Onboarding(step1), Services Setup, Bank Setup, Calendar,');
-console.log('               Chat, Notifications, Job History, Performance, Help');
-console.log('ADMIN   (14): Dashboard, User Mgmt, Orders Monitor, Complaints, Analytics,');
-console.log('               Provider Verification, Promo Mgmt, Payout Mgmt,');
-console.log('               Category Mgmt, Platform Settings, Revenue Reports,');
-console.log('               Push Notifications, Support Tickets, Provider Detail');
+console.log('CUSTOMER (36 screens — Row y=0):');
+console.log('  C1  Login            C2  Register          C3  Home');
+console.log('  C4  Provider List    C5  Booking           C6  Payment');
+console.log('  C7  Tracking         C8  Profile           C9  Provider Detail');
+console.log('  C10 Confirmation     C11 Rate & Review     C12 My Bookings');
+console.log('  C13 Notifications    C14 Wallet & Promos   C15 Onboarding');
+console.log('  C16 OTP Login        C17 Forgot Password   C18 Browse Services');
+console.log('  C19 Booking Detail   C20 Live Chat         C21 Address Book');
+console.log('  C22 Vehicle Manager  C23 Referrals         C24 Subscription');
+console.log('  C25 Settings         C26 Help & Support    C27 Map View');
+console.log('  C28 Search Results   C29 Edit Profile      C30 Payment Methods');
+console.log('  C31 Complaint Filing C32 Refund Status     C33 Explore & Discover');
+console.log('  C34 Loyalty Rewards  C35 Invoice Receipt   C36 Booking Add-ons');
+console.log('');
+console.log('PROVIDER (26 screens — Row y=960):');
+console.log('  P1  Login            P2  Dashboard         P3  Request Detail');
+console.log('  P4  Active Jobs      P5  Job Detail        P6  Earnings');
+console.log('  P7  KYC Step 2       P8  En Route          P9  Job Completion');
+console.log('  P10 Profile          P11 Onboarding Step1  P12 Services Setup');
+console.log('  P13 Bank Setup       P14 Calendar          P15 Chat');
+console.log('  P16 Notifications    P17 Job History       P18 Performance');
+console.log('  P19 Help             P20 Availability Setup P21 Edit Profile');
+console.log('  P22 Service Editor   P23 Photo Docs        P24 Payout Detail');
+console.log('  P25 Incentives       P26 Training & Resources');
+console.log('');
+console.log('ADMIN (22 screens — Row y=1920):');
+console.log('  A1  Dashboard        A2  User Management   A3  Orders Monitor');
+console.log('  A4  Complaints       A5  Analytics         A6  Provider Verify');
+console.log('  A7  Promo Management A8  Payout Management A9  Category Mgmt');
+console.log('  A10 Platform Settings A11 Revenue Reports  A12 Push Notifications');
+console.log('  A13 Support Tickets  A14 Provider Detail   A15 User Detail View');
+console.log('  A16 Provider Full Detail A17 Order Detail  A18 Content Moderation');
+console.log('  A19 Incentive Mgmt   A20 Geographic Analytics A21 Audit Log');
+console.log('  A22 API & Integrations');
 console.log('============================================================');
