@@ -671,10 +671,293 @@ const C8 = async () => {
   return f;
 };
 
+// C9: PROVIDER DETAIL
+const C9 = async () => {
+  const f = mk(custPage,3600,'C9 Provider Detail');
+  await SB(f);
+  await HDR(f,'Provider Profile');
+  bx(f,0,44,W,140,{r:.01,g:.06,b:.18});
+  for (let i=0;i<4;i++) bx(f,0,44+i*35,W,1,WH,.02);
+  bx(f,20,108,70,70,CY,1,35); await tx(f,'CM',42,128,18,BK,'Bold');
+  bx(f,16,104,78,78,CY,.2,39);
+  await tx(f,'CleanMax Auto Spa',104,112,15,WH,'Bold');
+  await tx(f,'* 4.9  (1.2K reviews)',104,132,11,ST);
+  await tx(f,'Banjara Hills  +  1.2 km away',104,150,10,GR);
+  await BDG(f,104,170,'Verified',GN); await BDG(f,162,170,'Top Rated',CY);
+  CD(f,20,196,350,54);
+  const pst=[['142','Jobs/mo'],['5 yrs','Experience'],['94%','Accept Rate'],['30min','Avg Time']];
+  for (let i=0;i<4;i++){
+    const ox=30+i*86;
+    await tx(f,pst[i][0], ox,206, 14, CY,'Bold');
+    await tx(f,pst[i][1], ox-2,228, 8, GR);
+    if (i<3) bx(f,30+(i+1)*86-4,206,1,28,EDGE,.5);
+  }
+  bx(f,20,262,350,36,SURF,1,18);
+  const stabs=['Packages','Reviews','Gallery'];
+  for (let i=0;i<3;i++){
+    const s=i===0, tw=116;
+    bx(f,22+i*tw,264,tw,32,s?CY:{r:0,g:0,b:0},s?1:0,14);
+    await tx(f,stabs[i], 22+i*tw+24,272, 12, s?BK:GR, s?'Semi Bold':'Regular');
+  }
+  await tx(f,'Select Package',20,310,14,WH,'Semi Bold');
+  const ppkgs=[
+    {n:'Basic Wash',d:'Exterior only',t:'30 min',p:'Rs.199',tag:''},
+    {n:'Premium Wash',d:'Interior + Exterior',t:'60 min',p:'Rs.349',tag:'Best Value'},
+    {n:'Full Detailing',d:'Complete care + polish',t:'3 hrs',p:'Rs.699',tag:'Popular'},
+  ];
+  for (let i=0;i<3;i++){
+    const pk=ppkgs[i], oy=334+i*84;
+    CD(f,20,oy,350,74);
+    bx(f,28,oy+12,32,32,CY,.12,16); bx(f,28,oy+12,32,1,WH,.08,16);
+    await tx(f,pk.n, 72,oy+12, 13, WH,'Semi Bold');
+    await tx(f,pk.d+'  +  '+pk.t, 72,oy+32, 10, GR);
+    if (pk.tag) await BDG(f,72,oy+52,pk.tag,CY);
+    await tx(f,pk.p, 300,oy+24, 14, CY,'Bold');
+    bx(f,290,oy+50,52,18,CY,.15,9); await tx(f,'Select', 296,oy+53, 9, CY);
+  }
+  await tx(f,'Recent Reviews',20,590,14,WH,'Semi Bold');
+  await tx(f,'4.9 / 5   (1,284 reviews)',236,592,10,GR);
+  for (let i=0;i<5;i++) await tx(f,'*',20+i*18,608,14,ST,'Bold');
+  const revs=[
+    {n:'Ramprasad M.',t:'"Excellent service, car looks brand new!"',d:'27 May'},
+    {n:'Neha S.',t:'"Very professional and thorough."',d:'25 May'},
+  ];
+  for (let i=0;i<revs.length;i++){
+    const rv=revs[i], oy=630+i*84;
+    CD(f,20,oy,350,76);
+    await AV(f,28,oy+14,36,rv.n[0]+rv.n[rv.n.indexOf(' ')+1],CY);
+    await tx(f,rv.n, 74,oy+12, 12, WH,'Semi Bold');
+    await tx(f,'* * * * *', 74,oy+30, 10, ST);
+    await tx(f,rv.d, 304,oy+12, 9, GR);
+    await tx(f,rv.t, 28,oy+52, 10, LG);
+  }
+  bx(f,0,762,W,1,EDGE,.5); bx(f,0,763,W,81,DP);
+  await tx(f,'Premium Wash — Rs.349', 20,780, 11, LG);
+  await BTN(f,192,770,178,'Book Now',CY);
+  await LBL(f,'C9 / PROVIDER DETAIL');
+  return f;
+};
+
+// C10: BOOKING CONFIRMATION
+const C10 = async () => {
+  const f = mk(custPage,4050,'C10 Confirmation');
+  tg(f,{r:.01,g:.12,b:.08},H);
+  await SB(f);
+  bx(f,140,120,110,110,GN,.08,55); bx(f,148,128,94,94,GN,.12,47); bx(f,156,136,78,78,GN,1,39);
+  await tx(f,'v',186,162,30,BK,'Bold');
+  await tx(f,'Booking Confirmed!',86,264,20,WH,'Bold');
+  await tx(f,'Your car wash is scheduled.',80,292,13,GR);
+  CD(f,20,324,350,164); bx(f,20,324,350,3,GN,1,2);
+  await tx(f,'Order ID: #ORD-7285',28,336,11,GR); await tx(f,'27 May 2026',280,336,10,GR);
+  DIV(f,354);
+  const cinfo=[
+    ['Provider','CleanMax Auto Spa'],['Service','Premium Car Wash'],
+    ['Time','11:00 AM — 12:00 PM'],['Address','Banjara Hills, Hyderabad'],['Amount Paid','Rs. 349'],
+  ];
+  for (let i=0;i<cinfo.length;i++){
+    const oy=362+i*24;
+    await tx(f,cinfo[i][0], 28,oy, 10, GR);
+    await tx(f,cinfo[i][1], 180,oy, 10, i===4?GN:LG, i===4?'Bold':'Regular');
+  }
+  await tx(f,"What's Next",20,504,14,WH,'Semi Bold');
+  const next=['Provider will confirm within 10 min','SMS + app notification when confirmed','Track live when provider en route','OTP to verify job start & end'];
+  for (let i=0;i<4;i++){
+    bx(f,20,528+i*40,20,20,CY,1,10); await tx(f,String(i+1), 27,531+i*40, 10, BK,'Bold');
+    await tx(f,next[i], 50,531+i*40, 12, LG);
+  }
+  await BTN(f,20,696,350,'Track My Booking',CY);
+  await BTN2(f,20,762,350,'Back to Home',CY);
+  bx(f,130,814,130,26,SURF,1,13); await tx(f,'Share Booking',143,821,11,GR);
+  await LBL(f,'C10 / CONFIRMATION');
+  return f;
+};
+
+// C11: RATE & REVIEW
+const C11 = async () => {
+  const f = mk(custPage,4500,'C11 Rate & Review');
+  await SB(f);
+  await HDR(f,'Rate & Review','CleanMax Auto Spa');
+  CD(f,20,88,350,68);
+  bx(f,30,98,44,44,CY,1,22); await tx(f,'CM',42,114,14,BK,'Bold');
+  await tx(f,'CleanMax Auto Spa', 86,98, 13, WH,'Semi Bold');
+  await tx(f,'Premium Car Wash  +  27 May 2026', 86,118, 10, GR);
+  await tx(f,'Order #ORD-7285  +  Rs.349', 86,136, 10, GR);
+  await tx(f,'Overall Experience',20,172,14,WH,'Semi Bold');
+  bx(f,20,198,350,72,SURF,1,16);
+  await tx(f,'Tap to rate',154,206,11,GR);
+  for (let i=0;i<5;i++){
+    bx(f,42+i*62,220,48,32,i<4?ST:EDGE,.2,8);
+    await tx(f,'*',57+i*62,226,18,i<4?ST:EDGE,'Bold');
+  }
+  await tx(f,'4 stars — Great!',146,258,11,AM,'Semi Bold');
+  await tx(f,'Rate by Category',20,286,14,WH,'Semi Bold');
+  const cats2=[
+    {n:'Punctuality',s:5,c:GN},{n:'Service Quality',s:4,c:CY},
+    {n:'Behavior',s:5,c:GN},{n:'Value for Money',s:4,c:CY},
+  ];
+  for (let i=0;i<cats2.length;i++){
+    const oy=310+i*48;
+    await tx(f,cats2[i].n, 20,oy+4, 12, LG);
+    for (let j=0;j<5;j++) await tx(f,'*',180+j*34,oy,16,j<cats2[i].s?cats2[i].c:EDGE,'Bold');
+    await tx(f,String(cats2[i].s)+'.0', 352,oy+4, 12, cats2[i].c,'Semi Bold');
+  }
+  await tx(f,'Write a Review',20,506,14,WH,'Semi Bold');
+  bx(f,20,530,350,88,CARD,1,12); bx(f,20,530,350,1,WH,.05,12);
+  await tx(f,'"Excellent service! The team was very professional',30,546,12,LG);
+  await tx(f,'and the car looks spotless. Highly recommend."',30,566,12,LG);
+  await tx(f,'Add Photos (optional)',20,632,12,GR);
+  bx(f,20,654,56,56,SURF,1,12); bx(f,38,674,20,20,CY,.3,10); await tx(f,'+',44,678,14,CY,'Bold');
+  bx(f,86,654,56,56,CARD,1,12); await tx(f,'IMG',104,676,10,GR);
+  bx(f,152,654,56,56,CARD,1,12); await tx(f,'IMG',170,676,10,GR);
+  await tx(f,'Tip (optional)',20,726,12,GR);
+  const tips=['Skip','Rs.20','Rs.50','Rs.100'];
+  for (let i=0;i<4;i++){
+    const s=i===2;
+    bx(f,20+i*84,748,76,28,s?GN:SURF,1,14);
+    await tx(f,tips[i], 20+i*84+18,758, 10, s?BK:LG, s?'Semi Bold':'Regular');
+  }
+  await BTN(f,20,792,350,'Submit Review',GN,WH);
+  await LBL(f,'C11 / RATE & REVIEW');
+  return f;
+};
+
+// C12: MY BOOKINGS
+const C12 = async () => {
+  const f = mk(custPage,4950,'C12 My Bookings');
+  await SB(f);
+  await tx(f,'My Bookings',20,50,20,WH,'Bold');
+  bx(f,20,82,350,36,SURF,1,18);
+  const btabs=['Upcoming','Ongoing','Completed','Cancelled'];
+  for (let i=0;i<4;i++){
+    const s=i===2, tw=87;
+    bx(f,22+i*tw,84,tw,32,s?CY:{r:0,g:0,b:0},s?1:0,14);
+    await tx(f,btabs[i], 22+i*tw+8,92, 10, s?BK:GR, s?'Semi Bold':'Regular');
+  }
+  let bfx=20;
+  const bfilt=['All Time','This Month','Rated','Unrated'];
+  for (let i=0;i<bfilt.length;i++){
+    const fw=bfilt[i].length*7+16, s=i===1;
+    bx(f,bfx,126,fw,26,s?CY:SURF,1,13);
+    if (!s) bx(f,bfx,126,fw,1,WH,.04,13);
+    await tx(f,bfilt[i], bfx+6,131, 9, s?BK:LG, s?'Semi Bold':'Regular');
+    bfx+=fw+6;
+  }
+  const bkgs=[
+    {id:'7285',prov:'CleanMax Auto Spa',svc:'Premium Car Wash',dt:'27 May  +  11:00 AM',p:'Rs.349',s:'Completed',sc:GN,c:CY},
+    {id:'7280',prov:'Swift Wash & Care',svc:'Basic Wash',dt:'15 May  +  10:00 AM',p:'Rs.149',s:'Completed',sc:GN,c:GN},
+    {id:'7274',prov:'ProShine Detailing',svc:'Full Detailing',dt:'02 May  +  2:00 PM',p:'Rs.699',s:'Cancelled',sc:RD,c:OG},
+    {id:'7268',prov:'QuickWash Express',svc:'Exterior Wash',dt:'18 Apr  +  9:00 AM',p:'Rs.99',s:'Completed',sc:GN,c:PK},
+    {id:'7261',prov:'CleanMax Auto Spa',svc:'Basic Wash',dt:'05 Apr  +  11:30 AM',p:'Rs.199',s:'Refunded',sc:AM,c:CY},
+  ];
+  for (let i=0;i<bkgs.length;i++){
+    const b=bkgs[i], oy=162+i*118;
+    CD(f,20,oy,350,108);
+    bx(f,20,oy,350,30,SURF,.4,16);
+    await tx(f,'#ORD-'+b.id, 28,oy+8, 10, GR);
+    await BDG(f,260,oy+6,b.s,b.sc);
+    bx(f,30,oy+38,44,44,b.c,.18,22); bx(f,32,oy+40,40,40,b.c,.2,20);
+    await tx(f,b.prov[0], 46,oy+52, 14, b.c,'Bold');
+    await tx(f,b.prov, 86,oy+34, 12, WH,'Semi Bold');
+    await tx(f,b.svc, 86,oy+52, 10, GR);
+    await tx(f,b.dt, 86,oy+70, 9, GR);
+    await tx(f,b.p, 296,oy+52, 14, WH,'Bold');
+    bx(f,86,oy+86,76,16,b.s==='Cancelled'?RD:CY,.1,8);
+    await tx(f,b.s==='Cancelled'?'Rebook':'Rate & Review', 90,oy+89, 9, b.s==='Cancelled'?RD:CY);
+    if (b.s==='Completed'){ bx(f,172,oy+86,60,16,GN,.1,8); await tx(f,'Rebook',176,oy+89,9,GN); }
+  }
+  await NAV_C(f,2);
+  await LBL(f,'C12 / MY BOOKINGS');
+  return f;
+};
+
+// C13: NOTIFICATIONS
+const C13 = async () => {
+  const f = mk(custPage,5400,'C13 Notifications');
+  await SB(f);
+  await tx(f,'Notifications',20,50,20,WH,'Bold');
+  bx(f,280,46,80,28,CY,.15,14); await tx(f,'Mark All Read',284,54,9,CY);
+  await tx(f,'Today',20,92,12,GR,'Semi Bold');
+  const notifs=[
+    {t:'Booking Confirmed',b:'CleanMax Auto Spa accepted your booking for 11:00 AM',dt:'2 min ago',c:GN,dot:true},
+    {t:'Payment Successful',b:'Rs.349 paid via UPI for Order #ORD-7285',dt:'5 min ago',c:CY,dot:true},
+    {t:'Special Offer',b:'30% off on Full Detailing this weekend — Code: CLEAN30',dt:'1 hr ago',c:OG,dot:false},
+    {t:'Rate Your Experience',b:'How was your last wash with Swift Wash & Care?',dt:'2 hrs ago',c:ST,dot:false},
+  ];
+  for (let i=0;i<notifs.length;i++){
+    const n=notifs[i], oy=112+i*102;
+    CD(f,20,oy,350,92);
+    bx(f,28,oy+16,42,42,n.c,.15,21); bx(f,30,oy+18,38,38,n.c,.2,19);
+    if (n.dot){ bx(f,352,oy+8,10,10,CY,1,5); }
+    await tx(f,n.t, 82,oy+14, 13, WH,'Semi Bold');
+    await tx(f,n.b.substring(0,50)+(n.b.length>50?'...':''), 82,oy+34, 10, GR);
+    await tx(f,n.dt, 272,oy+14, 9, GR);
+  }
+  await tx(f,'Earlier',20,526,12,GR,'Semi Bold');
+  const old2=[
+    {t:'Provider En Route',b:'Suresh Kumar is 8 min away from your location',c:BL},
+    {t:'Job Completed',b:'Car wash with CleanMax done. OTP verified.',c:GN},
+    {t:'Promo Expiring',b:'FIRST30 expires in 2 days — use before it\'s gone!',c:AM},
+  ];
+  for (let i=0;i<old2.length;i++){
+    const n=old2[i], oy=546+i*82;
+    bx(f,20,oy,350,72,{r:.09,g:.09,b:.11},1,14); bx(f,20,oy,350,1,WH,.03,14);
+    bx(f,28,oy+14,36,36,n.c,.12,18); bx(f,30,oy+16,32,32,n.c,.15,16);
+    await tx(f,n.t, 76,oy+12, 12, GR,'Semi Bold');
+    await tx(f,n.b.substring(0,48)+(n.b.length>48?'...':''), 76,oy+30, 10, GR);
+  }
+  await NAV_C(f,3);
+  await LBL(f,'C13 / NOTIFICATIONS');
+  return f;
+};
+
+// C14: WALLET & PROMOS
+const C14 = async () => {
+  const f = mk(custPage,5850,'C14 Wallet & Promos');
+  await SB(f);
+  await HDR(f,'Wallet & Promos');
+  bx(f,20,88,350,112,{r:.01,g:.06,b:.20},1,20); bx(f,20,88,350,112,WH,.03,20);
+  bx(f,20,88,350,3,CY,.8,2);
+  for (let i=0;i<4;i++) bx(f,20+i*90,88,1,112,WH,.04);
+  await tx(f,'ServiCo Wallet',30,100,12,GR);
+  await tx(f,'Rs. 2,450',30,122,28,CY,'Bold');
+  await tx(f,'Available Balance',30,160,10,GR);
+  bx(f,248,108,106,30,CY,.15,15); await tx(f,'Add Money  +',254,116,11,CY,'Semi Bold');
+  bx(f,248,148,106,30,GN,.1,15); await tx(f,'Cash Out',268,156,11,GN);
+  CD(f,20,212,350,52); bx(f,20,212,350,3,AM,.7,2);
+  bx(f,30,224,28,28,AM,.2,14);
+  await tx(f,'*',38,228,14,AM,'Bold');
+  await tx(f,'2,400 Reward Points  =  Rs.24 value',68,230,12,WH,'Semi Bold');
+  await tx(f,'Use at checkout',68,248,10,GR);
+  await tx(f,'Redeem ->',298,230,10,AM,'Semi Bold');
+  await tx(f,'Available Coupons',20,278,14,WH,'Semi Bold');
+  await tx(f,'4 active',316,280,10,GR);
+  const promos=[
+    {code:'FIRST30',d:'30% off on first booking',exp:'Expires: 31 May 2026',max:'Max Rs.150',c:CY},
+    {code:'CLEAN50',d:'Flat Rs.50 off on Premium Wash',exp:'Expires: 15 Jun 2026',max:'Min order Rs.299',c:GN},
+    {code:'WEEKEND20',d:'20% off every Saturday & Sunday',exp:'Expires: 30 Jun 2026',max:'Max Rs.100',c:OG},
+    {code:'REFERRAL100',d:'Rs.100 for each referral booking',exp:'No expiry',max:'Per referral',c:PK},
+  ];
+  for (let i=0;i<promos.length;i++){
+    const pr=promos[i], oy=302+i*112;
+    CD(f,20,oy,350,104); bx(f,20,oy,350,3,pr.c,1,2);
+    bx(f,28,oy+12,66,30,pr.c,.15,8); await tx(f,pr.code, 30,oy+19, 9, pr.c,'Bold');
+    await tx(f,pr.d, 106,oy+14, 12, WH,'Semi Bold');
+    await tx(f,pr.exp, 106,oy+34, 10, GR);
+    await tx(f,pr.max, 106,oy+52, 10, GR);
+    bx(f,250,oy+70,100,24,pr.c,.15,12);
+    await tx(f,'Apply Coupon', 256,oy+75, 9, pr.c,'Semi Bold');
+  }
+  await NAV_C(f,4);
+  await LBL(f,'C14 / WALLET & PROMOS');
+  return f;
+};
+
 // Build customer screens
 const c1=await C1(), c2=await C2(), c3=await C3(), c4=await C4();
 const c5=await C5(), c6=await C6(), c7=await C7(), c8=await C8();
-console.log('Customer screens done (8/19)');
+const c9=await C9(), c10=await C10(), c11=await C11(), c12=await C12();
+const c13=await C13(), c14=await C14();
+console.log('Customer screens done (14/32)');
 
 // ════════════════════════════════════════════════════════════
 //  PROVIDER — Row 2  (y = 960)
@@ -996,9 +1279,178 @@ const P6 = async () => {
   return f;
 };
 
+// P7: KYC REGISTRATION
+const P7 = async () => {
+  const f = mk(provPage,2700,'P7 KYC Registration',1);
+  tg(f,{r:.05,g:.10,b:.03},200);
+  await SB(f);
+  bx(f,16,44,36,36,SURF,1,18); await tx(f,'<',25,51,18,WH,'Bold');
+  await tx(f,'Partner Registration',64,48,15,WH,'Bold');
+  await tx(f,'Step 2 of 4 — KYC & Business Details',64,68,10,GR);
+  bx(f,20,90,350,4,SURF,1,4); bx(f,20,90,175,4,OG,1,4);
+  const kycSteps=['Info','KYC','Services','Bank'];
+  for (let i=0;i<4;i++){
+    const done=i<2, act=i===1;
+    bx(f,20+i*88,82,20,20,done?OG:SURF,1,10);
+    if (done) await tx(f,'v',26+i*88,85,9,BK,'Bold');
+    await tx(f,kycSteps[i], 16+i*88,106, 9, done||act?OG:GR, done||act?'Semi Bold':'Regular');
+  }
+  await tx(f,'Business Details',20,122,14,WH,'Semi Bold');
+  await INP(f,20,148,350,'Business / Shop Name','VenkatRepairs Auto Services',OG);
+  await INP(f,20,222,350,'Business Type','Mobile Service Provider  v',OG);
+  await INP(f,20,296,350,'City & Service Area','Hyderabad — Banjara Hills, Jubilee Hills',OG);
+  await tx(f,'Identity Proof',20,368,14,WH,'Semi Bold');
+  const kycdocs=['Aadhaar Card','PAN Card','Driving Licence'];
+  for (let i=0;i<3;i++){
+    const oy=392+i*68;
+    CD(f,20,oy,350,58); bx(f,20,oy,4,58,OG,.7,2);
+    await tx(f,kycdocs[i], 34,oy+10, 12, WH,'Semi Bold');
+    await tx(f,i===0?'Uploaded v':(i===1?'Uploaded v':'Tap to upload'), 34,oy+30, 10, i<2?GN:GR);
+    bx(f,272,oy+16,78,26,i<2?GN:OG,.15,13);
+    await tx(f,i<2?'View':'Upload +', 280,oy+21, 10, i<2?GN:OG,'Semi Bold');
+  }
+  await tx(f,'Selfie with ID',20,602,14,WH,'Semi Bold');
+  bx(f,20,626,100,88,SURF,1,14); bx(f,20,626,100,1,WH,.05,14);
+  bx(f,52,646,36,36,OG,.1,18); await tx(f,'Cam',58,658,10,OG);
+  bx(f,130,626,240,88,CARD,1,14); bx(f,130,626,240,1,WH,.05,14);
+  await tx(f,'Take a clear selfie holding your', 142,644, 10, GR);
+  await tx(f,'Aadhaar card next to your face', 142,662, 10, GR);
+  bx(f,142,680,110,22,OG,.12,11); await tx(f,'Open Camera',146,686,9,OG);
+  await BTN(f,20,730,350,'Save & Continue',OG,WH);
+  bx(f,20,796,350,28,GN,.07,10); bx(f,20,796,350,1,GN,.2,10);
+  await tx(f,'Your KYC data is encrypted and reviewed within 24 hrs',36,806,10,GN);
+  await LBL(f,'P7 / KYC REGISTRATION');
+  return f;
+};
+
+// P8: EN ROUTE NAVIGATION
+const P8 = async () => {
+  const f = mk(provPage,3150,'P8 En Route',1);
+  bx(f,0,0,W,H,{r:.04,g:.08,b:.12});
+  for (let i=0;i<19;i++) bx(f,0,i*46,W,1,WH,.02);
+  for (let i=0;i<8;i++) bx(f,i*50,0,1,H,WH,.02);
+  bx(f,140,0,18,H,{r:.08,g:.10,b:.14},1,2);
+  for (let i=0;i<8;i++) bx(f,147,i*110,4,60,AM,.6,2);
+  for (let i=0;i<10;i++) bx(f,90+i*15,200-i*18,12,6,CY,.8,3);
+  bx(f,76,260,52,52,OG,.2,26); bx(f,82,266,40,40,OG,1,20);
+  await tx(f,'VR',96,278,11,BK,'Bold');
+  bx(f,68,308,62,16,BK,.7,8); await tx(f,'You',90,311,9,WH,'Semi Bold');
+  bx(f,56,120,40,40,GN,.2,20); bx(f,62,126,28,28,GN,1,14);
+  await tx(f,'v',72,132,11,BK,'Bold');
+  bx(f,46,158,52,16,BK,.7,8); await tx(f,'Customer',48,161,9,WH,'Semi Bold');
+  bx(f,0,0,W,80,BK,.7);
+  await SB(f);
+  bx(f,0,36,W,44,{r:.03,g:.10,b:.03},1);
+  bx(f,16,42,42,30,GN,.2,8);
+  await tx(f,'Turn Left in 200m',74,48,13,WH,'Bold');
+  await tx(f,'onto Jubilee Hills Road 36',74,66,10,GR);
+  await tx(f,'1.2 km  +  6 min',280,50,11,GN,'Semi Bold');
+  bx(f,310,100,60,60,{r:.05,g:.05,b:.06},1,30);
+  bx(f,322,126,18,2,WH,.5,1); bx(f,330,120,2,14,WH,.5,1);
+  bx(f,0,H-200,W,200,{r:.05,g:.05,b:.065});
+  bx(f,0,H-200,W,1,EDGE,.5);
+  bx(f,174,H-192,42,4,EDGE,1,2);
+  await tx(f,'ETA: 6 min',20,H-178,18,CY,'Bold');
+  await tx(f,'1.2 km remaining',20,H-156,11,GR);
+  bx(f,230,H-186,120,34,GN,.15,17); await tx(f,"I've Arrived",248,H-174,12,GN,'Semi Bold');
+  CD(f,20,H-136,350,82);
+  bx(f,30,H-124,44,44,CY,.2,22); await tx(f,'RM',44,H-108,14,BK,'Bold');
+  await tx(f,'Ramprasad Mokka',88,H-124,13,WH,'Bold');
+  await tx(f,'Premium Car Wash  +  Maruti Swift Dzire',88,H-106,10,GR);
+  await tx(f,'Banjara Hills, Hyderabad',88,H-88,10,GR);
+  bx(f,282,H-118,36,36,GN,.15,18); await tx(f,'Call',291,H-105,10,GN,'Semi Bold');
+  bx(f,324,H-118,36,36,CY,.15,18); await tx(f,'Chat',333,H-105,10,CY,'Semi Bold');
+  await LBL(f,'P8 / EN ROUTE');
+  return f;
+};
+
+// P9: JOB COMPLETION OTP
+const P9 = async () => {
+  const f = mk(provPage,3600,'P9 Job Completion',1);
+  tg(f,{r:.03,g:.12,b:.03},300);
+  await SB(f);
+  await HDR(f,'Complete Job','Enter customer OTP to close');
+  CD(f,20,88,350,100); bx(f,20,88,350,3,GN,1,2);
+  await AV(f,30,100,46,'RM',CY);
+  await tx(f,'Ramprasad Mokka',88,100,13,WH,'Bold');
+  await tx(f,'Premium Car Wash  +  Swift Dzire',88,118,10,GR);
+  bx(f,88,134,64,24,GN,.15,12); bx(f,90,136,8,8,GN,1,4); await tx(f,'In Progress',104,138,9,GN,'Semi Bold');
+  await tx(f,'Rs.286 payout',264,104,12,CY,'Bold');
+  await tx(f,'Customer OTP',150,210,14,WH,'Semi Bold');
+  await tx(f,'Ask customer for the 4-digit OTP shown in their app',70,234,12,GR);
+  await tx(f,'to confirm job completion and release your payout',74,254,12,GR);
+  const otpDigits=['8','4','*','*'];
+  for (let i=0;i<4;i++){
+    const filled=i<2;
+    bx(f,40+i*80,278,70,72,filled?{r:.04,g:.14,b:.04}:CARD,1,16);
+    bx(f,40+i*80,278,70,1,filled?GN:WH,filled?1:.05,16);
+    await tx(f,otpDigits[i], 62+i*80,300, 24, filled?GN:GR,'Bold');
+  }
+  bx(f,40,358,310,2,CY,.3,1);
+  await tx(f,'Enter the 4-digit OTP provided by the customer',60,370,11,GR);
+  await tx(f,'Numpad',165,402,10,GR);
+  const nums=['1','2','3','4','5','6','7','8','9','<','0','v'];
+  for (let i=0;i<12;i++){
+    const col=i%3, row2=Math.floor(i/3);
+    const ox=52+col*94, oy=422+row2*56;
+    bx(f,ox,oy,82,46,i===11?GN:SURF,i===11?1:0,12);
+    if (i<11&&i!==9) bx(f,ox,oy,82,1,WH,.04,12);
+    await tx(f,nums[i], ox+30,oy+14, 15, i===11?BK:i===9?RD:WH, i===11||i===9?'Bold':'Regular');
+  }
+  bx(f,20,666,165,52,{r:.14,g:.04,b:.04},1,26);
+  await tx(f,'Flag Issue',58,682,13,RD,'Bold');
+  bx(f,199,666,171,52,{r:.06,g:.14,b:.06},1,26); bx(f,200,667,169,1,WH,.2,25);
+  await tx(f,'Verify OTP',228,682,13,GN,'Bold');
+  CD(f,20,730,350,64); bx(f,20,730,4,64,AM,1,2);
+  await tx(f,'Why OTP?',32,742,12,WH,'Semi Bold');
+  await tx(f,'Confirms job is done to customer satisfaction.',32,762,10,GR);
+  await tx(f,'Your payout is released immediately after verification.',32,778,10,GR);
+  await LBL(f,'P9 / JOB COMPLETION');
+  return f;
+};
+
+// P10: PROVIDER PROFILE
+const P10 = async () => {
+  const f = mk(provPage,4050,'P10 Provider Profile',1);
+  tg(f,{r:.05,g:.10,b:.03},220);
+  await SB(f);
+  bx(f,146,44,98,98,OG,.1,49); bx(f,154,52,82,82,OG,1,41);
+  await tx(f,'VR',179,82,22,BK,'Bold');
+  await tx(f,'Venkat Repairs',104,158,16,WH,'Bold');
+  await tx(f,'Auto Services  +  Hyderabad',100,180,11,GR);
+  bx(f,150,202,90,22,GN,.1,11); bx(f,150,202,90,1,GN,.3,11);
+  bx(f,158,210,8,8,GN,1,4); await tx(f,'KYC Verified',172,208,10,GN,'Semi Bold');
+  CD(f,20,234,350,60);
+  const pStats=[['4.8','Rating'],['142','Jobs Done'],['5 yrs','Experience'],['94%','Accept']];
+  for (let i=0;i<4;i++){
+    const ox=26+i*86;
+    await tx(f,pStats[i][0], ox,244, 15, OG,'Bold');
+    await tx(f,pStats[i][1], ox-4,266, 8, GR);
+    if (i<3) bx(f,26+(i+1)*86-4,244,1,28,EDGE,.6);
+  }
+  await tx(f,'Account Settings',20,308,14,WH,'Semi Bold');
+  const pSettings=[
+    {t:'Edit Profile & Photo',c:OG},{t:'Manage Services Offered',c:OG},
+    {t:'Set Availability Schedule',c:CY},{t:'Bank Account & UPI',c:GN},
+    {t:'KYC Documents',c:AM},{t:'Notification Preferences',c:GR},
+    {t:'Privacy & Security',c:GR},{t:'Help & Support',c:BL},{t:'Logout',c:RD},
+  ];
+  for (let i=0;i<pSettings.length;i++){
+    const s=pSettings[i], oy=334+i*52;
+    CD(f,20,oy,350,44);
+    bx(f,28,oy+12,20,20,s.c,.18,10); bx(f,30,oy+14,16,16,s.c,.25,8);
+    await tx(f,s.t, 60,oy+14, 13, i===8?RD:LG);
+    if (i<8) await tx(f,'->',330,oy+14, 13, GR,'Bold');
+  }
+  await NAV_P(f,3);
+  await LBL(f,'P10 / PROVIDER PROFILE');
+  return f;
+};
+
 const p1=await P1(), p2=await P2(), p3=await P3();
 const p4=await P4(), p5=await P5(), p6=await P6();
-console.log('Provider screens done (14/19)');
+const p7=await P7(), p8=await P8(), p9=await P9(), p10=await P10();
+console.log('Provider screens done (24/32)');
 
 // ════════════════════════════════════════════════════════════
 //  ADMIN — Row 3  (y = 1920)
@@ -1280,38 +1732,212 @@ const A5 = async () => {
   return f;
 };
 
+// A6: PROVIDER VERIFICATION
+const A6 = async () => {
+  const f = mk(adminPage,2250,'A6 Provider Verification',2);
+  await SB(f);
+  await tx(f,'Provider Verification',20,50,20,WH,'Bold');
+  bx(f,270,46,90,30,AM,.15,15); await tx(f,'2 Pending',280,54,11,AM,'Semi Bold');
+  const vtabs=['Pending (2)','Approved','Rejected'];
+  let vfx=20;
+  for (let i=0;i<vtabs.length;i++){
+    const fw=vtabs[i].length*7.5+20, s=i===0;
+    bx(f,vfx,88,fw,30,s?AM:SURF,1,15);
+    if (!s) bx(f,vfx,88,fw,1,WH,.04,15);
+    await tx(f,vtabs[i], vfx+8,96, 11, s?BK:LG, s?'Bold':'Regular');
+    vfx+=fw+8;
+  }
+  const kycs=[
+    {n:'Ramesh Nair',biz:'FastWash Mobile Services',city:'Jubilee Hills, Hyderabad',sub:'2 hrs ago',docs:['Aadhaar','PAN','Driving Licence']},
+    {n:'Suresh B.',biz:'BrightShine Auto Care',city:'Gachibowli, Hyderabad',sub:'5 hrs ago',docs:['Aadhaar','PAN']},
+  ];
+  for (let i=0;i<kycs.length;i++){
+    const k=kycs[i], oy=130+i*270;
+    CD(f,20,oy,350,258); bx(f,20,oy,350,3,AM,1,2);
+    bx(f,20,oy,350,30,SURF,.4,16);
+    await tx(f,'Application #KYC-'+(24-i), 28,oy+8, 10, GR);
+    await BDG(f,226,oy+6,'Pending',AM);
+    await tx(f,k.sub, 278,oy+8, 9, GR);
+    bx(f,30,oy+38,48,48,OG,.18,24); bx(f,32,oy+40,44,44,OG,.22,22);
+    await tx(f,k.n[0], 50,oy+56, 14, OG,'Bold');
+    await tx(f,k.n, 90,oy+38, 13, WH,'Bold');
+    await tx(f,k.biz, 90,oy+58, 11, GR);
+    await tx(f,k.city, 90,oy+76, 10, GR);
+    await tx(f,'Submitted Documents:',28,oy+104,11,LG,'Semi Bold');
+    for (let j=0;j<k.docs.length;j++){
+      bx(f,28,oy+122+j*24,8,8,GN,1,4);
+      await tx(f,k.docs[j]+' — Uploaded', 44,oy+120+j*24, 10, GR);
+      bx(f,240,oy+118+j*24,60,18,BL,.12,9); await tx(f,'Preview',244,oy+122+j*24,9,BL);
+    }
+    const dy=oy+114+(k.docs.length*26);
+    bx(f,20,dy,350,36,CARD,1,12);
+    await tx(f,'Admin Note (optional):', 28,dy+8, 10, GR);
+    await tx(f,'Enter review notes here...', 28,dy+22, 10, GR,.35);
+    bx(f,20,dy+44,158,42,{r:.22,g:.06,b:.06},1,21);
+    await tx(f,'Reject', 70,dy+60, 13, RD,'Bold');
+    bx(f,194,dy+44,176,42,GN,1,21); bx(f,195,dy+45,174,1,WH,.2,20);
+    await tx(f,'Approve & Activate', 214,dy+60, 12, BK,'Bold');
+  }
+  await NAV_A(f,1);
+  await LBL(f,'A6 / PROVIDER VERIFICATION');
+  return f;
+};
+
+// A7: PROMO MANAGEMENT
+const A7 = async () => {
+  const f = mk(adminPage,2700,'A7 Promo Management',2);
+  await SB(f);
+  await tx(f,'Promo Management',20,50,20,WH,'Bold');
+  bx(f,280,46,90,30,CY,.15,15); await tx(f,'+ New Promo',288,54,10,CY,'Semi Bold');
+  bx(f,20,88,350,52,{r:.07,g:.07,b:.09},1,14); bx(f,20,88,350,2,PK,.4,2);
+  const pmeta=[['12','Active Promos'],['4.2K','Uses Today'],['Rs8.6K','Discount Given']];
+  for (let i=0;i<3;i++){
+    await tx(f,pmeta[i][0], 32+i*112,98, 16, [CY,GN,OG][i],'Bold');
+    await tx(f,pmeta[i][1], 32+i*112,120, 9, GR);
+    if (i<2) bx(f,32+(i+1)*112-4,98,1,28,EDGE,.5);
+  }
+  const promos2=[
+    {code:'FIRST30',d:'30% off — new user first booking',uses:'8,421',exp:'31 May 2026',budget:'50K',spent:'42K',s:'Active',sc:GN},
+    {code:'CLEAN50',d:'Flat Rs.50 off — Premium Wash',uses:'1,284',exp:'15 Jun 2026',budget:'30K',spent:'14K',s:'Active',sc:GN},
+    {code:'FLASH20',d:'20% off — flash sale (12-4 PM)',uses:'342',exp:'28 May 4PM',budget:'10K',spent:'9.8K',s:'Expiring',sc:AM},
+    {code:'WEEKEND20',d:'20% off — Saturdays & Sundays',uses:'2,180',exp:'30 Jun 2026',budget:'80K',spent:'36K',s:'Active',sc:GN},
+    {code:'SUMMER15',d:'15% off — summer special',uses:'0',exp:'01 Jun 2026',budget:'20K',spent:'0',s:'Scheduled',sc:CY},
+  ];
+  for (let i=0;i<promos2.length;i++){
+    const pr=promos2[i], oy=152+i*112;
+    CD(f,20,oy,350,102); bx(f,20,oy,4,102,pr.sc,1,2);
+    bx(f,20,oy,350,26,SURF,.4,16);
+    await tx(f,pr.code, 28,oy+7, 11, pr.sc,'Bold');
+    await BDG(f,226,oy+4,pr.s,pr.sc);
+    await tx(f,'Exp: '+pr.exp, 274,oy+7, 8, GR);
+    await tx(f,pr.d, 28,oy+34, 12, WH,'Semi Bold');
+    await tx(f,pr.uses+' uses  |  Budget: Rs'+pr.budget+'  |  Spent: Rs'+pr.spent, 28,oy+54, 9, GR);
+    bx(f,28,oy+72,248,8,SURF,1,4);
+    const ratio=parseFloat(pr.spent)/parseFloat(pr.budget);
+    bx(f,28,oy+72,Math.round(248*Math.min(ratio||0,1)),8,pr.s==='Expiring'?RD:pr.sc,.8,4);
+    bx(f,284,oy+64,48,20,PK,.12,10); await tx(f,'Edit',298,oy+68,9,PK);
+    bx(f,284,oy+38,48,20,RD,.12,10); await tx(f,'Off',300,oy+42,9,RD);
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A7 / PROMO MANAGEMENT');
+  return f;
+};
+
+// A8: PAYOUT MANAGEMENT
+const A8 = async () => {
+  const f = mk(adminPage,3150,'A8 Payout Management',2);
+  await SB(f);
+  await tx(f,'Payout Management',20,50,20,WH,'Bold');
+  bx(f,268,46,94,30,GN,.15,15); await tx(f,'Process All',274,54,10,GN,'Semi Bold');
+  const psum=[['Rs2.84L','Pending Payouts',AM],['Rs18.4K','Settled Today',GN],['342','Active Providers',CY]];
+  for (let i=0;i<3;i++){
+    const ox=20+i*118;
+    CD(f,ox,88,108,68); bx(f,ox,88,108,3,psum[i][2],1,2);
+    await tx(f,psum[i][0], ox+8,100, 14, psum[i][2],'Bold');
+    await tx(f,psum[i][1], ox+8,126, 8, GR);
+  }
+  const pfilt=['All','Pending','Processing','Settled','Failed'];
+  let pfx=20;
+  for (let i=0;i<pfilt.length;i++){
+    const fw=pfilt[i].length*7+18, s=i===1;
+    bx(f,pfx,170,fw,28,s?AM:SURF,1,14);
+    if (!s) bx(f,pfx,170,fw,1,WH,.04,14);
+    await tx(f,pfilt[i], pfx+6,177, 10, s?BK:LG, s?'Bold':'Regular');
+    pfx+=fw+6;
+  }
+  const payouts=[
+    {n:'Venkat Repairs',jobs:3,amt:'Rs.862',dt:'Today',bank:'HDFC ***4521',s:'Pending',sc:AM},
+    {n:'Suresh Kumar',jobs:5,amt:'Rs1,240',dt:'Today',bank:'SBI ***9823',s:'Processing',sc:CY},
+    {n:'Ramesh Auto',jobs:2,amt:'Rs.586',dt:'Yesterday',bank:'ICICI ***6712',s:'Settled',sc:GN},
+    {n:'Priya Services',jobs:4,amt:'Rs.974',dt:'Yesterday',bank:'Axis ***3341',s:'Settled',sc:GN},
+    {n:'Clean Bros',jobs:1,amt:'Rs.286',dt:'25 May',bank:'YES ***8823',s:'Failed',sc:RD},
+    {n:'AutoPro Wash',jobs:6,amt:'Rs1,680',dt:'25 May',bank:'HDFC ***2210',s:'Settled',sc:GN},
+  ];
+  for (let i=0;i<payouts.length;i++){
+    const py=payouts[i], oy=208+i*90;
+    CD(f,20,oy,350,82); bx(f,20,oy,3,82,py.sc,1,2);
+    bx(f,28,oy+16,38,38,OG,.18,19); bx(f,30,oy+18,34,34,OG,.22,17);
+    await tx(f,py.n[0], 44,oy+28, 12, OG,'Bold');
+    await tx(f,py.n, 78,oy+14, 12, WH,'Semi Bold');
+    await tx(f,py.jobs+' jobs  +  '+py.bank, 78,oy+32, 10, GR);
+    await tx(f,py.dt, 78,oy+52, 9, GR);
+    await BDG(f,78,oy+62,py.s,py.sc);
+    await tx(f,py.amt, 268,oy+14, 15, CY,'Bold');
+    if (py.s==='Pending'){
+      bx(f,260,oy+40,72,22,GN,.15,11); await tx(f,'Pay Now',268,oy+46,9,GN,'Semi Bold');
+    } else if (py.s==='Failed'){
+      bx(f,260,oy+40,72,22,RD,.12,11); await tx(f,'Retry',274,oy+46,9,RD,'Semi Bold');
+    } else if (py.s==='Processing'){
+      bx(f,252,oy+40,84,22,CY,.1,11); await tx(f,'Processing...',254,oy+46,9,CY);
+    }
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A8 / PAYOUT MANAGEMENT');
+  return f;
+};
+
 const a1=await A1(), a2=await A2(), a3=await A3(), a4=await A4(), a5=await A5();
-console.log('Admin screens done (19/19)');
+const a6=await A6(), a7=await A7(), a8=await A8();
+console.log('Admin screens done (32/32)');
 
 // ── All 19 screens built — now add prototype links ───────────
 // Wrapped in try/catch so a failed link never blocks screen rendering
 try {
-  // Customer flow
-  lnk(c1,20,472,350,52,c3.id);
-  lnk(c1,248,684,132,18,c2.id);
-  lnk(c2,20,696,350,52,c3.id);
+  // ── Customer flow ──────────────────────────────────────────
+  lnk(c1,20,472,350,52,c3.id);          // Login -> Home
+  lnk(c1,248,684,132,18,c2.id);         // Register here
+  lnk(c2,20,696,350,52,c3.id);          // Register -> Home
+  // Home category tiles -> Provider List
   for (let i=0;i<6;i++){const col=i%3,row=Math.floor(i/3); lnk(c3,20+col*120,358+row*94,110,84,c4.id);}
-  lnk(c3,20,584,170,86,c4.id); lnk(c3,200,584,170,86,c4.id);
-  for (let i=0;i<4;i++) lnk(c4,268,262+i*122,80,52,c5.id);
+  lnk(c3,20,584,170,86,c4.id); lnk(c3,200,584,170,86,c4.id); // Near you cards
+  // Provider List -> Provider Detail
+  for (let i=0;i<4;i++) lnk(c4,20,262+i*122,330,112,c9.id);
+  // Provider Detail -> Booking
+  lnk(c9,192,770,178,52,c5.id);
+  // Booking -> Payment
   lnk(c5,18,792,354,36,c6.id);
-  lnk(c6,20,654,350,52,c7.id);
-  lnk(c7,190,736,180,44,c8.id);
-  // Provider flow
-  lnk(p1,20,460,350,52,p2.id);
-  lnk(p2,82,404,70,22,p3.id); lnk(p2,82,512,70,22,p3.id);
-  lnk(p3,194,678,176,54,p4.id);
-  lnk(p4,32,218,132,24,p5.id);
-  for (let i=0;i<3;i++) lnk(p4,268,288+i*90,72,46,p5.id);
-  lnk(p5,192,660,178,52,p6.id);
-  // Admin flow
-  lnk(a1,20,440,164,48,a2.id);
-  lnk(a1,198,440,164,48,a3.id);
-  lnk(a1,20,620,164,48,a4.id);
-  lnk(a1,198,620,164,48,a5.id);
-  lnk(a2,274,238,66,24,a3.id);
-  lnk(a3,274,170,68,22,a4.id);
-  lnk(a4,216,200,70,22,a1.id);
-  lnk(a5,284,742,86,16,a1.id);
+  // Payment -> Confirmation
+  lnk(c6,20,654,350,52,c10.id);
+  // Confirmation -> Tracking
+  lnk(c10,20,696,350,52,c7.id);
+  // Tracking -> Rate & Review
+  lnk(c7,190,736,180,44,c11.id);
+  // Rate & Review -> My Bookings
+  lnk(c11,20,792,350,52,c12.id);
+  // My Bookings -> Profile
+  lnk(c12,20,82,87,36,c8.id);           // nav tab
+  // Notifications -> Home
+  lnk(c13,20,50,100,36,c3.id);
+  // Wallet -> Home
+  lnk(c14,16,44,36,36,c3.id);           // back btn
+
+  // ── Provider flow ──────────────────────────────────────────
+  lnk(p1,20,460,350,52,p2.id);          // Login -> Dashboard
+  lnk(p1,316,590,60,26,p7.id);          // New partner -> KYC
+  lnk(p2,82,404,70,22,p3.id);           // Accept incoming -> Request Detail
+  lnk(p2,82,512,70,22,p3.id);
+  lnk(p3,194,678,176,54,p4.id);         // Accept Job -> Active Jobs
+  lnk(p4,32,218,132,24,p5.id);          // Mark complete btn -> Job Detail
+  for (let i=0;i<3;i++) lnk(p4,268,288+i*90,72,46,p5.id); // upcoming detail
+  lnk(p5,192,660,178,52,p9.id);         // Job Detail -> Completion OTP
+  lnk(p9,199,666,171,52,p6.id);         // Completion -> Earnings
+  lnk(p7,20,730,350,52,p2.id);          // KYC -> Dashboard
+  lnk(p8,230,H-186,120,34,p5.id);       // Arrived -> Job Detail
+  lnk(p10,16,44,36,36,p2.id);           // Profile back
+
+  // ── Admin flow ─────────────────────────────────────────────
+  lnk(a1,20,440,164,48,a2.id);          // quick action -> User Mgmt
+  lnk(a1,198,440,164,48,a3.id);         // -> Orders
+  lnk(a1,20,496,164,48,a4.id);          // -> Complaints
+  lnk(a1,198,496,164,48,a5.id);         // -> Analytics
+  lnk(a2,274,238,66,24,a6.id);          // User -> Provider Verify
+  lnk(a3,274,170,68,22,a4.id);          // Orders -> Complaints
+  lnk(a4,216,200,70,22,a1.id);          // Complaints -> Dashboard
+  lnk(a5,284,742,86,16,a1.id);          // Analytics -> Dashboard
+  lnk(a6,194,130+256+4+44,176,42,a2.id); // Verify -> User Mgmt
+  lnk(a7,20,50,100,32,a1.id);           // Promos -> Dashboard
+  lnk(a8,20,50,100,32,a1.id);           // Payouts -> Dashboard
+
   console.log('Prototype links added');
 } catch(e) {
   console.error('Links skipped (reactions API error):', e.message);
@@ -1319,9 +1945,20 @@ try {
 
 figma.viewport.scrollAndZoomIntoView(pg.children);
 
-console.log('====================================');
-console.log('ServiCo v2 Complete! All 19 screens on one page.');
-console.log('Row 1 (y=0):    C1 C2 C3 C4 C5 C6 C7 C8  — Customer');
-console.log('Row 2 (y=960):  P1 P2 P3 P4 P5 P6        — Provider');
-console.log('Row 3 (y=1920): A1 A2 A3 A4 A5            — Admin');
-console.log('====================================');
+console.log('============================================================');
+console.log('ServiCo v3 Complete! All 32 screens on one page.');
+console.log('Row 1 (y=0):    C1 C2 C3 C4 C5 C6 C7 C8  — Customer (existing)');
+console.log('                C9 C10 C11 C12 C13 C14     — Customer (new)');
+console.log('Row 2 (y=960):  P1 P2 P3 P4 P5 P6         — Provider (existing)');
+console.log('                P7 P8 P9 P10               — Provider (new)');
+console.log('Row 3 (y=1920): A1 A2 A3 A4 A5            — Admin (existing)');
+console.log('                A6 A7 A8                   — Admin (new)');
+console.log('');
+console.log('Customer (14): Login, Register, Home, Provider List, Provider Detail,');
+console.log('               Booking, Payment, Confirmation, Tracking, Rate+Review,');
+console.log('               Profile, My Bookings, Notifications, Wallet+Promos');
+console.log('Provider (10): Login, Dashboard, Request Detail, Active Jobs, Job Detail,');
+console.log('               Earnings, KYC Registration, En Route, Job Completion, Profile');
+console.log('Admin (8):     Dashboard, User Mgmt, Orders Monitor, Complaints, Analytics,');
+console.log('               Provider Verification, Promo Management, Payout Management');
+console.log('============================================================');
