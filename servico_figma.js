@@ -4400,27 +4400,1905 @@ const A22 = async () => {
   return f;
 };
 
+// ════════════════════════════════════════════════════════════
+//  CUSTOMER — Batch 2  C37–C56
+// ════════════════════════════════════════════════════════════
+
+// C37: SPLASH SCREEN
+const C37 = async () => {
+  const f = mk(custPage,16200,'C37 Splash Screen');
+  bx(f,0,0,W,H,NV,1);
+  bx(f,0,0,W,H,CY,.04);
+  // Radial glow
+  bx(f,95,272,200,200,CY,.06,100);
+  bx(f,115,292,160,160,CY,.08,80);
+  bx(f,135,312,120,120,CY,.12,60);
+  // Logo
+  bx(f,155,330,80,80,CY,.18,40); bx(f,163,338,64,64,CY,.22,32); bx(f,171,346,48,48,CY,1,24);
+  await tx(f,'S',186,358,22,BK,'Bold');
+  await tx(f,'ServiCo',120,438,32,WH,'Bold');
+  await tx(f,'Your Services. On Demand.',80,480,13,GR);
+  // Loading dots
+  for(let i=0;i<3;i++){ const a=i===1?1:.4; bx(f,181+i*16,680,8,8,CY,a,4); }
+  await tx(f,'v5.0.1',166,760,10,GR);
+  await LBL(f,'C37 / SPLASH');
+  return f;
+};
+
+// C38: ROLE SELECTION
+const C38 = async () => {
+  const f = mk(custPage,16650,'C38 Role Selection');
+  bx(f,0,0,W,H,BG,1); tg(f,NV,400);
+  await tx(f,'Welcome to ServiCo',60,80,24,WH,'Bold');
+  await tx(f,'How will you use the app?',80,114,13,GR);
+  // Customer card
+  bx(f,20,168,350,240,CARD,1,20); bx(f,20,168,350,3,CY,1,4);
+  bx(f,20,168,350,240,CY,.04,20);
+  bx(f,145,188,100,100,CY,.1,50);
+  await tx(f,'🛒',172,210,44,CY);
+  await tx(f,'I need a Service',86,304,18,WH,'Bold');
+  await tx(f,'Book car wash, AC repair, plumbing & more',40,330,11,GR);
+  bx(f,88,352,214,40,CY,1,20); bx(f,89,353,212,1,WH,.2,19);
+  await tx(f,'Continue as Customer',104,365,12,BK,'Bold');
+  // Provider card
+  bx(f,20,432,350,240,CARD,1,20); bx(f,20,432,350,3,OG,1,4);
+  bx(f,20,432,350,240,OG,.04,20);
+  bx(f,145,452,100,100,OG,.1,50);
+  await tx(f,'🔧',172,474,44,OG);
+  await tx(f,'I provide Services',78,568,18,WH,'Bold');
+  await tx(f,'Earn by offering your skills on ServiCo',52,594,11,GR);
+  bx(f,88,616,214,40,OG,1,20); bx(f,89,617,212,1,WH,.2,19);
+  await tx(f,'Join as Provider',114,629,12,BK,'Bold');
+  await tx(f,'Already have an account? Sign In',85,700,12,GR);
+  await LBL(f,'C38 / ROLE SELECTION');
+  return f;
+};
+
+// C39: ONBOARDING SLIDE 1
+const C39 = async () => {
+  const f = mk(custPage,17100,'C39 Onboard Slide 1');
+  bx(f,0,0,W,H,BG,1);
+  bx(f,0,0,W,440,NV,1); bx(f,0,0,W,440,CY,.04);
+  // Illustration area
+  bx(f,60,80,270,260,CY,.06,20);
+  bx(f,120,120,150,120,CARD,1,16);
+  for(let i=0;i<3;i++){ bx(f,136,140+i*32,88,20,SURF,1,6); bx(f,136,140+i*32,Math.round(88*(1-i*.2)),4,CY,.4,3); }
+  await tx(f,'📍',192,178,32,CY);
+  bx(f,80,260,230,60,CARD,.8,12); bx(f,80,260,3,60,CY,1,2);
+  await tx(f,'Ravi Auto Spa',94,272,13,WH,'Semi Bold'); await tx(f,'0.8 km  •  ★ 4.9  •  ₹299',94,290,10,GR);
+  // Text
+  await tx(f,'Book in Under',80,380,28,WH,'Bold');
+  await tx(f,'60 Seconds',80,416,28,CY,'Bold');
+  await tx(f,'Find verified professionals near you.\nCompare ratings, prices & availability.',48,462,13,LG);
+  // Dots
+  for(let i=0;i<3;i++) bx(f,181+i*20,580,i===0?24:8,8,i===0?CY:EDGE,1,4);
+  await BTN(f,20,610,350,'Next',CY);
+  bx(f,148,680,94,28,SURF,.5,14); await tx(f,'Skip →',166,688,11,GR);
+  await LBL(f,'C39 / ONBOARD SLIDE 1');
+  return f;
+};
+
+// C40: ONBOARDING SLIDE 2
+const C40 = async () => {
+  const f = mk(custPage,17550,'C40 Onboard Slide 2');
+  bx(f,0,0,W,H,BG,1);
+  bx(f,0,0,W,440,NV,1); bx(f,0,0,W,440,OG,.04);
+  // Illustration
+  bx(f,60,80,270,260,OG,.06,20);
+  bx(f,100,120,190,200,CARD,1,16);
+  for(let i=0;i<3;i++){
+    bx(f,116,140+i*56,160,48,SURF,.7,8);
+    await tx(f,['🚗','❄️','🔧'][i],122,152+i*56,22,OG);
+    await tx(f,['Car Wash','AC Repair','Plumbing'][i],154,154+i*56,11,WH,'Semi Bold');
+    await tx(f,'★ 4.'+[9,7,8][i],154,170+i*56,9,ST);
+  }
+  await tx(f,'Real-time',80,380,28,WH,'Bold');
+  await tx(f,'Tracking',80,416,28,OG,'Bold');
+  await tx(f,'Track your provider live on the map.\nGet SMS & app updates at every step.',48,462,13,LG);
+  for(let i=0;i<3;i++) bx(f,181+i*20,580,i===1?24:8,8,i===1?OG:EDGE,1,4);
+  await BTN(f,20,610,350,'Next',OG);
+  bx(f,148,680,94,28,SURF,.5,14); await tx(f,'Skip →',166,688,11,GR);
+  await LBL(f,'C40 / ONBOARD SLIDE 2');
+  return f;
+};
+
+// C41: ONBOARDING SLIDE 3
+const C41 = async () => {
+  const f = mk(custPage,18000,'C41 Onboard Slide 3');
+  bx(f,0,0,W,H,BG,1);
+  bx(f,0,0,W,440,NV,1); bx(f,0,0,W,440,GN,.03);
+  bx(f,60,80,270,260,GN,.06,20);
+  bx(f,100,100,190,230,CARD,1,16);
+  const shields=[{l:'Insured',c:GN},{l:'Verified',c:CY},{l:'Background Checked',c:OG}];
+  for(let i=0;i<shields.length;i++){
+    bx(f,116,120+i*62,160,54,SURF,.7,8); bx(f,116,120+i*62,3,54,shields[i].c,.8,2);
+    await tx(f,'✓',122,138+i*62,16,shields[i].c,'Bold');
+    await tx(f,shields[i].l,148,140+i*62,12,WH,'Semi Bold');
+  }
+  await tx(f,'100%',80,380,28,WH,'Bold');
+  await tx(f,'Safe & Verified',80,416,28,GN,'Bold');
+  await tx(f,'Every provider is background-checked,\ninsured & trained by ServiCo.',60,462,13,LG);
+  for(let i=0;i<3;i++) bx(f,181+i*20,580,i===2?24:8,8,i===2?GN:EDGE,1,4);
+  await BTN(f,20,610,350,'Get Started',GN);
+  await LBL(f,'C41 / ONBOARD SLIDE 3');
+  return f;
+};
+
+// C42: ADDRESS CONFIRMATION + MAP PIN
+const C42 = async () => {
+  const f = mk(custPage,18450,'C42 Confirm Service Address');
+  await SB(f);
+  await HDR(f,'Where should we come?');
+  bx(f,0,0,W,44,SURF,1);
+  // Map area
+  bx(f,0,88,W,360,{r:.04,g:.08,b:.05},1);
+  for(let i=0;i<7;i++) bx(f,0,88+i*52,W,1,{r:.08,g:.12,b:.08},.5);
+  for(let i=0;i<5;i++) bx(f,i*88,88,1,360,{r:.08,g:.12,b:.08},.5);
+  bx(f,0,248,W,8,{r:.12,g:.16,b:.12},1); bx(f,176,88,8,360,{r:.12,g:.16,b:.12},1);
+  // Pin
+  bx(f,179,198,32,32,CY,1,16); bx(f,181,200,28,28,WH,.2,14);
+  await tx(f,'📍',183,204,18,BK);
+  bx(f,183,228,4,28,CY,1,2);
+  // Address card bottom
+  bx(f,0,448,W,396,DP,1); bx(f,0,448,W,1,EDGE,.5);
+  bx(f,172,456,46,4,EDGE,1,2);
+  await tx(f,'Confirm your location',20,470,15,WH,'Bold');
+  // Current address
+  CD(f,20,498,350,64,12); bx(f,20,498,3,64,CY,1,2);
+  await tx(f,'📍',30,514,18,CY);
+  await tx(f,'Flat 4B, Regal Residency',56,506,12,WH,'Semi Bold');
+  await tx(f,'Banjara Hills, Hyderabad — 500034',56,524,10,GR);
+  await tx(f,'Change',310,516,10,CY,'Semi Bold');
+  // Landmark
+  await INP(f,20,576,350,'Landmark / Gate No.','Near main gate, 4th building',CY);
+  // Saved addresses
+  await tx(f,'Saved Addresses',20,638,12,WH,'Semi Bold');
+  const saved=[{nm:'Home',addr:'Flat 4B, Regal Residency'},{nm:'Work',addr:'Salarpuria Sattva, Madhapur'}];
+  for(let i=0;i<saved.length;i++){
+    CD(f,20,658+i*58,350,50,8);
+    await tx(f,saved[i].nm==='Home'?'🏠':'🏢',30,670+i*58,16,saved[i].nm==='Home'?CY:OG);
+    await tx(f,saved[i].nm,56,670+i*58,12,WH,'Semi Bold');
+    await tx(f,saved[i].addr,56,686+i*58,10,GR);
+    bx(f,320,668+i*58,24,20,CY,.1,10); await tx(f,'→',324,673+i*58,10,CY);
+  }
+  await BTN(f,20,788,350,'Confirm This Address',CY);
+  await LBL(f,'C42 / ADDRESS CONFIRM');
+  return f;
+};
+
+// C43: DATE & TIME SLOT PICKER
+const C43 = async () => {
+  const f = mk(custPage,18900,'C43 Schedule Booking');
+  await SB(f);
+  await HDR(f,'Choose Date & Time');
+  bx(f,0,0,W,44,SURF,1);
+  // Month nav
+  bx(f,20,90,350,44,SURF,1,10);
+  await tx(f,'‹',28,99,20,CY,'Bold'); await tx(f,'May 2024',140,101,14,WH,'Bold'); await tx(f,'›',336,99,20,CY,'Bold');
+  // Day headers
+  const dnames=['S','M','T','W','T','F','S'];
+  for(let i=0;i<7;i++) await tx(f,dnames[i],26+i*50,144,11,GR,'Semi Bold');
+  // Calendar grid
+  const days=[[0,0,1,2,3,4,5],[6,7,8,9,10,11,12],[13,14,15,16,17,18,19],[20,21,22,23,24,25,26],[27,28,29,30,31,0,0]];
+  for(let r=0;r<days.length;r++){
+    for(let c=0;c<7;c++){
+      const d=days[r][c]; if(!d) continue;
+      const sel=d===28, today=d===27, past=d<27;
+      const ox=20+c*50, oy=168+r*50;
+      if(sel){bx(f,ox,oy,40,40,CY,1,20);}
+      else if(today){bx(f,ox,oy,40,40,CY,.15,20); bx(f,ox,oy,40,1,CY,.4,20);}
+      await tx(f,String(d),ox+(d<10?14:10),oy+11,13,sel?BK:past?EDGE:WH,sel?'Bold':'Regular');
+    }
+  }
+  DIV(f,436);
+  // Time slots
+  await tx(f,'Available Slots  (28 May)',20,450,13,WH,'Semi Bold');
+  await tx(f,'Morning',20,474,11,OG,'Semi Bold');
+  const mSlots=['8:00 AM','9:00 AM','10:00 AM','11:00 AM'];
+  for(let i=0;i<mSlots.length;i++){
+    const sel=i===1, avail=i!==2;
+    bx(f,20+i*88,492,80,40,sel?CY:avail?CARD:SURF,sel?1:1,10);
+    if(!avail)bx(f,20+i*88,492,80,40,BG,.5,10);
+    if(sel)bx(f,20+i*88,492,80,1,WH,.3,10);
+    await tx(f,mSlots[i],24+i*88,504,9,sel?BK:avail?LG:EDGE,sel?'Bold':'Regular');
+    if(!avail){bx(f,20+i*88,510,80,1,EDGE,.5);}
+  }
+  await tx(f,'Afternoon',20,546,11,OG,'Semi Bold');
+  const aSlots=['12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+  for(let i=0;i<Math.min(aSlots.length,4);i++){
+    bx(f,20+i*88,564,80,40,CARD,1,10);
+    await tx(f,aSlots[i],24+i*88,576,9,LG);
+  }
+  await tx(f,'Evening',20,618,11,OG,'Semi Bold');
+  const eSlots=['5:00 PM','6:00 PM','7:00 PM'];
+  for(let i=0;i<eSlots.length;i++){
+    bx(f,20+i*88,636,80,40,CARD,1,10);
+    await tx(f,eSlots[i],24+i*88,648,9,LG);
+  }
+  // Duration note
+  bx(f,20,692,350,32,SURF,1,8); bx(f,20,692,3,32,AM,1,2);
+  await tx(f,'⏱  Premium Wash takes approx 45–60 minutes',32,703,10,AM);
+  await BTN(f,20,740,350,'Confirm — Tue 28 May at 9:00 AM',CY);
+  await LBL(f,'C43 / DATE & TIME SLOT');
+  return f;
+};
+
+// C44: PROVIDER COMPARISON
+const C44 = async () => {
+  const f = mk(custPage,19350,'C44 Compare Providers');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Compare',20,54,20,WH,'Bold');
+  await tx(f,'Select up to 3 providers',20,78,11,GR);
+  bx(f,310,56,58,28,CY,.15,14); bx(f,310,56,58,1,CY,.3,14);
+  await tx(f,'Done (2)',316,63,9,CY,'Semi Bold');
+  // Column headers
+  const provs=[{nm:'Ravi Auto',rt:'4.9',pr:'₹299',exp:'5yr',jobs:342,c:CY},{nm:'AquaWash',rt:'4.7',pr:'₹199',exp:'3yr',jobs:218,c:OG}];
+  for(let i=0;i<provs.length;i++){
+    const ox=60+i*160;
+    bx(f,ox,102,140,130,CARD,1,12); bx(f,ox,102,140,3,provs[i].c,1,2);
+    await AV(f,ox+48,114,44,'RK',provs[i].c);
+    await tx(f,provs[i].nm,ox+8,164,10,WH,'Semi Bold');
+    await tx(f,'★ '+provs[i].rt,ox+8,180,9,ST,'Semi Bold');
+    bx(f,ox+2,238,136,3,provs[i].c,1,2);
+  }
+  // Comparison rows
+  const rows=[
+    {label:'Price',vals:['₹299','₹199']},
+    {label:'Availability','vals':['Today 9 AM','Today 2 PM']},
+    {label:'Experience',vals:['5 years','3 years']},
+    {label:'Jobs Done',vals:['342','218']},
+    {label:'Response Time',vals:['~3 min','~7 min']},
+    {label:'Includes',vals:['Wash+Polish','Wash Only']},
+    {label:'Guarantee',vals:['Re-do free','No policy']},
+    {label:'Distance',vals:['0.8 km','1.4 km']},
+  ];
+  for(let r=0;r<rows.length;r++){
+    const oy=244+r*56;
+    if(r%2===0) bx(f,0,oy,W,56,SURF,.3);
+    await tx(f,rows[r].label,20,oy+14,11,GR,'Semi Bold');
+    for(let i=0;i<provs.length;i++){
+      const ox=60+i*160, val=rows[r].vals[i];
+      const best=(r===0&&i===1)||(r===4&&i===0)||(r===7&&i===0);
+      await tx(f,val,ox+14,oy+14,11,best?provs[i].c:LG,best?'Bold':'Regular');
+      if(best) await tx(f,'✓',ox+12+val.length*6.5,oy+16,8,provs[i].c,'Bold');
+    }
+  }
+  // Book buttons
+  for(let i=0;i<provs.length;i++){
+    const ox=60+i*160;
+    bx(f,ox,700,140,40,provs[i].c,1,20);
+    await tx(f,'Book '+provs[i].nm.split(' ')[0],ox+16,714,10,BK,'Bold');
+  }
+  await NAV_C(f,1);
+  await LBL(f,'C44 / PROVIDER COMPARE');
+  return f;
+};
+
+// C45: TIP PROVIDER
+const C45 = async () => {
+  const f = mk(custPage,19800,'C45 Tip Provider');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Leave a Tip',110,54,20,WH,'Bold');
+  // Provider thanks
+  bx(f,20,100,350,100,CARD,1,16); bx(f,20,100,350,3,GN,1,2);
+  await AV(f,28,116,68,'RK',OG);
+  await tx(f,'Ravi Kumar',108,116,14,WH,'Bold');
+  await tx(f,'Premium Car Wash  •  45 min',108,136,10,GR);
+  await tx(f,'Service completed! 🎉',108,156,11,GN,'Semi Bold');
+  // Thank you note
+  await tx(f,'Your car is spotless! Did Ravi go above',50,218,13,LG);
+  await tx(f,'and beyond? Show your appreciation 💙',50,236,13,LG);
+  // Tip amounts
+  await tx(f,'Choose a tip amount',20,270,13,WH,'Semi Bold');
+  const tips=['₹20','₹50','₹100','₹200'];
+  const tipPcts=['~7%','~17%','~33%','~67%'];
+  for(let i=0;i<tips.length;i++){
+    const sel=i===1, ox=20+i*88;
+    bx(f,ox,290,80,72,sel?GN:CARD,sel?1:1,12);
+    if(sel){bx(f,ox,290,80,1,WH,.2,12);}
+    await tx(f,tips[i],ox+(i<2?22:18),302,16,sel?BK:LG,sel?'Bold':'Regular');
+    await tx(f,tipPcts[i],ox+14,324,9,sel?BK:GR);
+  }
+  // Custom amount
+  await tx(f,'Custom Amount',20,378,12,WH,'Semi Bold');
+  bx(f,20,396,350,52,CARD,1,12); bx(f,20,396,3,52,GN,1,2); bx(f,20,396,350,1,WH,.05,12);
+  await tx(f,'₹',34,414,16,GN,'Bold'); await tx(f,'Enter custom amount',56,414,13,GR);
+  // Summary
+  DIV(f,464);
+  await tx(f,'Service Amount',20,476,11,GR); await tx(f,'₹299',296,476,11,LG,'Semi Bold');
+  await tx(f,'Tip for Ravi',20,500,11,GR); await tx(f,'₹50',304,500,11,GN,'Semi Bold');
+  await tx(f,'Total',20,524,13,WH,'Bold'); await tx(f,'₹349',286,522,16,CY,'Bold');
+  await BTN(f,20,562,350,'Pay ₹349 & Submit Tip',GN);
+  bx(f,20,628,350,44,SURF,1,22); bx(f,20,628,350,1,EDGE,.3,22);
+  await tx(f,'Skip — Pay ₹299 without tip',85,643,12,GR);
+  await LBL(f,'C45 / TIP PROVIDER');
+  return f;
+};
+
+// C46: QUICK REBOOK
+const C46 = async () => {
+  const f = mk(custPage,20250,'C46 Quick Rebook');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Book Again',120,54,20,WH,'Bold');
+  // Last booking card
+  bx(f,20,92,350,108,CARD,1,16); bx(f,20,92,350,3,CY,1,2);
+  bx(f,20,92,350,108,CY,.03,16);
+  await tx(f,'Last Booking',28,104,10,GR);
+  await tx(f,'Premium Car Wash',28,120,15,WH,'Bold');
+  await AV(f,28,148,44,'RK',OG);
+  await tx(f,'Ravi Kumar',82,152,12,WH,'Semi Bold');
+  await tx(f,'★ 4.9  •  342 jobs',82,168,10,GR);
+  await tx(f,'₹299',300,148,16,CY,'Bold');
+  // Pre-filled details
+  await tx(f,'Booking Details',20,216,13,WH,'Semi Bold');
+  CD(f,20,234,350,62,10); bx(f,20,234,3,62,CY,1,2);
+  await tx(f,'📍',30,250,16,CY);
+  await tx(f,'Flat 4B, Regal Residency',56,248,12,WH,'Semi Bold');
+  await tx(f,'Banjara Hills, Hyderabad  —  Change',56,266,10,CY);
+  // Date/time
+  await tx(f,'When?',20,312,13,WH,'Semi Bold');
+  const slots=['Today, Now','Today 2 PM','Tomorrow 9 AM','Tomorrow 2 PM','Custom'];
+  for(let i=0;i<slots.length;i++){
+    const sel=i===0;
+    const ox=i<4?20+(i%2)*182:20, oy=i<2?330:i<4?386:442, w=i===4?350:174;
+    bx(f,ox,oy,w,48,sel?CY:CARD,sel?1:1,12);
+    if(sel)bx(f,ox,oy,w,1,WH,.3,12);
+    await tx(f,slots[i],ox+sel?30:22,oy+16,12,sel?BK:LG,sel?'Bold':'Regular');
+  }
+  // Add-ons
+  await tx(f,'Add extras?',20,508,13,WH,'Semi Bold');
+  const extras=['Interior Vacuum +₹50','Dashboard Polish +₹50'];
+  for(let i=0;i<extras.length;i++){
+    CD(f,20,526+i*56,350,48,8);
+    bx(f,312,538+i*56,28,24,EDGE,.15,12);
+    await tx(f,'+',319,543+i*56,12,GR,'Bold');
+    await tx(f,extras[i],34,540+i*56,12,LG);
+  }
+  DIV(f,642);
+  await tx(f,'Total',20,654,13,WH,'Bold'); await tx(f,'₹299',300,652,16,CY,'Bold');
+  await BTN(f,20,686,350,'Book Ravi Kumar — ₹299',CY);
+  await LBL(f,'C46 / QUICK REBOOK');
+  return f;
+};
+
+// C47: MULTI-SERVICE CART
+const C47 = async () => {
+  const f = mk(custPage,20700,'C47 Cart');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'My Cart',140,54,20,WH,'Bold');
+  await tx(f,'3 services',152,78,11,GR);
+  // Cart items
+  const items=[
+    {svc:'Premium Car Wash',prov:'Ravi Auto Spa',pr:299,dur:'45 min',c:CY},
+    {svc:'Dashboard Polish',prov:'Add-on',pr:50,dur:'+10 min',c:GR},
+    {svc:'Interior Vacuum',prov:'Add-on',pr:50,dur:'+15 min',c:GR},
+  ];
+  for(let i=0;i<items.length;i++){
+    const it=items[i], oy=106+i*100;
+    CD(f,20,oy,350,92,10); bx(f,20,oy,3,92,it.c,1,2);
+    bx(f,28,oy+10,48,48,SURF,1,8);
+    await tx(f,'🚗',34,oy+18,24,it.c);
+    await tx(f,it.svc,86,oy+14,13,WH,'Semi Bold');
+    await tx(f,it.prov+'  •  '+it.dur,86,oy+32,10,GR);
+    await tx(f,'₹'+it.pr,290,oy+14,14,it.c==='GR'?LG:CY,'Bold');
+    bx(f,308,oy+48,36,28,RD,.12,10); bx(f,308,oy+48,36,1,RD,.2,10);
+    await tx(f,'✕',318,oy+55,10,RD);
+  }
+  // Add more
+  bx(f,20,406,350,44,CARD,1,22); bx(f,20,406,350,1,CY,.2,22);
+  await tx(f,'+ Add another service',120,421,12,CY,'Semi Bold');
+  DIV(f,462);
+  // Schedule card
+  CD(f,20,470,350,72,10);
+  await tx(f,'📅  Scheduled',30,482,12,WH,'Semi Bold');
+  await tx(f,'Tuesday, 28 May  •  9:00 AM',30,500,11,GR);
+  bx(f,290,480,56,28,CY,.15,14); await tx(f,'Change',296,488,9,CY,'Semi Bold');
+  // Address card
+  CD(f,20,550,350,60,10);
+  await tx(f,'📍  Flat 4B, Regal Residency',30,562,11,WH,'Semi Bold');
+  await tx(f,'Banjara Hills, Hyderabad',30,578,10,GR);
+  bx(f,290,558,56,28,CY,.15,14); await tx(f,'Change',296,566,9,CY,'Semi Bold');
+  // Promo
+  bx(f,20,620,350,48,CARD,1,12); bx(f,20,620,350,1,WH,.05,12);
+  await tx(f,'🏷',28,634,16,GN); await tx(f,'Add promo code',54,634,12,GR);
+  await tx(f,'FIRST10 applied  −₹39',54,634,12,GN);
+  // Bill summary
+  DIV(f,678);
+  await tx(f,'Item Total',20,690,11,GR); await tx(f,'₹399',300,690,11,LG,'Semi Bold');
+  await tx(f,'GST (18%)',20,712,11,GR); await tx(f,'₹71.82',288,712,11,LG,'Semi Bold');
+  await tx(f,'Promo (FIRST10)',20,734,11,GN); await tx(f,'−₹39',300,734,11,GN,'Semi Bold');
+  DIV(f,754); await tx(f,'Total',20,762,13,WH,'Bold'); await tx(f,'₹431.82',270,760,16,CY,'Bold');
+  await BTN(f,20,790,350,'Proceed to Payment',CY);
+  await LBL(f,'C47 / CART');
+  return f;
+};
+
+// C48: ORDER CANCELLATION FLOW
+const C48 = async () => {
+  const f = mk(custPage,21150,'C48 Cancel Order');
+  await SB(f);
+  await HDR(f,'Cancel Booking','#SVC-2024-8821');
+  bx(f,0,0,W,44,SURF,1);
+  // Order summary
+  CD(f,20,90,350,60,10); bx(f,20,90,3,60,RD,1,2);
+  await tx(f,'Premium Car Wash — Ravi Kumar',32,102,12,WH,'Semi Bold');
+  await tx(f,'28 May  •  9:00 AM  •  ₹299',32,120,10,GR);
+  // Cancellation fee warning
+  bx(f,20,162,350,56,{r:.14,g:.03,b:.03},1,10); bx(f,20,162,350,3,RD,1,2);
+  await tx(f,'⚠  Cancellation Fee Applies',32,174,12,RD,'Semi Bold');
+  await tx(f,'Cancelling within 1 hour of service costs ₹49.',32,192,10,GR);
+  // Reasons
+  await tx(f,'Why are you cancelling?',20,232,13,WH,'Semi Bold');
+  const reasons=['Provider is late','Changed my mind','Booked by mistake','Emergency came up','Found a better price','Vehicle issue'];
+  for(let i=0;i<reasons.length;i++){
+    const sel=i===0, oy=252+i*52;
+    CD(f,20,oy,350,44,8);
+    if(sel){bx(f,20,oy,350,44,RD,.08,8); bx(f,20,oy,3,44,RD,1,2);}
+    bx(f,316,oy+12,20,20,sel?RD:EDGE,sel?.3:.1,10);
+    if(sel)bx(f,322,oy+16,8,8,RD,1,4);
+    await tx(f,reasons[i],38,oy+14,12,sel?RD:LG,sel?'Semi Bold':'Regular');
+  }
+  // Other notes
+  bx(f,20,572,350,64,CARD,1,10); bx(f,20,572,350,1,WH,.05,10);
+  await tx(f,'Any other details? (optional)',28,590,11,GR);
+  // Fee summary
+  DIV(f,648);
+  await tx(f,'Refund Amount',20,660,11,GR); await tx(f,'₹250',298,660,11,GN,'Semi Bold');
+  await tx(f,'Cancellation Fee',20,682,11,GR); await tx(f,'₹49',302,682,11,RD,'Semi Bold');
+  await tx(f,'Back to Wallet in 2–3 days',20,700,9,GR);
+  bx(f,20,720,350,52,RD,1,26); bx(f,20,720,350,1,WH,.2,26);
+  await tx(f,'Confirm Cancellation',104,735,13,WH,'Bold');
+  bx(f,20,780,350,44,CARD,1,22);
+  await tx(f,"Don't Cancel — Keep Booking",88,797,12,LG);
+  await LBL(f,'C48 / CANCEL ORDER');
+  return f;
+};
+
+// C49: CATEGORY LANDING PAGE
+const C49 = async () => {
+  const f = mk(custPage,21600,'C49 Category Landing');
+  bx(f,0,0,W,180,NV,1); bx(f,0,0,W,180,CY,.05); await SB(f);
+  bx(f,16,44,36,36,SURF,.8,18); await tx(f,'<',25,51,18,WH,'Bold');
+  await tx(f,'Car Wash',64,50,20,WH,'Bold');
+  await tx(f,'24 providers near you',64,74,11,GR);
+  // Sub-categories
+  await tx(f,'What type?',20,110,12,CY,'Semi Bold');
+  const subCats=[
+    {nm:'Basic Wash',pr:'From ₹99',ic:'💧',c:BL},
+    {nm:'Premium Wash',pr:'From ₹199',ic:'✨',c:CY},
+    {nm:'Full Detail',pr:'From ₹399',ic:'🌟',c:ST},
+    {nm:'Bike Wash',pr:'From ₹59',ic:'🏍',c:GN},
+  ];
+  for(let i=0;i<subCats.length;i++){
+    const col=i%2, row=Math.floor(i/2);
+    const ox=20+col*182, oy=130+row*90;
+    CD(f,ox,oy,174,82,12); bx(f,ox,oy,174,3,subCats[i].c,1,2);
+    await tx(f,subCats[i].ic,ox+12,oy+14,28,subCats[i].c);
+    await tx(f,subCats[i].nm,ox+56,oy+16,12,WH,'Semi Bold');
+    await tx(f,subCats[i].pr,ox+56,oy+34,10,GR);
+  }
+  // Popular in area
+  await tx(f,'Popular in Banjara Hills',20,324,14,WH,'Bold');
+  await tx(f,'See All',304,328,10,CY);
+  const popular=[
+    {nm:'Ravi Auto Spa',rt:'4.9',pr:'₹299',bk:'342',tag:'Bestseller'},
+    {nm:'AquaWash Pro',rt:'4.7',pr:'₹199',bk:'218',tag:'Value Pick'},
+    {nm:'SparkShine',rt:'4.8',pr:'₹349',bk:'87',tag:'Premium'},
+  ];
+  for(let i=0;i<popular.length;i++){
+    const p=popular[i], oy=346+i*114;
+    CD(f,20,oy,350,106,12);
+    bx(f,28,oy+10,70,70,SURF,1,8);
+    await tx(f,'🚗',42,oy+22,32,CY);
+    await BDG(f,28,oy+6,p.tag,p.tag==='Bestseller'?ST:p.tag==='Value Pick'?GN:PK);
+    await tx(f,p.nm,110,oy+14,13,WH,'Bold');
+    await tx(f,'★ '+p.rt,110,oy+32,11,ST,'Semi Bold');
+    await tx(f,'('+p.bk+' bookings)',148,oy+34,9,GR);
+    await tx(f,'📍 0.8 km',110,oy+50,10,GR);
+    await tx(f,p.pr,282,oy+14,15,CY,'Bold');
+    await tx(f,'per session',272,oy+32,8,GR);
+    bx(f,264,oy+56,90,32,CY,1,16);
+    await tx(f,'Book Now',278,oy+64,10,BK,'Bold');
+  }
+  await NAV_C(f,1);
+  await LBL(f,'C49 / CATEGORY LANDING');
+  return f;
+};
+
+// C50: FLASH SALE / DEAL OF THE DAY
+const C50 = async () => {
+  const f = mk(custPage,22050,'C50 Flash Sale');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Flash Deals 🔥',100,54,20,WH,'Bold');
+  await tx(f,'Limited time — today only!',98,78,11,OG);
+  // Countdown timer hero
+  bx(f,20,98,350,100,{r:.12,g:.04,b:.01},1,16); bx(f,20,98,350,3,OG,1,2);
+  bx(f,20,98,350,100,OG,.08,16);
+  await tx(f,'Ends in',28,110,11,GR);
+  const timeBlocks=[{v:'02',l:'HRS'},{v:'47',l:'MIN'},{v:'33',l:'SEC'}];
+  for(let i=0;i<timeBlocks.length;i++){
+    const ox=100+i*72;
+    bx(f,ox,104,58,54,BG,.5,8);
+    await tx(f,timeBlocks[i].v,ox+12,108,26,OG,'Bold');
+    await tx(f,timeBlocks[i].l,ox+14,136,8,GR);
+    if(i<2) await tx(f,':',ox+62,114,20,OG,'Bold');
+  }
+  await tx(f,'Don\'t miss today\'s best prices 🎯',68,162,11,OG);
+  // Deal cards
+  const deals=[
+    {svc:'Full Car Wash',orig:'₹299',sale:'₹149',save:'50% off',tag:'⚡ Flash',prov:'AquaWash',c:OG,timeLeft:'47 min left'},
+    {svc:'AC Deep Clean',orig:'₹799',sale:'₹399',save:'50% off',tag:'🔥 Hot',prov:'CoolAir Pro',c:RD,timeLeft:'1 hr left'},
+    {svc:'Bike Service',orig:'₹599',sale:'₹249',save:'58% off',tag:'🌟 Deal',prov:'QuickMech',c:ST,timeLeft:'2 hr left'},
+    {svc:'Home Deep Clean',orig:'₹1499',sale:'₹699',save:'53% off',tag:'💥 Mega',prov:'SparkHome',c:PK,timeLeft:'3 hr left'},
+  ];
+  for(let i=0;i<deals.length;i++){
+    const d=deals[i], oy=186+i*134;
+    CD(f,20,oy,350,126,12); bx(f,20,oy,350,126,d.c,.04,12);
+    bx(f,20,oy,350,3,d.c,1,2);
+    bx(f,28,oy+10,70,70,SURF,1,8); bx(f,28,oy+10,70,70,d.c,.1,8);
+    await tx(f,'🔥',44,oy+22,28,d.c);
+    await BDG(f,28,oy+78,d.timeLeft,d.c);
+    await tx(f,d.svc,110,oy+12,13,WH,'Bold');
+    await tx(f,d.prov,110,oy+30,10,GR);
+    await BDG(f,110,oy+48,d.tag,d.c);
+    await tx(f,d.orig,268,oy+12,11,GR);
+    // Strikethrough simulation
+    bx(f,268,oy+20,50,1,GR,.5);
+    await tx(f,d.sale,270,oy+28,18,d.c,'Bold');
+    await BDG(f,270,oy+52,d.save,GN);
+    bx(f,262,oy+82,88,32,d.c,1,16);
+    await tx(f,'Grab Deal',268,oy+90,9,BK,'Bold');
+  }
+  await NAV_C(f,1);
+  await LBL(f,'C50 / FLASH SALE');
+  return f;
+};
+
+// C51: LIVE SUPPORT AGENT CHAT
+const C51 = async () => {
+  const f = mk(custPage,22500,'C51 Support Chat');
+  await SB(f);
+  bx(f,0,0,W,60,SURF,1); bx(f,0,60,W,1,EDGE,.4);
+  bx(f,16,10,36,36,SURF,1,18); await tx(f,'<',25,17,18,WH,'Bold');
+  await AV(f,60,10,36,'S',GN);
+  bx(f,92,18,8,8,GN,1,4);
+  await tx(f,'ServiCo Support',104,14,13,WH,'Bold');
+  await tx(f,'Typically replies in < 2 min',104,30,9,GN);
+  bx(f,330,16,36,28,CY,.1,14); await tx(f,'#8821',334,22,9,CY,'Semi Bold');
+  // Chat messages
+  const msgs=[
+    {type:'bot',text:'Hi Ramprasad! 👋 How can I help you today?',time:'2:30 PM'},
+    {type:'user',text:'My booking #8821 — provider hasn\'t arrived, it\'s 30 min late.',time:'2:31 PM'},
+    {type:'bot',text:'I\'m sorry for the inconvenience! Let me check this for you right away. 🔍',time:'2:31 PM'},
+    {type:'bot',text:'Ravi Kumar is 8 minutes away. Traffic caused a delay. We\'ve notified him.',time:'2:32 PM'},
+    {type:'bot',text:'You\'re eligible for a ₹50 credit as a goodwill gesture. Shall I apply it?',time:'2:32 PM'},
+    {type:'user',text:'Yes please, thank you!',time:'2:33 PM'},
+    {type:'bot',text:'Done! ₹50 added to your ServiCo Wallet 🎉 Anything else I can help with?',time:'2:33 PM'},
+  ];
+  let ypos=74;
+  for(const m of msgs){
+    const isUser=m.type==='user';
+    const maxW=240, approxLen=m.text.length;
+    const lines=Math.ceil(approxLen/28), bh=lines*18+20;
+    const bw=Math.min(maxW, approxLen*6.5+24);
+    const bx_=isUser?W-20-bw:20;
+    bx(f,bx_,ypos,bw,bh,isUser?CY:CARD,1,isUser?[0,16,16,16]:16);
+    await tx(f,m.text.substring(0,40),bx_+10,ypos+8,10,isUser?BK:LG);
+    if(m.text.length>40) await tx(f,m.text.substring(40,80),bx_+10,ypos+24,10,isUser?BK:LG);
+    if(m.text.length>80) await tx(f,m.text.substring(80),bx_+10,ypos+40,10,isUser?BK:LG);
+    await tx(f,m.time,(isUser?bx_+bw-40:bx_+4),ypos+bh+2,8,GR);
+    ypos+=bh+22;
+  }
+  // Quick replies
+  const qreplies=['Cancel Booking','Track Provider','Refund Status'];
+  let qx=20;
+  for(const q of qreplies){
+    const qw=q.length*6.5+20;
+    bx(f,qx,702,qw,28,CY,.12,14); bx(f,qx,702,qw,1,CY,.3,14);
+    await tx(f,q,qx+8,708,9,CY,'Semi Bold');
+    qx+=qw+10;
+  }
+  // Input bar
+  bx(f,0,742,W,102,DP,1); bx(f,0,742,W,1,EDGE,.5);
+  bx(f,16,754,278,48,CARD,1,24); bx(f,16,754,278,1,WH,.05,24);
+  await tx(f,'Type a message...',28,770,12,GR);
+  bx(f,304,754,70,48,CY,1,24); await tx(f,'Send',316,769,12,BK,'Bold');
+  await LBL(f,'C51 / SUPPORT CHAT');
+  return f;
+};
+
+// C52: NOTIFICATION PREFERENCES
+const C52 = async () => {
+  const f = mk(custPage,22950,'C52 Notification Preferences');
+  await SB(f);
+  await HDR(f,'Notification Preferences');
+  bx(f,0,0,W,44,SURF,1);
+  // Master toggle
+  CD(f,20,90,350,56,12); bx(f,20,90,350,56,CY,.03,12);
+  await tx(f,'All Notifications',28,102,14,WH,'Bold');
+  await tx(f,'Globally enable or disable all',28,120,10,GR);
+  bx(f,306,104,36,20,GN,1,10); bx(f,322,106,16,16,WH,1,8);
+  // Categories
+  const notifGroups=[
+    {label:'Booking Updates',desc:'Status changes, provider ETA, completions',on:true,c:CY},
+    {label:'Promotions & Offers',desc:'Flash sales, promo codes, loyalty rewards',on:true,c:ST},
+    {label:'Chat Messages',desc:'Messages from your provider',on:true,c:GN},
+    {label:'Payment Alerts',desc:'Charges, refunds, wallet top-ups',on:true,c:BL},
+    {label:'Reminders',desc:'Upcoming bookings, service due reminders',on:false,c:OG},
+    {label:'New in Your Area',desc:'New providers, new services nearby',on:false,c:PK},
+    {label:'Account Security',desc:'Login alerts, password changes',on:true,c:RD},
+  ];
+  for(let i=0;i<notifGroups.length;i++){
+    const g=notifGroups[i], oy=162+i*76;
+    CD(f,20,oy,350,68,10);
+    bx(f,28,oy+8,40,40,g.c,.12,8);
+    await tx(f,g.label,78,oy+12,12,WH,'Semi Bold');
+    await tx(f,g.desc,78,oy+30,10,GR);
+    bx(f,g.on?322:308,oy+24,16,16,WH,1,8);
+    bx(f,306,oy+22,36,20,g.on?g.c:EDGE,g.on?1:.3,10);
+  }
+  // Channel settings
+  await tx(f,'Notification Channels',20,698,13,WH,'Semi Bold');
+  const channels=[{ch:'Push Notifications',on:true},{ch:'SMS',on:true},{ch:'Email',on:false},{ch:'WhatsApp',on:false}];
+  for(let i=0;i<channels.length;i++){
+    const ch=channels[i], oy=716+i*48;
+    DIV(f,oy); await tx(f,ch.ch,20,oy+8,12,LG);
+    bx(f,ch.on?322:308,oy+10,16,16,WH,1,8);
+    bx(f,306,oy+8,36,20,ch.on?CY:EDGE,ch.on?1:.3,10);
+  }
+  await LBL(f,'C52 / NOTIF PREFERENCES');
+  return f;
+};
+
+// C53: PRIVACY & DATA SETTINGS
+const C53 = async () => {
+  const f = mk(custPage,23400,'C53 Privacy & Data');
+  await SB(f);
+  await HDR(f,'Privacy & Data','Your rights under DPDP Act 2023');
+  bx(f,0,0,W,44,SURF,1);
+  // Banner
+  bx(f,20,90,350,52,{r:.01,g:.06,b:.14},1,10); bx(f,20,90,350,3,BL,.7,2);
+  await tx(f,'🔒  Your data is encrypted & protected.',32,102,11,BL,'Semi Bold');
+  await tx(f,'View our full Privacy Policy',32,120,10,GR);
+  // Data controls
+  await tx(f,'Your Data Controls',20,158,13,WH,'Semi Bold');
+  const controls=[
+    {title:'Download My Data',desc:'Get a copy of all your ServiCo data',ic:'📥',c:CY},
+    {title:'Manage Location Access',desc:'Control when location is used',ic:'📍',c:GN},
+    {title:'Ad Preferences',desc:'Manage personalised offers & tracking',ic:'🎯',c:OG},
+    {title:'Third-party Sharing',desc:'Control which partners receive your data',ic:'🔗',c:PK},
+  ];
+  for(let i=0;i<controls.length;i++){
+    const c=controls[i], oy=176+i*72;
+    CD(f,20,oy,350,64,10);
+    bx(f,28,oy+12,40,40,c.c,.12,8);
+    await tx(f,c.ic,34,oy+20,20,c.c);
+    await tx(f,c.title,78,oy+16,12,WH,'Semi Bold');
+    await tx(f,c.desc,78,oy+32,10,GR);
+    await tx(f,'›',336,oy+22,18,GR,'Bold');
+  }
+  // Consent toggles
+  await tx(f,'Data Consent Settings',20,468,13,WH,'Semi Bold');
+  const consents=[
+    {label:'Analytics & Crash Reporting',on:true},
+    {label:'Personalisation',on:true},
+    {label:'Marketing Communications',on:false},
+  ];
+  for(let i=0;i<consents.length;i++){
+    const c=consents[i], oy=486+i*60;
+    CD(f,20,oy,350,52,8);
+    await tx(f,c.label,32,oy+18,12,LG);
+    bx(f,c.on?322:308,oy+16,16,16,WH,1,8);
+    bx(f,306,oy+14,36,20,c.on?CY:EDGE,c.on?1:.3,10);
+  }
+  // Danger zone
+  await tx(f,'Account Actions',20,656,13,WH,'Semi Bold');
+  bx(f,20,674,350,52,CARD,1,12); bx(f,20,674,3,52,AM,1,2);
+  await tx(f,'Deactivate Account',32,688,12,AM,'Semi Bold');
+  await tx(f,'Temporarily disable your account',32,706,10,GR);
+  bx(f,20,734,350,52,CARD,1,12); bx(f,20,734,3,52,RD,1,2);
+  await tx(f,'Delete My Account',32,748,12,RD,'Semi Bold');
+  await tx(f,'Permanently delete account & all data',32,766,10,GR);
+  await LBL(f,'C53 / PRIVACY & DATA');
+  return f;
+};
+
+// C54: NO PROVIDERS AVAILABLE (Empty State)
+const C54 = async () => {
+  const f = mk(custPage,23850,'C54 No Providers');
+  await SB(f);
+  await HDR(f,'Car Wash');
+  bx(f,0,0,W,44,SURF,1);
+  // Empty state illustration
+  bx(f,95,140,200,200,SURF,.5,100);
+  bx(f,115,160,160,160,SURF,.3,80);
+  await tx(f,'😕',168,202,50,GR);
+  await tx(f,'No Providers Available',70,318,18,WH,'Bold');
+  await tx(f,'We couldn\'t find any providers for',60,348,13,GR);
+  await tx(f,'Car Wash in your area right now.',62,366,13,GR);
+  // Why
+  bx(f,20,398,350,96,CARD,1,12); bx(f,20,398,350,3,AM,1,2);
+  await tx(f,'Why this happens:',30,412,11,AM,'Semi Bold');
+  const reasons=['All providers are currently booked','Your area is outside coverage zone','High demand — try in 15 minutes'];
+  for(let i=0;i<reasons.length;i++) await tx(f,'• '+reasons[i],30,430+i*16,10,GR);
+  // Suggestions
+  await tx(f,'What you can do:',20,512,13,WH,'Semi Bold');
+  const sugs=[
+    {title:'Try a nearby area',desc:'Search in Jubilee Hills or Madhapur',c:CY},
+    {title:'Set a reminder',desc:'We\'ll notify when a provider is available',c:GN},
+    {title:'Browse similar services',desc:'Interior cleaning, tyre dressing & more',c:OG},
+  ];
+  for(let i=0;i<sugs.length;i++){
+    const s=sugs[i], oy=532+i*80;
+    CD(f,20,oy,350,72,10); bx(f,20,oy,3,72,s.c,1,2);
+    await tx(f,s.title,34,oy+12,12,WH,'Semi Bold');
+    await tx(f,s.desc,34,oy+30,10,GR);
+    bx(f,296,oy+20,40,32,s.c,.15,10);
+    await tx(f,'→',308,oy+26,12,s.c,'Bold');
+  }
+  // Waitlist CTA
+  await BTN(f,20,776,350,'Notify Me When Available',CY);
+  await LBL(f,'C54 / NO PROVIDERS');
+  return f;
+};
+
+// C55: BOOKING START OTP (Customer shows to provider)
+const C55 = async () => {
+  const f = mk(custPage,24300,'C55 Booking Start OTP');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Share with Provider',72,54,18,WH,'Bold');
+  await tx(f,'Let Ravi scan or read this to start',80,78,11,GR);
+  // OTP display
+  bx(f,20,104,350,200,NV,1,20); bx(f,20,104,350,200,CY,.08,20); bx(f,20,104,350,3,CY,1,4);
+  await tx(f,'START CODE',130,116,11,CY,'Semi Bold');
+  await tx(f,'4821',88,138,72,WH,'Bold');
+  await tx(f,'Valid for this booking only',90,222,11,GR);
+  // QR code simulation
+  bx(f,95,322,200,200,WH,1,10);
+  for(let r=0;r<7;r++){
+    for(let c=0;c<7;c++){
+      const on=((r<3&&c<3)||(r<3&&c>3)||(r>3&&c<3)||Math.random()>.5);
+      if(on) bx(f,102+c*26,329+r*26,22,22,BK,1,3);
+    }
+  }
+  await tx(f,'QR Code',170,530,11,GR);
+  // Booking summary
+  DIV(f,562);
+  CD(f,20,570,350,64,10); bx(f,20,570,3,64,CY,1,2);
+  await tx(f,'Premium Car Wash  •  Ravi Kumar',32,582,11,WH,'Semi Bold');
+  await tx(f,'28 May 9:00 AM  •  Flat 4B Regal Residency',32,600,10,GR);
+  await BDG(f,270,582,'In Progress',OG);
+  bx(f,20,644,350,52,CARD,1,26);
+  await tx(f,'📞  Call Ravi Kumar',110,660,12,CY,'Semi Bold');
+  await BTN(f,20,706,350,'Service Arrived — Mark Started',GN);
+  await LBL(f,'C55 / BOOKING START OTP');
+  return f;
+};
+
+// C56: POST-SERVICE SURVEY (NPS)
+const C56 = async () => {
+  const f = mk(custPage,24750,'C56 Post-Service Survey');
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Quick Survey',110,54,18,WH,'Bold');
+  await tx(f,'2 questions  •  Takes 30 seconds',80,78,11,GR);
+  // Progress
+  bx(f,20,100,350,4,SURF,1,4); bx(f,20,100,175,4,CY,1,4);
+  await tx(f,'1 of 2',310,96,9,GR);
+  // Q1 NPS
+  await tx(f,'How likely are you to recommend',42,126,15,WH,'Bold');
+  await tx(f,'ServiCo to a friend?',96,148,15,WH,'Bold');
+  // NPS scale 0-10
+  for(let i=0;i<=10;i++){
+    const sel=i===9, ox=20+i*32;
+    bx(f,ox,186,28,36,sel?CY:i<7?RD:i<9?AM:GN,sel?1:.15,6);
+    await tx(f,String(i),ox+(i<10?8:5),196,11,sel?BK:i<7?RD:i<9?AM:GN,sel?'Bold':'Regular');
+  }
+  await tx(f,'Not at all',22,230,9,RD); await tx(f,'Extremely likely',280,230,9,GN);
+  // Q2 specific
+  await tx(f,'What did you love most?',48,268,15,WH,'Bold');
+  const aspects=['Speed of service','Provider was friendly','Great value for money','Car looks amazing','Easy app experience','Will use again'];
+  for(let i=0;i<aspects.length;i++){
+    const sel=[0,3].includes(i), col=i%2, row=Math.floor(i/2);
+    const ox=20+col*182, oy=300+row*56;
+    bx(f,ox,oy,174,48,sel?CY:CARD,sel?.15:1,12);
+    if(sel){bx(f,ox,oy,174,1,CY,.3,12); bx(f,ox,oy,3,48,CY,1,2);}
+    await tx(f,(sel?'✓ ':'')+aspects[i],ox+12,oy+16,10,sel?CY:LG,sel?'Semi Bold':'Regular');
+  }
+  // Open text
+  await tx(f,'Any other feedback?',20,470,12,WH,'Semi Bold');
+  bx(f,20,488,350,80,CARD,1,10); bx(f,20,488,350,1,WH,.05,10);
+  await tx(f,'Tell us more (optional)...',28,510,11,GR);
+  await BTN(f,20,588,350,'Submit Survey',CY);
+  bx(f,20,652,350,40,SURF,.5,20);
+  await tx(f,'Skip Survey',145,664,11,GR);
+  await LBL(f,'C56 / POST-SERVICE SURVEY');
+  return f;
+};
+
+// ════════════════════════════════════════════════════════════
+//  PROVIDER — Batch 2  P27–P37
+// ════════════════════════════════════════════════════════════
+
+// P27: INCOMING JOB ALERT with TIMER
+const P27 = async () => {
+  const f = mk(provPage,11700,'P27 Incoming Job Alert',1);
+  bx(f,0,0,W,H,BG,1); bx(f,0,0,W,H,OG,.03);
+  await SB(f);
+  // Alert header
+  bx(f,0,44,W,80,OG,.15); bx(f,0,44,W,3,OG,1);
+  await tx(f,'New Job Request! 🔔',80,60,18,OG,'Bold');
+  await tx(f,'Accept before the timer runs out',70,82,11,GR);
+  // Countdown ring simulation
+  bx(f,135,138,120,120,OG,.1,60); bx(f,140,143,110,110,OG,.15,55);
+  bx(f,148,151,94,94,DP,1,47);
+  await tx(f,'22',172,166,38,OG,'Bold');
+  await tx(f,'seconds',166,208,10,GR);
+  // Progress arc bar substitute
+  bx(f,135,258,120,6,SURF,1,4); bx(f,135,258,60,6,OG,1,4);
+  // Job details card
+  CD(f,20,278,350,180,16); bx(f,20,278,350,3,OG,1,4);
+  await tx(f,'Job Details',32,292,12,OG,'Semi Bold');
+  DIV(f,312);
+  const jobDetails=[
+    ['Service','Premium Car Wash'],['Vehicle','Maruti Swift (White) • TS09AB1234'],
+    ['Location','Flat 4B Regal Residency, Banjara Hills'],['Distance','0.8 km from you'],
+    ['Earnings','₹254 (after platform fee)'],['Scheduled','Today 9:00 AM'],
+  ];
+  for(let i=0;i<jobDetails.length;i++){
+    await tx(f,jobDetails[i][0],32,320+i*22,10,GR);
+    await tx(f,jobDetails[i][1],160,320+i*22,10,i===4?GN:LG,i===4?'Bold':'Regular');
+  }
+  // Customer brief
+  CD(f,20,468,350,68,12);
+  await AV(f,28,480,48,'RM',CY);
+  await tx(f,'Ramprasad Mokka',86,482,12,WH,'Semi Bold');
+  await tx(f,'★ 4.8 as customer  •  42 bookings',86,500,10,GR);
+  await tx(f,'Special note: "Please focus on the roof"',86,516,9,GR);
+  // Action buttons
+  bx(f,20,548,350,72,GN,1,36); bx(f,20,548,350,2,WH,.2,36);
+  await tx(f,'✓  Accept Job',118,566,18,WH,'Bold');
+  await tx(f,'Earn ₹254',150,590,10,WH);
+  bx(f,20,630,350,52,SURF,1,26); bx(f,20,630,350,1,RD,.3,26);
+  await tx(f,'Decline',152,646,14,RD,'Semi Bold');
+  await tx(f,'22 seconds remaining',118,694,10,OG,'Semi Bold');
+  await LBL(f,'P27 / INCOMING JOB ALERT');
+  return f;
+};
+
+// P28: JOB DECLINE REASON
+const P28 = async () => {
+  const f = mk(provPage,12150,'P28 Decline Reason',1);
+  await SB(f);
+  await HDR(f,'Decline Job','Please tell us why');
+  bx(f,0,0,W,44,SURF,1);
+  // Declined job summary
+  CD(f,20,90,350,52,10); bx(f,20,90,3,52,RD,1,2);
+  await tx(f,'Premium Car Wash — 0.8 km away',32,100,11,WH,'Semi Bold');
+  await tx(f,'₹254 potential earning  •  Today 9:00 AM',32,118,10,GR);
+  await tx(f,'Declined',296,100,10,RD,'Semi Bold');
+  // Warning
+  bx(f,20,154,350,44,{r:.12,g:.04,b:.01},1,10); bx(f,20,154,350,3,AM,1,2);
+  await tx(f,'⚠  3+ declines reduce your job priority',32,166,10,AM,'Semi Bold');
+  await tx(f,'Currently: 1 decline today',32,182,10,GR);
+  // Reasons
+  await tx(f,'Reason for declining',20,212,13,WH,'Semi Bold');
+  const reasons=['Location is too far','Already have a booking','Personal emergency','Vehicle breakdown','Job scope unclear','Customer rating too low','Taking a break'];
+  for(let i=0;i<reasons.length;i++){
+    const sel=i===0, oy=232+i*56;
+    CD(f,20,oy,350,48,8);
+    if(sel){bx(f,20,oy,350,48,RD,.08,8); bx(f,20,oy,3,48,RD,1,2);}
+    bx(f,316,oy+14,20,20,sel?RD:EDGE,sel?.3:.1,10);
+    if(sel)bx(f,322,oy+18,8,8,RD,1,4);
+    await tx(f,reasons[i],38,oy+16,12,sel?RD:LG,sel?'Semi Bold':'Regular');
+  }
+  // Note
+  bx(f,20,634,350,64,CARD,1,10); bx(f,20,634,350,1,WH,.05,10);
+  await tx(f,'Optional: Additional notes',28,646,10,GR);
+  await tx(f,'Help us improve job matching...',28,664,11,GR);
+  await BTN(f,20,718,350,'Submit & Continue',RD);
+  bx(f,20,780,350,44,SURF,.5,22);
+  await tx(f,'Go Online & Accept Next Job',90,796,11,GN,'Semi Bold');
+  await NAV_P(f,1);
+  await LBL(f,'P28 / DECLINE REASON');
+  return f;
+};
+
+// P29: EARNINGS ANALYTICS / CHARTS
+const P29 = async () => {
+  const f = mk(provPage,12600,'P29 Earnings Analytics',1);
+  await SB(f);
+  await HDR(f,'Earnings Analytics');
+  bx(f,0,0,W,44,SURF,1);
+  // Period toggle
+  bx(f,20,90,350,36,SURF,1,18);
+  const periods=['Week','Month','Quarter','Year'];
+  for(let i=0;i<periods.length;i++){
+    const sel=i===1;
+    bx(f,24+i*87,92,82,32,sel?OG:SURF,sel?1:0,16);
+    await tx(f,periods[i],38+i*87,100,11,sel?BK:GR,sel?'Bold':'Regular');
+  }
+  // Total earnings
+  bx(f,20,138,350,80,NV,1,12); bx(f,20,138,350,80,OG,.08,12); bx(f,20,138,350,3,OG,1,2);
+  await tx(f,'May 2024 Earnings',28,150,11,GR);
+  await tx(f,'₹18,420',28,168,28,WH,'Bold');
+  await tx(f,'+12% vs April',28,202,10,GN,'Semi Bold');
+  await tx(f,'42 jobs  •  Avg ₹438/job',200,162,10,GR);
+  await tx(f,'Best day: ₹2,100 (Sat 18)',200,180,10,GR);
+  // Bar chart
+  await tx(f,'Daily Earnings — May',20,232,12,WH,'Semi Bold');
+  const bars=[420,680,320,580,740,920,1100,440,680,820,560,980,1200,780];
+  const maxB=Math.max(...bars);
+  for(let i=0;i<bars.length;i++){
+    const bh=Math.round((bars[i]/maxB)*100);
+    const clr=i===6?OG:i===12?OG:SURF;
+    bx(f,24+i*26,350-bh,20,bh,clr,i===6||i===12?1:.6,3);
+  }
+  bx(f,20,350,350,1,EDGE,.4);
+  await tx(f,'Week 1',24,356,8,GR); await tx(f,'Week 2',126,356,8,GR); await tx(f,'Week 3',228,356,8,GR);
+  // Category breakdown
+  await tx(f,'By Service Type',20,376,12,WH,'Semi Bold');
+  const cats=[{nm:'Car Wash',pct:58,val:'₹10,684',c:CY},{nm:'Interior Detail',pct:24,val:'₹4,420',c:OG},{nm:'Tyre Service',pct:18,val:'₹3,316',c:GN}];
+  for(let i=0;i<cats.length;i++){
+    const c=cats[i], oy=394+i*62;
+    await tx(f,c.nm,20,oy+4,11,LG);
+    bx(f,20,oy+22,294,8,SURF,1,4);
+    bx(f,20,oy+22,Math.round(294*c.pct/100),8,c.c,.8,4);
+    await tx(f,c.pct+'%',322,oy+18,10,c.c,'Semi Bold');
+    await tx(f,c.val,260,oy+4,10,c.c,'Semi Bold');
+  }
+  // Weekly trend table
+  await tx(f,'Week-by-Week',20,584,12,WH,'Semi Bold');
+  const weeks=[['Week 1','₹3,840','9 jobs'],['Week 2','₹4,620','11 jobs'],['Week 3','₹5,180','12 jobs'],['Week 4 (partial)','₹4,780','10 jobs']];
+  for(let i=0;i<weeks.length;i++){
+    const oy=602+i*44;
+    if(i%2===0) bx(f,20,oy,350,44,SURF,.3,6);
+    await tx(f,weeks[i][0],28,oy+14,10,LG);
+    await tx(f,weeks[i][1],200,oy+14,12,OG,'Bold');
+    await tx(f,weeks[i][2],304,oy+14,10,GR);
+  }
+  await NAV_P(f,2);
+  await LBL(f,'P29 / EARNINGS ANALYTICS');
+  return f;
+};
+
+// P30: DAILY AVAILABILITY TOGGLE
+const P30 = async () => {
+  const f = mk(provPage,13050,'P30 Availability Manager',1);
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'My Availability',96,54,18,WH,'Bold');
+  await tx(f,'Tuesday, 28 May 2024',108,78,11,GR);
+  // Status toggle hero
+  bx(f,20,102,350,100,GN,.1,20); bx(f,20,102,350,3,GN,1,4);
+  bx(f,20,102,350,100,GN,.06,20);
+  await tx(f,'Status: ONLINE 🟢',104,116,14,GN,'Bold');
+  await tx(f,'You are accepting new jobs',94,138,11,GR);
+  bx(f,88,160,214,32,GN,1,16); bx(f,89,161,212,1,WH,.2,15);
+  await tx(f,'Go Offline',136,170,12,BK,'Bold');
+  // Break management
+  await tx(f,'Schedule a Break',20,222,13,WH,'Semi Bold');
+  const breaks=[{label:'15 min break',icon:'☕'},{label:'Lunch (1 hr)',icon:'🍱'},{label:'Custom break',icon:'⏸'}];
+  for(let i=0;i<breaks.length;i++){
+    const ox=20+i*120;
+    CD(f,ox,240,112,64,10);
+    await tx(f,breaks[i].icon,ox+38,248,22,AM);
+    await tx(f,breaks[i].label,ox+8,274,8,GR);
+  }
+  // Today's schedule
+  await tx(f,"Today's Schedule",20,322,13,WH,'Semi Bold');
+  bx(f,20,340,350,44,CARD,1,10); bx(f,20,340,3,44,OG,1,2);
+  await tx(f,'Working Hours',32,350,11,LG); await tx(f,'8:00 AM – 8:00 PM',200,350,12,WH,'Semi Bold');
+  await tx(f,'Lunch Break',32,368,11,GR); await tx(f,'1:00 PM – 2:00 PM',200,368,10,GR);
+  // Upcoming jobs
+  await tx(f,"Today's Jobs (3)",20,400,13,WH,'Semi Bold');
+  const jobs=[
+    {time:'9:00 AM',svc:'Premium Wash',cust:'Ramprasad M.',st:'Active',c:GN},
+    {time:'11:30 AM',svc:'Basic Wash',cust:'Priya Reddy',st:'Upcoming',c:CY},
+    {time:'3:00 PM',svc:'Interior Clean',cust:'Kiran Kumar',st:'Upcoming',c:CY},
+  ];
+  for(let i=0;i<jobs.length;i++){
+    const j=jobs[i], oy=418+i*72;
+    CD(f,20,oy,350,64,8); if(j.st==='Active') bx(f,20,oy,3,64,GN,1,2);
+    await tx(f,j.time,32,oy+12,11,j.c,'Bold');
+    await tx(f,j.svc,32,oy+30,11,WH,'Semi Bold');
+    await tx(f,j.cust,32,oy+48,10,GR);
+    await BDG(f,254,oy+20,j.st,j.c);
+  }
+  // Emergency unavailable
+  bx(f,20,640,350,52,RD,.12,12); bx(f,20,640,350,1,RD,.3,12);
+  await tx(f,'🆘  Mark Unavailable for Full Day',68,656,12,RD,'Semi Bold');
+  await NAV_P(f,0);
+  await LBL(f,'P30 / AVAILABILITY MANAGER');
+  return f;
+};
+
+// P31: CASH OUT / WITHDRAWAL
+const P31 = async () => {
+  const f = mk(provPage,13500,'P31 Cash Out',1);
+  await SB(f);
+  await HDR(f,'Withdraw Earnings');
+  bx(f,0,0,W,44,SURF,1);
+  // Balance card
+  bx(f,20,90,350,100,NV,1,16); bx(f,20,90,350,100,OG,.1,16); bx(f,20,90,350,3,OG,.8,2);
+  await tx(f,'Available to Withdraw',28,102,11,GR);
+  await tx(f,'₹ 4,821.00',28,120,28,WH,'Bold');
+  await tx(f,'Last payout: ₹4,200 on 21 May',28,156,10,GR);
+  await tx(f,'₹580 pending (2 jobs processing)',28,172,10,AM);
+  // Withdraw amount
+  await tx(f,'Enter Amount',20,208,13,WH,'Semi Bold');
+  bx(f,20,226,350,64,CARD,1,16); bx(f,20,226,350,1,WH,.08,16); bx(f,20,226,3,64,OG,1,2);
+  await tx(f,'₹',32,242,22,OG,'Bold');
+  await tx(f,'4,821',60,244,28,WH,'Bold');
+  await tx(f,'Withdraw All',282,252,10,OG,'Semi Bold');
+  // Bank account
+  await tx(f,'To Account',20,306,13,WH,'Semi Bold');
+  CD(f,20,324,350,64,10); bx(f,20,324,350,64,OG,.04,10);
+  bx(f,28,334,44,44,SURF,1,8);
+  await tx(f,'🏦',34,342,24,OG);
+  await tx(f,'HDFC Bank — Savings',82,336,12,WH,'Semi Bold');
+  await tx(f,'A/C •••• 8834  •  IFSC: HDFC0001234',82,354,10,GR);
+  await BDG(f,276,334,'Primary',GN);
+  bx(f,296,374,48,20,CY,.15,10); await tx(f,'Change',300,380,8,CY,'Semi Bold');
+  // Fee info
+  bx(f,20,402,350,64,CARD,1,10);
+  await tx(f,'Withdrawal Details',28,414,11,WH,'Semi Bold');
+  await tx(f,'Amount',28,434,10,GR); await tx(f,'₹4,821',290,434,10,LG,'Semi Bold');
+  await tx(f,'Processing (Free)',28,452,10,GR); await tx(f,'₹0',320,452,10,GN,'Semi Bold');
+  // Timeline
+  bx(f,20,478,350,52,SURF,.5,10); bx(f,20,478,3,52,GN,1,2);
+  await tx(f,'⚡  Instant transfer to your bank account',32,492,10,GN,'Semi Bold');
+  await tx(f,'Credits usually within 30 minutes',32,510,10,GR);
+  await BTN(f,20,546,350,'Withdraw ₹4,821 Now',OG);
+  // Schedule
+  bx(f,20,610,350,44,CARD,1,22);
+  await tx(f,'⏰  Set Auto-Withdrawal (Weekly / Monthly)',30,626,11,GR);
+  // History
+  await tx(f,'Past Withdrawals',20,670,13,WH,'Semi Bold');
+  const history=[{dt:'21 May',amt:'₹4,200',st:'Credited'},{dt:'14 May',amt:'₹3,890',st:'Credited'},{dt:'7 May',amt:'₹4,540',st:'Credited'}];
+  for(let i=0;i<history.length;i++){
+    DIV(f,690+i*40);
+    await tx(f,history[i].dt,28,696+i*40,10,GR);
+    await tx(f,history[i].amt,170,696+i*40,12,OG,'Bold');
+    await BDG(f,280,692+i*40,history[i].st,GN);
+  }
+  await NAV_P(f,2);
+  await LBL(f,'P31 / CASH OUT');
+  return f;
+};
+
+// P32: RATING RESPONSE
+const P32 = async () => {
+  const f = mk(provPage,13950,'P32 Rating Response',1);
+  await SB(f);
+  await HDR(f,'Respond to Review');
+  bx(f,0,0,W,44,SURF,1);
+  // Original review
+  CD(f,20,90,350,140,12); bx(f,20,90,350,3,ST,1,2);
+  await AV(f,28,104,48,'RM',CY);
+  await tx(f,'Ramprasad Mokka',86,106,13,WH,'Bold');
+  await tx(f,'28 May 2024  •  Premium Car Wash',86,124,10,GR);
+  for(let i=0;i<5;i++) await tx(f,'★',86+i*18,142,14,i<4?ST:EDGE,'Bold');
+  await tx(f,'4.0',176,144,11,LG,'Semi Bold');
+  bx(f,28,162,294,52,SURF,.5,8);
+  await tx(f,'"Great service overall! Car looks clean.',36,172,11,LG);
+  await tx(f,'Just wish the tyre shine was a bit better."',36,188,11,LG);
+  // Response composer
+  await tx(f,'Your Response',20,246,13,WH,'Semi Bold');
+  await tx(f,'Customers can see your reply publicly',20,264,10,GR);
+  bx(f,20,280,350,120,CARD,1,12); bx(f,20,280,350,1,WH,.05,12); bx(f,20,280,3,120,OG,1,2);
+  await tx(f,'Thank you so much for your kind review,',28,292,11,LG);
+  await tx(f,'Ramprasad! I\'m glad the car is looking',28,308,11,LG);
+  await tx(f,'great. I\'ll make sure the tyre shine is',28,324,11,LG);
+  await tx(f,'perfect on your next booking. See you!',28,340,11,LG);
+  await tx(f,'140/250',294,390,9,GR);
+  // Suggested responses
+  await tx(f,'Quick Templates',20,412,12,WH,'Semi Bold');
+  const templates=['Thank you! 🙏','Sorry for any shortcoming!','Glad you were satisfied!'];
+  for(let i=0;i<templates.length;i++){
+    bx(f,20,430+i*48,350,40,CARD,1,8); bx(f,20,430+i*48,3,40,OG,.7,2);
+    await tx(f,templates[i],32,442+i*48,11,LG);
+    await tx(f,'Use →',302,444+i*48,9,OG,'Semi Bold');
+  }
+  // Dispute option
+  bx(f,20,586,350,44,RD,.08,10); bx(f,20,586,350,1,RD,.2,10);
+  await tx(f,'⚑  Dispute this review (unfair / fake)',80,602,11,RD,'Semi Bold');
+  await BTN(f,20,646,350,'Publish Response',OG);
+  bx(f,20,708,350,40,SURF,.5,20);
+  await tx(f,'Skip — Don\'t Reply',138,721,11,GR);
+  await NAV_P(f,3);
+  await LBL(f,'P32 / RATING RESPONSE');
+  return f;
+};
+
+// P33: DISPUTE A RATING
+const P33 = async () => {
+  const f = mk(provPage,14400,'P33 Dispute Rating',1);
+  await SB(f);
+  await HDR(f,'Dispute Review','#REV-2024-0821');
+  bx(f,0,0,W,44,SURF,1);
+  // Disputed review
+  CD(f,20,90,350,120,12); bx(f,20,90,350,3,RD,1,2);
+  await tx(f,'Anonymous Customer  •  1★',28,104,12,WH,'Semi Bold');
+  await tx(f,'Basic Wash  •  22 May 2024',28,122,10,GR);
+  bx(f,28,140,294,52,SURF,.5,8);
+  await tx(f,'"Did not clean car at all. Complete waste."',36,152,11,LG);
+  await tx(f,'Not reflecting my standard of work.',36,168,11,GR);
+  // Dispute reasons
+  await tx(f,'Why are you disputing this?',20,224,13,WH,'Semi Bold');
+  const dispReasons=['Review is factually incorrect','Customer made false claims','Review left by wrong person','Service was completed & verified','Customer was refunded, review unfair','Abusive or inappropriate content'];
+  for(let i=0;i<dispReasons.length;i++){
+    const sel=[0,3].includes(i), oy=244+i*52;
+    CD(f,20,oy,350,44,8);
+    if(sel){bx(f,20,oy,350,44,RD,.08,8); bx(f,20,oy,3,44,RD,1,2);}
+    bx(f,316,oy+12,20,20,sel?RD:EDGE,sel?.3:.1,10);
+    if(sel)bx(f,322,oy+16,8,8,RD,1,4);
+    await tx(f,dispReasons[i],38,oy+14,10,sel?RD:LG,sel?'Semi Bold':'Regular');
+  }
+  // Evidence
+  await tx(f,'Attach Evidence',20,564,13,WH,'Semi Bold');
+  await tx(f,'Job completion photo / OTP confirmation',20,582,10,GR);
+  for(let i=0;i<3;i++){
+    bx(f,20+i*120,598,112,68,CARD,1,8);
+    if(i<2){ bx(f,20+i*120,598,112,68,GN,.05,8); await BDG(f,26+i*120,660,'Evidence '+(i+1),GN); }
+    else{ await tx(f,'+',62+i*120,622,24,GR,'Bold'); await tx(f,'Add',68+i*120,650,9,GR); }
+  }
+  // Statement
+  bx(f,20,680,350,80,CARD,1,10); bx(f,20,680,350,1,WH,.05,10); bx(f,20,680,3,80,RD,.7,2);
+  await tx(f,'Job was 100% completed. Customer also\npaid and left. Photo evidence attached.',28,694,11,LG);
+  await BTN(f,20,776,350,'Submit Dispute to ServiCo',RD);
+  await LBL(f,'P33 / DISPUTE RATING');
+  return f;
+};
+
+// P34: REFER A PARTNER
+const P34 = async () => {
+  const f = mk(provPage,14850,'P34 Refer a Partner',1);
+  await SB(f);
+  await HDR(f,'Refer a Partner','Earn when they earn');
+  bx(f,0,0,W,44,SURF,1);
+  // Hero
+  bx(f,20,90,350,100,NV,1,16); bx(f,20,90,350,100,OG,.12,16); bx(f,20,90,350,3,OG,1,2);
+  await tx(f,'Earn ₹500 per Referral! 🎉',58,102,16,OG,'Bold');
+  await tx(f,'When your friend completes their first 5 jobs,',28,128,11,GR);
+  await tx(f,'you both earn ₹500 bonus.',68,144,11,GR);
+  await tx(f,'₹2,500',40,160,20,WH,'Bold'); await tx(f,'earned from 5 referrals',112,166,10,GR);
+  // Referral code
+  await tx(f,'Your Referral Code',20,208,13,WH,'Semi Bold');
+  bx(f,20,226,350,64,CARD,1,12); bx(f,20,226,350,1,WH,.08,12); bx(f,20,226,350,64,OG,.06,12);
+  await tx(f,'RAVI2024',110,244,28,OG,'Bold');
+  bx(f,264,238,88,40,OG,1,20);
+  await tx(f,'Copy Code',272,252,10,BK,'Bold');
+  // Share
+  await tx(f,'Share with friends',20,308,13,WH,'Semi Bold');
+  const shareOpts=['WhatsApp','Telegram','SMS','More'];
+  for(let i=0;i<shareOpts.length;i++){
+    const ox=20+i*88;
+    CD(f,ox,326,80,72,12);
+    await tx(f,['💬','✈️','📱','⋯'][i],ox+26,336,28,OG);
+    await tx(f,shareOpts[i],ox+8,368,9,GR);
+  }
+  // Referral status
+  await tx(f,'Your Referrals (5)',20,416,13,WH,'Semi Bold');
+  const refs=[
+    {nm:'Suresh Kumar',jobs:12,earned:'₹500',st:'Bonus Paid',c:GN},
+    {nm:'Anand Rao',jobs:5,earned:'₹500',st:'Bonus Paid',c:GN},
+    {nm:'Vikram Singh',jobs:3,earned:'Pending',st:'2 jobs left',c:AM},
+    {nm:'Deepak Nair',jobs:0,earned:'Pending',st:'Not started',c:GR},
+  ];
+  for(let i=0;i<refs.length;i++){
+    const r=refs[i], oy=434+i*64;
+    CD(f,20,oy,350,56,8);
+    await AV(f,28,oy+8,40,r.nm[0]+'K',r.c);
+    await tx(f,r.nm,78,oy+10,12,WH,'Semi Bold');
+    await tx(f,r.jobs+' jobs completed',78,oy+28,10,GR);
+    await tx(f,r.earned,254,oy+10,12,r.c,'Bold');
+    await BDG(f,254,oy+28,r.st,r.c);
+  }
+  await NAV_P(f,0);
+  await LBL(f,'P34 / REFER PARTNER');
+  return f;
+};
+
+// P35: DOCUMENT MANAGER
+const P35 = async () => {
+  const f = mk(provPage,15300,'P35 Document Manager',1);
+  await SB(f);
+  await HDR(f,'My Documents','KYC & Certificates');
+  bx(f,0,0,W,44,SURF,1);
+  // Verification status bar
+  bx(f,20,90,350,44,GN,.1,10); bx(f,20,90,350,3,GN,1,2);
+  await tx(f,'✓  All documents verified — Gold Partner',32,104,11,GN,'Semi Bold');
+  await tx(f,'Last verified: 28 Jan 2024',32,120,9,GR);
+  // Documents list
+  await tx(f,'Identity & KYC',20,150,13,WH,'Semi Bold');
+  const docs=[
+    {nm:'Aadhaar Card',num:'XXXX XXXX 5821',exp:'Lifetime',st:'Verified',c:GN,ic:'🪪'},
+    {nm:'PAN Card',num:'ABCDE1234F',exp:'Lifetime',st:'Verified',c:GN,ic:'💳'},
+    {nm:'Driving Licence',num:'AP09 20190001234',exp:'Dec 2029',st:'Verified',c:GN,ic:'🚗'},
+    {nm:'Bank Account',num:'HDFC •••• 8834',exp:'—',st:'Verified',c:GN,ic:'🏦'},
+  ];
+  for(let i=0;i<docs.length;i++){
+    const d=docs[i], oy=168+i*84;
+    CD(f,20,oy,350,76,10);
+    bx(f,28,oy+10,48,48,d.c,.1,8);
+    await tx(f,d.ic,34,oy+18,24,d.c);
+    await tx(f,d.nm,86,oy+12,13,WH,'Semi Bold');
+    await tx(f,d.num,86,oy+30,10,GR);
+    await tx(f,'Exp: '+d.exp,86,oy+48,10,GR);
+    await BDG(f,260,oy+12,d.st,d.c);
+    bx(f,296,oy+42,48,24,CY,.15,12); await tx(f,'Update',300,oy+50,8,CY,'Semi Bold');
+  }
+  // Skill certificates
+  await tx(f,'Skill Certificates',20,510,13,WH,'Semi Bold');
+  const certs=[
+    {nm:'ServiCo Certified Washer',issued:'Jan 2024',c:CY},
+    {nm:'Advanced Detailing Course',issued:'Mar 2024',c:OG},
+  ];
+  for(let i=0;i<certs.length;i++){
+    const c=certs[i], oy=528+i*72;
+    CD(f,20,oy,350,64,10); bx(f,20,oy,3,64,c.c,1,2);
+    bx(f,28,oy+12,40,40,c.c,.12,8);
+    await tx(f,'🏆',32,oy+18,24,c.c);
+    await tx(f,c.nm,78,oy+14,12,WH,'Semi Bold');
+    await tx(f,'Issued: '+c.issued,78,oy+32,10,GR);
+    bx(f,268,oy+18,72,28,c.c,.15,14);
+    await tx(f,'Download',274,oy+25,9,c.c,'Semi Bold');
+  }
+  bx(f,20,682,350,44,CARD,1,22); bx(f,20,682,350,1,CY,.2,22);
+  await tx(f,'+ Upload New Document',110,698,12,CY,'Semi Bold');
+  await NAV_P(f,3);
+  await LBL(f,'P35 / DOCUMENT MANAGER');
+  return f;
+};
+
+// P36: PRE-JOB CUSTOMER INFO CARD
+const P36 = async () => {
+  const f = mk(provPage,15750,'P36 Pre-Job Info',1);
+  await SB(f);
+  await HDR(f,'Job Brief','Before you head out');
+  bx(f,0,0,W,44,SURF,1);
+  // Job number + status
+  bx(f,20,90,350,44,OG,.15,10); bx(f,20,90,350,3,OG,1,2);
+  await tx(f,'#JOB-2024-5521  —  Premium Car Wash',28,100,11,OG,'Semi Bold');
+  await tx(f,'Today 9:00 AM  •  Starts in 22 min',28,118,10,GR);
+  // Customer card
+  await tx(f,'Customer',20,150,12,GR,'Semi Bold');
+  CD(f,20,166,350,80,12);
+  await AV(f,28,178,56,'RM',CY);
+  await tx(f,'Ramprasad Mokka',94,178,13,WH,'Bold');
+  await tx(f,'+91 98765 43210',94,198,11,CY);
+  await tx(f,'★ 4.8 as customer  •  42 bookings',94,216,10,GR);
+  // Vehicle info
+  await tx(f,'Vehicle',20,264,12,GR,'Semi Bold');
+  CD(f,20,280,350,68,12); bx(f,20,280,3,68,OG,1,2);
+  await tx(f,'🚗',30,296,28,OG);
+  await tx(f,'Maruti Swift Dzire — White',72,288,12,WH,'Bold');
+  await tx(f,'TS 09 AB 1234',72,306,11,GR);
+  await tx(f,'Sedan  •  Diesel  •  2019 model',72,322,10,GR);
+  // Service location
+  await tx(f,'Service Location',20,364,12,GR,'Semi Bold');
+  CD(f,20,380,350,80,12);
+  await tx(f,'📍',28,398,18,CY);
+  await tx(f,'Flat 4B, Regal Residency',54,386,12,WH,'Bold');
+  await tx(f,'Near main gate, Building 4',54,404,11,GR);
+  await tx(f,'Banjara Hills, Hyderabad — 500034',54,420,10,GR);
+  bx(f,254,392,92,28,CY,.15,14); bx(f,254,392,92,1,CY,.3,14);
+  await tx(f,'Open in Maps',260,400,8,CY,'Semi Bold');
+  // Special notes
+  await tx(f,'Customer Notes',20,476,12,GR,'Semi Bold');
+  CD(f,20,492,350,60,10); bx(f,20,492,3,60,AM,1,2);
+  await tx(f,'"Please focus on the roof area, there are',32,504,11,LG);
+  await tx(f,'some bird droppings. Use soft cloth only."',32,520,11,LG);
+  // Services to perform
+  await tx(f,'Services Booked',20,568,12,GR,'Semi Bold');
+  const svcs=['Premium Exterior Wash','Interior Vacuum','Dashboard Polish'];
+  for(let i=0;i<svcs.length;i++){
+    bx(f,20,586+i*40,350,34,SURF,.5,6); bx(f,20,586+i*40,3,34,OG,.7,2);
+    await tx(f,'• '+svcs[i],32,596+i*40,11,LG);
+  }
+  // Action
+  await BTN(f,20,714,350,'Start Navigation to Customer',OG);
+  bx(f,20,776,350,44,CARD,1,22);
+  await tx(f,'📞  Call Customer',120,792,12,CY,'Semi Bold');
+  await NAV_P(f,1);
+  await LBL(f,'P36 / PRE-JOB INFO');
+  return f;
+};
+
+// P37: ROUTE & NAVIGATION HANDOFF
+const P37 = async () => {
+  const f = mk(provPage,16200,'P37 Navigation Handoff',1);
+  await SB(f);
+  bx(f,0,0,W,44,SURF,1);
+  await tx(f,'Navigate to Job',96,54,18,WH,'Bold');
+  await tx(f,'#JOB-2024-5521  •  0.8 km away',84,78,11,GR);
+  // Map preview
+  bx(f,0,100,W,280,{r:.04,g:.08,b:.05},1);
+  for(let i=0;i<6;i++) bx(f,0,100+i*46,W,1,{r:.08,g:.12,b:.08},.4);
+  for(let i=0;i<5;i++) bx(f,i*88,100,1,280,{r:.08,g:.12,b:.08},.4);
+  bx(f,0,228,W,8,{r:.12,g:.16,b:.12},1); bx(f,176,100,8,280,{r:.12,g:.16,b:.12},1);
+  // Route line
+  bx(f,192,380,4,88,OG,1,2); bx(f,192,300,4,80,OG,1,2);
+  bx(f,192,228,80,4,OG,1,2);
+  // Start pin (provider)
+  bx(f,183,363,18,18,OG,1,9); bx(f,187,367,10,10,WH,1,5);
+  await tx(f,'You',175,384,8,OG,'Semi Bold');
+  // End pin (customer)
+  bx(f,259,220,22,22,CY,1,11); await tx(f,'📍',261,223,14,WH);
+  await tx(f,'Destination',248,246,8,CY,'Semi Bold');
+  // ETA banner
+  bx(f,0,380,W,36,DP,1); bx(f,0,380,W,1,EDGE,.5);
+  await tx(f,'8 min  •  0.8 km  •  Via Banjara Hills Rd',60,391,11,OG,'Semi Bold');
+  // App choices
+  await tx(f,'Open navigation in:',20,432,14,WH,'Bold');
+  const navApps=[
+    {nm:'Google Maps',ic:'🗺',c:BL,desc:'Best for traffic'},
+    {nm:'Ola Maps',ic:'🟡',c:AM,desc:'India optimised'},
+    {nm:'Apple Maps',ic:'📍',c:CY,desc:'Native app'},
+    {nm:'Waze',ic:'💙',c:PK,desc:'Community alerts'},
+  ];
+  for(let i=0;i<navApps.length;i++){
+    const n=navApps[i], col=i%2, row=Math.floor(i/2);
+    const ox=20+col*182, oy=456+row*90;
+    CD(f,ox,oy,174,82,12); bx(f,ox,oy,174,3,n.c,1,2);
+    await tx(f,n.ic,ox+14,oy+16,32,n.c);
+    await tx(f,n.nm,ox+64,oy+18,13,WH,'Semi Bold');
+    await tx(f,n.desc,ox+64,oy+36,10,GR);
+    bx(f,ox+118,oy+50,40,24,n.c,.15,10);
+    await tx(f,'Open',ox+124,oy+57,9,n.c,'Semi Bold');
+  }
+  // Quick actions
+  DIV(f,648);
+  bx(f,20,656,168,48,CARD,1,24);
+  await tx(f,'📞  Call Customer',40,672,11,CY,'Semi Bold');
+  bx(f,202,656,168,48,CARD,1,24);
+  await tx(f,'💬  Message',248,672,11,GR,'Semi Bold');
+  await BTN(f,20,716,350,'Mark En Route',OG);
+  await NAV_P(f,1);
+  await LBL(f,'P37 / NAVIGATION');
+  return f;
+};
+
+// ════════════════════════════════════════════════════════════
+//  ADMIN — Batch 2  A23–A33
+// ════════════════════════════════════════════════════════════
+
+// A23: ADMIN LOGIN
+const A23 = async () => {
+  const f = mk(adminPage,9900,'A23 Admin Login',2);
+  bx(f,0,0,W,H,{r:.01,g:.01,b:.03},1);
+  bx(f,0,0,W,H,PK,.04);
+  await SB(f);
+  bx(f,155,80,80,80,PK,.08,40); bx(f,163,88,64,64,PK,.12,32); bx(f,171,96,48,48,PK,1,24);
+  await tx(f,'A',186,108,22,WH,'Bold');
+  await tx(f,'ServiCo Admin',102,178,22,WH,'Bold');
+  await tx(f,'Operations & Management Console',56,206,11,GR);
+  bx(f,20,228,350,44,SURF,1,22); bx(f,20,228,350,2,PK,.3,22);
+  await tx(f,'ADMIN PORTAL  —  AUTHORISED ACCESS ONLY',52,244,9,PK,'Semi Bold');
+  await INP(f,20,288,350,'Admin Email','admin@servico.app',PK);
+  await INP(f,20,364,350,'Password','••••••••••••',PK);
+  // 2FA
+  bx(f,20,430,350,52,CARD,1,12); bx(f,20,430,3,52,PK,1,2); bx(f,20,430,350,1,WH,.05,12);
+  await tx(f,'2FA Code (Authenticator App)',28,442,10,GR);
+  await tx(f,'Enter 6-digit code',28,456,12,LG);
+  bx(f,310,438,38,28,PK,.15,10); await tx(f,'SMS',316,448,9,PK,'Semi Bold');
+  // Login
+  bx(f,20,498,350,52,PK,1,26); bx(f,20,498,350,1,WH,.2,26);
+  await tx(f,'Sign In to Admin Console',90,513,14,WH,'Bold');
+  // Security note
+  bx(f,20,562,350,48,{r:.06,g:.02,b:.08},1,10); bx(f,20,562,350,2,PK,.3,2);
+  await tx(f,'🔒  Secure connection  •  Activity logged  •  2FA required',28,574,9,PK);
+  await tx(f,'Suspicious login? Contact security@servico.app',44,592,9,GR);
+  // Role selector
+  await tx(f,'Sign in as:',20,626,11,GR);
+  const roles=['Super Admin','City Admin','Finance','Ops Support'];
+  for(let i=0;i<roles.length;i++){
+    const sel=i===0;
+    bx(f,20+i*88,642,80,28,sel?PK:CARD,sel?.2:1,14);
+    if(sel)bx(f,20+i*88,642,80,1,PK,.4,14);
+    await tx(f,roles[i],28+i*88,649,8,sel?PK:GR,sel?'Semi Bold':'Regular');
+  }
+  await LBL(f,'A23 / ADMIN LOGIN');
+  return f;
+};
+
+// A24: CITY / ZONE MANAGEMENT
+const A24 = async () => {
+  const f = mk(adminPage,10350,'A24 City Management',2);
+  await SB(f);
+  await HDR(f,'City & Zone Management');
+  bx(f,0,0,W,44,SURF,1);
+  // Summary stats
+  const cityStats=[{v:'8',l:'Active Cities',c:GN},{v:'3',l:'Launching',c:AM},{v:'28',l:'Total Zones',c:CY}];
+  for(let i=0;i<cityStats.length;i++){
+    bx(f,20+i*118,90,108,64,CARD,1,10); bx(f,20+i*118,90,108,3,cityStats[i].c,1,2);
+    await tx(f,cityStats[i].v,52+i*118,102,24,cityStats[i].c,'Bold');
+    await tx(f,cityStats[i].l,26+i*118,130,8,GR);
+  }
+  bx(f,20,166,350,44,PK,.15,22); bx(f,20,166,350,1,PK,.4,22);
+  await tx(f,'+ Launch New City',118,181,12,PK,'Semi Bold');
+  // City list
+  const cities=[
+    {nm:'Hyderabad',zones:6,prov:342,orders:'2.1k/mo',st:'Active',c:GN},
+    {nm:'Bangalore',zones:5,prov:289,orders:'1.8k/mo',st:'Active',c:GN},
+    {nm:'Mumbai',zones:7,prov:412,orders:'3.2k/mo',st:'Active',c:GN},
+    {nm:'Chennai',zones:4,prov:198,orders:'1.1k/mo',st:'Active',c:GN},
+    {nm:'Pune',zones:3,prov:124,orders:'642/mo',st:'Launching',c:AM},
+    {nm:'Ahmedabad',zones:2,prov:56,orders:'Pilot',st:'Launching',c:AM},
+  ];
+  for(let i=0;i<cities.length;i++){
+    const c=cities[i], oy=222+i*86;
+    CD(f,20,oy,350,78,10);
+    bx(f,20,oy,3,78,c.c,1,2);
+    await tx(f,c.nm,32,oy+8,14,WH,'Bold');
+    await tx(f,c.zones+' zones  •  '+c.prov+' providers  •  '+c.orders,32,oy+28,10,GR);
+    await BDG(f,32,oy+48,c.st,c.c);
+    bx(f,260,oy+14,48,28,CY,.15,10); await tx(f,'Manage',264,oy+22,9,CY,'Semi Bold');
+    bx(f,316,oy+14,44,28,i>3?GN:EDGE,(i>3&&c.st==='Launching')?.15:.08,10);
+    await tx(f,i>3?'Launch':'Config',318,oy+22,8,i>3?GN:GR,'Semi Bold');
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A24 / CITY MANAGEMENT');
+  return f;
+};
+
+// A25: DYNAMIC / SURGE PRICING
+const A25 = async () => {
+  const f = mk(adminPage,10800,'A25 Dynamic Pricing',2);
+  await SB(f);
+  await HDR(f,'Dynamic Pricing','Surge & Demand Rules');
+  bx(f,0,0,W,44,SURF,1);
+  // Current status
+  bx(f,20,90,350,52,{r:.12,g:.04,b:.01},1,10); bx(f,20,90,350,3,OG,1,2);
+  await tx(f,'⚡  Surge Active: 1.4× in Banjara Hills',32,102,11,OG,'Semi Bold');
+  await tx(f,'High demand: 12 customers, 4 providers online',32,118,10,GR);
+  // Master toggle
+  CD(f,20,154,350,52,10);
+  await tx(f,'Dynamic Pricing Engine',28,164,13,WH,'Bold');
+  await tx(f,'Automatically adjusts prices based on demand',28,182,10,GR);
+  bx(f,306,162,36,20,GN,1,10); bx(f,322,164,16,16,WH,1,8);
+  // Rules
+  await tx(f,'Surge Rules',20,220,13,WH,'Semi Bold');
+  const rules=[
+    {cond:'Demand > 2× supply',mult:'1.5×',active:true,c:OG},
+    {cond:'Peak hours (8–10 AM, 6–8 PM)',mult:'1.2×',active:true,c:AM},
+    {cond:'Sunday / holiday',mult:'1.3×',active:true,c:CY},
+    {cond:'Rain / bad weather',mult:'1.6×',active:false,c:BL},
+    {cond:'New city launch (first 30 days)',mult:'0.8×',active:false,c:GN},
+  ];
+  for(let i=0;i<rules.length;i++){
+    const r=rules[i], oy=238+i*82;
+    CD(f,20,oy,350,74,10); if(r.active)bx(f,20,oy,3,74,r.c,1,2);
+    await tx(f,r.cond,32,oy+10,11,WH,'Semi Bold');
+    bx(f,32,oy+32,80,28,r.c,r.active?.2:.08,8);
+    await tx(f,'Multiplier: '+r.mult,38,oy+40,10,r.active?r.c:GR,r.active?'Bold':'Regular');
+    bx(f,r.active?310:296,oy+27,16,16,WH,1,8);
+    bx(f,294,oy+25,36,20,r.active?r.c:EDGE,r.active?1:.3,10);
+    bx(f,240,oy+32,46,28,CY,.15,8); await tx(f,'Edit',248,oy+40,9,CY,'Semi Bold');
+  }
+  bx(f,20,652,350,44,PK,.15,22); bx(f,20,652,350,1,PK,.3,22);
+  await tx(f,'+ Add New Surge Rule',110,668,12,PK,'Semi Bold');
+  // Price cap
+  await tx(f,'Price Cap',20,710,13,WH,'Semi Bold');
+  CD(f,20,728,350,52,10); bx(f,20,728,3,52,RD,1,2);
+  await tx(f,'Maximum surge allowed',32,740,12,WH,'Semi Bold');
+  await tx(f,'2.0× base price (hard cap)',32,758,10,GR);
+  bx(f,284,740,72,24,RD,.15,10); await tx(f,'Change Cap',288,748,8,RD,'Semi Bold');
+  await NAV_A(f,0);
+  await LBL(f,'A25 / DYNAMIC PRICING');
+  return f;
+};
+
+// A26: PROVIDER ONBOARDING PIPELINE
+const A26 = async () => {
+  const f = mk(adminPage,11250,'A26 Onboarding Pipeline',2);
+  await SB(f);
+  await HDR(f,'Onboarding Pipeline','Provider Funnel');
+  bx(f,0,0,W,44,SURF,1);
+  // Funnel stats
+  const stages=[{label:'Applied',count:48,c:GR},{label:'Docs Submitted',count:31,c:BL},{label:'Under Review',count:18,c:AM},{label:'Verified',count:12,c:GN},{label:'Active',count:8,c:OG}];
+  for(let i=0;i<stages.length;i++){
+    const s=stages[i];
+    bx(f,20,96+i*56,350,48,CARD,1,8);
+    bx(f,20,96+i*56,Math.round(350*(s.count/48)),48,s.c,.15,8);
+    bx(f,20,96+i*56,3,48,s.c,1,2);
+    await tx(f,s.label,32,108+i*56,12,WH,'Semi Bold');
+    await tx(f,s.count+' providers',32,124+i*56,10,GR);
+    await tx(f,String(s.count),314,108+i*56,16,s.c,'Bold');
+    if(i<stages.length-1){
+      await tx(f,'↓',191,148+i*56,10,EDGE,'Bold');
+    }
+  }
+  // Pending reviews
+  await tx(f,'Needs Attention (18)',20,388,13,WH,'Semi Bold');
+  const pending=[
+    {nm:'Rajesh M.',area:'Madhapur',days:3,step:'KYC Review',c:AM},
+    {nm:'Sunita P.',area:'Kondapur',days:1,step:'BG Check',c:OG},
+    {nm:'Kiran V.',area:'Gachibowli',days:5,step:'Doc Upload',c:RD},
+    {nm:'Anand R.',area:'Jubilee Hills',days:2,step:'Bank Verify',c:AM},
+  ];
+  for(let i=0;i<pending.length;i++){
+    const p=pending[i], oy=406+i*76;
+    CD(f,20,oy,350,68,8); bx(f,20,oy,3,68,p.c,1,2);
+    await AV(f,28,oy+12,44,p.nm[0]+'R',p.c);
+    await tx(f,p.nm,82,oy+12,12,WH,'Semi Bold');
+    await tx(f,p.area+'  •  Waiting '+p.days+' days',82,oy+30,10,GR);
+    await BDG(f,82,oy+48,p.step,p.c);
+    bx(f,272,oy+18,36,24,GN,.15,8); await tx(f,'Approve',276,oy+26,8,GN,'Semi Bold');
+    bx(f,316,oy+18,36,24,RD,.15,8); await tx(f,'Reject',320,oy+26,8,RD,'Semi Bold');
+  }
+  await NAV_A(f,1);
+  await LBL(f,'A26 / ONBOARDING PIPELINE');
+  return f;
+};
+
+// A27: FRAUD DETECTION
+const A27 = async () => {
+  const f = mk(adminPage,11700,'A27 Fraud Detection',2);
+  await SB(f);
+  await HDR(f,'Fraud Detection','Anomaly Alerts');
+  bx(f,0,0,W,44,SURF,1);
+  // Alert stats
+  const fStats=[{v:'7',l:'Open Alerts',c:RD},{v:'3',l:'High Risk',c:AM},{v:'₹12k',l:'Flagged Amount',c:OG}];
+  for(let i=0;i<fStats.length;i++){
+    bx(f,20+i*118,90,108,64,CARD,1,10); bx(f,20+i*118,90,108,3,fStats[i].c,1,2);
+    await tx(f,fStats[i].v,48+i*118,100,22,fStats[i].c,'Bold');
+    await tx(f,fStats[i].l,26+i*118,128,8,GR);
+  }
+  // Fraud alerts
+  await tx(f,'Active Fraud Alerts',20,170,13,WH,'Semi Bold');
+  const alerts=[
+    {type:'Multiple OTPs same device',risk:'High',user:'USR-0223',amt:'₹4,200',c:RD},
+    {type:'Fake review cluster (5★)',risk:'High',user:'PRV-0156',amt:'—',c:RD},
+    {type:'Refund abuse — 4th request',risk:'Medium',user:'USR-0892',amt:'₹1,200',c:AM},
+    {type:'Abnormal booking frequency',risk:'Medium',user:'USR-1204',amt:'₹3,400',c:AM},
+    {type:'Card BIN mismatch',risk:'Low',user:'USR-0651',amt:'₹599',c:OG},
+  ];
+  for(let i=0;i<alerts.length;i++){
+    const a=alerts[i], oy=188+i*98;
+    CD(f,20,oy,350,90,10); bx(f,20,oy,3,90,a.c,1,2);
+    await BDG(f,28,oy+10,a.risk+' Risk',a.c);
+    await tx(f,a.type,28,oy+34,12,WH,'Semi Bold');
+    await tx(f,a.user+'  •  Amount: '+a.amt,28,oy+52,10,GR);
+    bx(f,28,oy+68,72,18,RD,.15,8); await tx(f,'Ban Account',32,oy+73,8,RD,'Semi Bold');
+    bx(f,108,oy+68,72,18,AM,.15,8); await tx(f,'Flag & Watch',112,oy+73,8,AM,'Semi Bold');
+    bx(f,188,oy+68,72,18,GN,.15,8); await tx(f,'Mark Safe',194,oy+73,8,GN,'Semi Bold');
+    bx(f,268,oy+68,72,18,CY,.15,8); await tx(f,'Investigate',272,oy+73,8,CY,'Semi Bold');
+    bx(f,296,oy+8,56,22,a.c,.15,8); await tx(f,'View Detail',300,oy+14,8,a.c,'Semi Bold');
+  }
+  await NAV_A(f,3);
+  await LBL(f,'A27 / FRAUD DETECTION');
+  return f;
+};
+
+// A28: FINANCIAL OVERVIEW / P&L
+const A28 = async () => {
+  const f = mk(adminPage,12150,'A28 Financial Overview',2);
+  await SB(f);
+  await HDR(f,'Financial Overview','May 2024  •  Live');
+  bx(f,0,0,W,44,SURF,1);
+  // Period toggle
+  bx(f,20,90,350,32,SURF,1,16);
+  const perds=['Today','Week','Month','Year'];
+  for(let i=0;i<perds.length;i++){
+    const sel=i===2;
+    bx(f,24+i*87,92,82,28,sel?PK:SURF,sel?1:0,14);
+    await tx(f,perds[i],38+i*87,99,11,sel?WH:GR,sel?'Bold':'Regular');
+  }
+  // GMV hero
+  bx(f,20,134,350,80,{r:.06,g:.01,b:.10},1,12); bx(f,20,134,350,80,PK,.12,12); bx(f,20,134,350,3,PK,1,2);
+  await tx(f,'Gross Merchandise Value',28,146,11,GR);
+  await tx(f,'₹ 24,18,400',28,164,26,WH,'Bold');
+  await tx(f,'+18% vs Apr  •  Target: ₹28L',28,196,10,GR);
+  bx(f,246,150,104,40,GN,.15,10); await tx(f,'▲ On Track',262,163,10,GN,'Semi Bold');
+  // P&L table
+  await tx(f,'Income Statement — May 2024',20,230,12,WH,'Semi Bold');
+  const pl=[
+    {label:'GMV (Gross Bookings)',val:'₹24,18,400',clr:GN,indent:0},
+    {label:'Commission Revenue (15%)',val:'₹3,62,760',clr:CY,indent:0},
+    {label:'Promo Spend',val:'–₹48,000',clr:RD,indent:1},
+    {label:'Partner Payouts',val:'–₹20,55,640',clr:RD,indent:0},
+    {label:'Gross Profit',val:'₹3,14,760',clr:GN,indent:0},
+    {label:'Infra & Ops Costs',val:'–₹82,000',clr:AM,indent:1},
+    {label:'Marketing Spend',val:'–₹64,000',clr:AM,indent:1},
+    {label:'Net Revenue',val:'₹1,68,760',clr:PK,indent:0},
+  ];
+  for(let i=0;i<pl.length;i++){
+    const p=pl[i], oy=248+i*34;
+    if(i===4||i===7) DIV(f,oy-2);
+    if(p.indent) bx(f,20,oy,350,32,SURF,.3,4);
+    await tx(f,p.label,28+(p.indent?20:0),oy+8,10,p.indent?GR:LG,p.indent?'Regular':'Semi Bold');
+    await tx(f,p.val,260,oy+8,11,p.clr,p.indent?'Regular':'Bold');
+  }
+  DIV(f,530);
+  // Take rate
+  bx(f,20,538,160,52,CARD,1,10); bx(f,20,538,160,3,CY,1,2);
+  await tx(f,'Take Rate',30,550,10,GR); await tx(f,'15.0%',30,566,16,CY,'Bold');
+  bx(f,196,538,160,52,CARD,1,10); bx(f,196,538,160,3,GN,1,2);
+  await tx(f,'Net Margin',206,550,10,GR); await tx(f,'6.98%',206,566,16,GN,'Bold');
+  // Monthly trend bars
+  await tx(f,'GMV Trend (6 months)',20,606,12,WH,'Semi Bold');
+  const trend=[18,21,19,22,20,24];
+  for(let i=0;i<trend.length;i++){
+    const bh=Math.round((trend[i]/24)*80);
+    bx(f,28+i*56,700-bh,44,bh,i===5?PK:SURF,i===5?1:.7,4);
+    await tx(f,trend[i]+'L',32+i*56,704,8,i===5?PK:GR,'Semi Bold');
+  }
+  await NAV_A(f,3);
+  await LBL(f,'A28 / FINANCIAL OVERVIEW');
+  return f;
+};
+
+// A29: CUSTOMER SEGMENTATION
+const A29 = async () => {
+  const f = mk(adminPage,12600,'A29 Customer Segments',2);
+  await SB(f);
+  await HDR(f,'Customer Segmentation','RFM Analysis');
+  bx(f,0,0,W,44,SURF,1);
+  // Total users
+  bx(f,20,90,350,44,SURF,1,10); bx(f,20,90,350,3,PK,1,2);
+  await tx(f,'Total Registered Customers:',28,102,11,GR);
+  await tx(f,'24,892',220,100,16,WH,'Bold');
+  await tx(f,'+342 this week',286,104,9,GN);
+  // Segment cards
+  const segs=[
+    {nm:'Champions',desc:'Frequent, recent, high-spend',count:2840,pct:11,c:ST,icon:'🏆'},
+    {nm:'Loyal',desc:'Regular & high value',count:4210,pct:17,c:GN,icon:'💎'},
+    {nm:'Potential Loyalists',desc:'Recent, mid frequency',count:5680,pct:23,c:CY,icon:'⭐'},
+    {nm:'At Risk',desc:'Used to be active, gone quiet',count:3920,pct:16,c:AM,icon:'⚠️'},
+    {nm:'Churned',desc:'No activity 90+ days',count:8242,pct:33,c:RD,icon:'💤'},
+  ];
+  for(let i=0;i<segs.length;i++){
+    const s=segs[i], oy=146+i*106;
+    CD(f,20,oy,350,98,10); bx(f,20,oy,350,98,s.c,.04,10); bx(f,20,oy,3,98,s.c,1,2);
+    await tx(f,s.icon,28,oy+12,28,s.c);
+    await tx(f,s.nm,72,oy+14,13,WH,'Bold');
+    await tx(f,s.desc,72,oy+32,10,GR);
+    // Bar
+    bx(f,72,oy+52,220,8,SURF,1,4); bx(f,72,oy+52,Math.round(220*s.pct/100),8,s.c,.7,4);
+    await tx(f,s.pct+'%',300,oy+50,10,s.c,'Bold');
+    await tx(f,s.count.toLocaleString()+' users',72,oy+68,10,GR);
+    bx(f,282,oy+60,50,24,s.c,.15,10); await tx(f,'Target',288,oy+68,8,s.c,'Semi Bold');
+  }
+  await NAV_A(f,3);
+  await LBL(f,'A29 / CUSTOMER SEGMENTATION');
+  return f;
+};
+
+// A30: SLA MONITOR
+const A30 = async () => {
+  const f = mk(adminPage,13050,'A30 SLA Monitor',2);
+  await SB(f);
+  await HDR(f,'SLA Monitor','Support Response Tracking');
+  bx(f,0,0,W,44,SURF,1);
+  // SLA stats
+  const slaStats=[{v:'94%',l:'1st Response SLA',c:GN},{v:'78%',l:'Resolution SLA',c:AM},{v:'2.4h',l:'Avg Resolution',c:CY}];
+  for(let i=0;i<slaStats.length;i++){
+    bx(f,20+i*118,90,108,64,CARD,1,10); bx(f,20+i*118,90,108,3,slaStats[i].c,1,2);
+    await tx(f,slaStats[i].v,42+i*118,100,20,slaStats[i].c,'Bold');
+    await tx(f,slaStats[i].l,26+i*118,126,7,GR);
+  }
+  // Breached SLAs
+  bx(f,20,166,350,32,RD,.1,8); bx(f,20,166,350,2,RD,.4,2);
+  await tx(f,'⚠  6 tickets have breached SLA target',32,178,10,RD,'Semi Bold');
+  // SLA rules
+  await tx(f,'SLA Configuration',20,212,13,WH,'Semi Bold');
+  const slaRules=[
+    {type:'First Response',urgent:'15 min',normal:'2 hrs',low:'24 hrs'},
+    {type:'Resolution',urgent:'2 hrs',normal:'24 hrs',low:'72 hrs'},
+  ];
+  CD(f,20,230,350,80,10);
+  await tx(f,'Priority →',28,244,9,GR,'Bold');
+  await tx(f,'Urgent',130,244,9,RD,'Bold');
+  await tx(f,'Normal',200,244,9,AM,'Bold');
+  await tx(f,'Low',278,244,9,GN,'Bold');
+  DIV(f,258);
+  for(let i=0;i<slaRules.length;i++){
+    await tx(f,slaRules[i].type,28,270+i*28,10,LG);
+    await tx(f,slaRules[i].urgent,130,270+i*28,10,RD,'Semi Bold');
+    await tx(f,slaRules[i].normal,200,270+i*28,10,AM,'Semi Bold');
+    await tx(f,slaRules[i].low,278,270+i*28,10,GN,'Semi Bold');
+  }
+  // Ticket queue sorted by SLA
+  await tx(f,'Tickets by SLA Status',20,324,13,WH,'Semi Bold');
+  const tickets=[
+    {id:'TKT-0821',issue:'Refund not credited',customer:'USR-0042',status:'Breached',hrs:'4.2h overdue',c:RD},
+    {id:'TKT-0819',issue:'Provider no-show',customer:'USR-1103',status:'At Risk',hrs:'1.8h remaining',c:AM},
+    {id:'TKT-0818',issue:'App crash during pay',customer:'USR-0892',status:'At Risk',hrs:'2.1h remaining',c:AM},
+    {id:'TKT-0815',issue:'Wrong service charged',customer:'USR-0445',status:'On Track',hrs:'6h remaining',c:GN},
+    {id:'TKT-0812',issue:'Rating dispute',customer:'PRV-0042',status:'On Track',hrs:'18h remaining',c:GN},
+  ];
+  for(let i=0;i<tickets.length;i++){
+    const t=tickets[i], oy=342+i*80;
+    CD(f,20,oy,350,72,8); bx(f,20,oy,3,72,t.c,1,2);
+    await tx(f,t.id,32,oy+8,10,GR); await BDG(f,100,oy+5,t.status,t.c);
+    await tx(f,t.issue,32,oy+26,12,WH,'Semi Bold');
+    await tx(f,t.customer+'  •  '+t.hrs,32,oy+44,10,t.c==='RD'?RD:GR);
+    bx(f,286,oy+20,60,32,CY,.15,8); await tx(f,'Assign',296,oy+30,9,CY,'Semi Bold');
+  }
+  await NAV_A(f,2);
+  await LBL(f,'A30 / SLA MONITOR');
+  return f;
+};
+
+// A31: A/B TEST MANAGER
+const A31 = async () => {
+  const f = mk(adminPage,13500,'A31 AB Test Manager',2);
+  await SB(f);
+  await HDR(f,'A/B Test Manager','Experiments');
+  bx(f,0,0,W,44,SURF,1);
+  bx(f,20,90,350,44,PK,.15,22); bx(f,20,90,350,1,PK,.4,22);
+  await tx(f,'+ Create New Experiment',104,105,12,PK,'Semi Bold');
+  // Active tests
+  await tx(f,'Active Tests (3)',20,148,13,WH,'Semi Bold');
+  const tests=[
+    {nm:'Promo Banner Position',hyp:'Top banner vs bottom sheet',split:'50/50',conv:{a:'8.2%',b:'11.4%'},winner:'B',c:GN,status:'Running'},
+    {nm:'Provider Card Layout',hyp:'Horizontal vs grid cards',split:'60/40',conv:{a:'14.1%',b:'13.8%'},winner:'A',c:CY,status:'Running'},
+    {nm:'Booking Flow Steps',hyp:'3-step vs 5-step checkout',split:'50/50',conv:{a:'72%',b:'68%'},winner:'A',c:OG,status:'Running'},
+  ];
+  for(let i=0;i<tests.length;i++){
+    const t=tests[i], oy=166+i*148;
+    CD(f,20,oy,350,140,10); bx(f,20,oy,3,140,t.c,1,2);
+    await tx(f,t.nm,32,oy+10,13,WH,'Bold');
+    await tx(f,t.hyp,32,oy+28,10,GR);
+    await tx(f,'Split: '+t.split,32,oy+44,10,GR);
+    // A vs B comparison
+    bx(f,32,oy+62,136,44,SURF,1,8); bx(f,32,oy+62,136,3,EDGE,.5,2);
+    await tx(f,'Variant A',40,oy+68,10,GR); await tx(f,t.conv.a,40,oy+82,14,LG,'Semi Bold');
+    bx(f,180,oy+62,136,44,t.c,t.winner==='B'?.15:.05,8);
+    if(t.winner==='B'){bx(f,180,oy+62,136,3,t.c,.5,2);}
+    await tx(f,'Variant B',188,oy+68,10,GR); await tx(f,t.conv.b,188,oy+82,14,t.winner==='B'?t.c:LG,t.winner==='B'?'Bold':'Semi Bold');
+    if(t.winner==='B')await BDG(f,260,oy+64,'Winner',t.c);
+    await BDG(f,280,oy+8,t.status,GN);
+    bx(f,284,oy+112,50,18,RD,.15,8); await tx(f,'End Test',288,oy+118,8,RD,'Semi Bold');
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A31 / AB TEST MANAGER');
+  return f;
+};
+
+// A32: ROLE & PERMISSION MANAGER
+const A32 = async () => {
+  const f = mk(adminPage,13950,'A32 Roles & Permissions',2);
+  await SB(f);
+  await HDR(f,'Roles & Permissions','Admin Access Control');
+  bx(f,0,0,W,44,SURF,1);
+  bx(f,20,90,350,44,PK,.15,22); bx(f,20,90,350,1,PK,.4,22);
+  await tx(f,'+ Invite New Admin User',106,105,12,PK,'Semi Bold');
+  // Admin users
+  await tx(f,'Admin Users (4)',20,148,13,WH,'Semi Bold');
+  const admins=[
+    {nm:'Suresh Mehta',email:'suresh@servico.app',role:'Super Admin',perms:'All access',c:PK,last:'2 min ago'},
+    {nm:'Deepa Rao',email:'deepa@servico.app',role:'Finance Admin',perms:'Reports, Payouts',c:BL,last:'1 hr ago'},
+    {nm:'Anand Kumar',email:'anand@servico.app',role:'City Admin — HYD',perms:'City ops only',c:GN,last:'Today'},
+    {nm:'Meena Iyer',email:'meena@servico.app',role:'Ops Support',perms:'Tickets, Complaints',c:OG,last:'Yesterday'},
+  ];
+  for(let i=0;i<admins.length;i++){
+    const a=admins[i], oy=166+i*100;
+    CD(f,20,oy,350,92,10);
+    await AV(f,28,oy+10,52,a.nm[0]+'M',a.c);
+    await tx(f,a.nm,90,oy+10,13,WH,'Bold');
+    await tx(f,a.email,90,oy+28,9,GR);
+    await BDG(f,90,oy+46,a.role,a.c);
+    await tx(f,'Last: '+a.last,90,oy+68,9,GR);
+    await tx(f,a.perms,232,oy+28,9,GR);
+    bx(f,290,oy+18,28,24,CY,.15,8); await tx(f,'Edit',294,oy+26,8,CY,'Semi Bold');
+    bx(f,326,oy+18,26,24,RD,.15,8); await tx(f,'✕',330,oy+26,8,RD,'Semi Bold');
+  }
+  // Permission matrix
+  await tx(f,'Permission Matrix',20,570,13,WH,'Semi Bold');
+  const permRows=['View Users','Edit Users','View Orders','Issue Refunds','View Reports','Manage Promos','Access API Keys'];
+  const roles=['Super','Finance','City','Ops'];
+  const matrix=[[1,1,1,1],[1,1,0,0],[1,1,1,1],[1,1,0,1],[1,1,0,0],[1,0,1,0],[1,0,0,0]];
+  for(let i=0;i<4;i++) await tx(f,roles[i],86+i*68,582,9,PK,'Bold');
+  for(let r=0;r<permRows.length;r++){
+    const oy=596+r*28;
+    if(r%2===0)bx(f,20,oy,350,28,SURF,.3,4);
+    await tx(f,permRows[r],28,oy+8,9,LG);
+    for(let c=0;c<4;c++){
+      const has=matrix[r][c];
+      await tx(f,has?'✓':'—',92+c*68,oy+8,10,has?GN:EDGE,'Bold');
+    }
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A32 / ROLES & PERMISSIONS');
+  return f;
+};
+
+// A33: BROADCAST MESSAGE CENTER
+const A33 = async () => {
+  const f = mk(adminPage,14400,'A33 Broadcast Messages',2);
+  await SB(f);
+  await HDR(f,'Broadcast Messages','Mass Communication');
+  bx(f,0,0,W,44,SURF,1);
+  bx(f,20,90,350,44,PK,.15,22); bx(f,20,90,350,1,PK,.4,22);
+  await tx(f,'+ Create New Broadcast',106,105,12,PK,'Semi Bold');
+  // Compose card
+  await tx(f,'Quick Compose',20,148,13,WH,'Semi Bold');
+  CD(f,20,166,350,240,12);
+  // Target audience
+  await tx(f,'Target Audience',28,180,11,GR,'Semi Bold');
+  bx(f,28,196,294,40,SURF,1,8); bx(f,28,196,294,1,WH,.05,8);
+  await tx(f,'All Active Customers (24,892) ▾',36,212,12,LG);
+  // Channel
+  await tx(f,'Channels',28,252,11,GR,'Semi Bold');
+  const chans=[{nm:'Push',on:true,c:CY},{nm:'SMS',on:true,c:GN},{nm:'Email',on:false,c:BL},{nm:'WhatsApp',on:false,c:GN}];
+  for(let i=0;i<chans.length;i++){
+    const ox=28+i*80;
+    bx(f,ox,268,72,28,chans[i].on?chans[i].c:EDGE,chans[i].on?.2:.08,14);
+    if(chans[i].on)bx(f,ox,268,72,1,chans[i].c,.4,14);
+    await tx(f,chans[i].nm,ox+14,274,9,chans[i].on?chans[i].c:GR,chans[i].on?'Semi Bold':'Regular');
+  }
+  // Message body
+  await tx(f,'Message',28,312,11,GR,'Semi Bold');
+  bx(f,28,328,294,64,SURF,.5,8);
+  await tx(f,'🚗 Flash Sale! 50% off all Car Wash',36,338,11,LG);
+  await tx(f,'services today only. Use code: FLASH50',36,354,11,LG);
+  await tx(f,'Valid till midnight! Tap to book.',36,370,11,LG);
+  await tx(f,'160/320',290,388,8,GR);
+  bx(f,28,396,140,24,OG,.15,10); await tx(f,'Schedule for Later',34,403,8,OG,'Semi Bold');
+  bx(f,176,396,140,24,PK,.15,10); await tx(f,'Send Now (24.8k)',182,403,8,PK,'Semi Bold');
+  // Past broadcasts
+  await tx(f,'Recent Broadcasts',20,422,13,WH,'Semi Bold');
+  const broads=[
+    {title:'Monsoon Sale Launch',sent:'24,892',opens:'68%',dt:'27 May 10:00 AM',c:CY},
+    {title:'New City — Pune Launch',sent:'4,200',opens:'74%',dt:'20 May 9:00 AM',c:GN},
+    {title:'Provider Appreciation Week',sent:'1,840',opens:'61%',dt:'15 May 6:00 PM',c:OG},
+    {title:'App Update v5.0',sent:'24,892',opens:'55%',dt:'10 May 12:00 PM',c:PK},
+  ];
+  for(let i=0;i<broads.length;i++){
+    const b=broads[i], oy=440+i*78;
+    CD(f,20,oy,350,70,8); bx(f,20,oy,3,70,b.c,1,2);
+    await tx(f,b.title,32,oy+10,12,WH,'Semi Bold');
+    await tx(f,'Sent to '+b.sent+' users  •  '+b.opens+' open rate',32,oy+28,10,GR);
+    await tx(f,b.dt,32,oy+46,9,GR);
+    bx(f,272,oy+14,72,24,b.c,.15,10);
+    await tx(f,'View Stats',278,oy+21,9,b.c,'Semi Bold');
+  }
+  await NAV_A(f,0);
+  await LBL(f,'A33 / BROADCAST MESSAGES');
+  return f;
+};
+
 // ── Build ALL screens ─────────────────────────────────────
 // Customer C1–C26 (row 0) — built before new screens
-// Customer C27–C36 (row 0, continued)
+// Customer C27–C56 (row 0, continued)
 const c27=await C27(), c28=await C28(), c29=await C29(), c30=await C30();
 const c31=await C31(), c32=await C32(), c33=await C33(), c34=await C34();
 const c35=await C35(), c36=await C36();
-console.log('Customer extended screens done (36/84)');
+const c37=await C37(), c38=await C38(), c39=await C39(), c40=await C40();
+const c41=await C41(), c42=await C42(), c43=await C43(), c44=await C44();
+const c45=await C45(), c46=await C46(), c47=await C47(), c48=await C48();
+const c49=await C49(), c50=await C50(), c51=await C51(), c52=await C52();
+const c53=await C53(), c54=await C54(), c55=await C55(), c56=await C56();
+console.log('Customer screens done (56/126)');
 
-// Provider P20–P26 (row 1, continued)
+// Provider P20–P37 (row 1, continued)
 const p20=await P20(), p21=await P21(), p22=await P22(), p23=await P23();
 const p24=await P24(), p25=await P25(), p26=await P26();
-console.log('Provider extended screens done (45/84 provider)');
+const p27=await P27(), p28=await P28(), p29=await P29(), p30=await P30();
+const p31=await P31(), p32=await P32(), p33=await P33(), p34=await P34();
+const p35=await P35(), p36=await P36(), p37=await P37();
+console.log('Provider screens done (37/126)');
 
-// Admin A1–A14 + A15–A22 (row 2)
+// Admin A1–A33 (row 2)
 const a1=await A1(), a2=await A2(), a3=await A3(), a4=await A4(), a5=await A5();
 const a6=await A6(), a7=await A7(), a8=await A8();
 const a9=await A9(), a10=await A10(), a11=await A11(), a12=await A12();
 const a13=await A13(), a14=await A14();
 const a15=await A15(), a16=await A16(), a17=await A17(), a18=await A18();
 const a19=await A19(), a20=await A20(), a21=await A21(), a22=await A22();
-console.log('All screens done (84/84)');
+const a23=await A23(), a24=await A24(), a25=await A25(), a26=await A26();
+const a27=await A27(), a28=await A28(), a29=await A29(), a30=await A30();
+const a31=await A31(), a32=await A32(), a33=await A33();
+console.log('All screens done (126/126)');
 
 // ── All 19 screens built — now add prototype links ───────────
 // Wrapped in try/catch so a failed link never blocks screen rendering
@@ -4552,7 +6430,95 @@ try {
   lnk(a22,16,44,36,36,a10.id);             // API Settings -> Platform Settings
   lnk(a10,20,600,350,52,a22.id);           // Platform Settings -> API Settings
 
-  console.log('Prototype links added (84 screens)');
+  // ── New Customer links (C37–C56) ───────────────────────
+  lnk(c37,0,0,W,H,c38.id);               // Splash -> Role Selection
+  lnk(c38,20,168,350,240,c39.id);        // Customer card -> Onboard 1
+  lnk(c38,20,432,350,240,p1.id);         // Provider card -> Provider Login
+  lnk(c39,20,610,350,52,c40.id);         // Slide 1 Next -> Slide 2
+  lnk(c39,148,680,94,28,c1.id);          // Skip -> Login
+  lnk(c40,20,610,350,52,c41.id);         // Slide 2 Next -> Slide 3
+  lnk(c41,20,610,350,52,c1.id);          // Slide 3 Get Started -> Login
+  lnk(c5,20,90,350,56,c42.id);           // Booking -> Confirm address
+  lnk(c42,20,788,350,44,c43.id);         // Address confirm -> Slot picker
+  lnk(c43,20,740,350,52,c36.id);         // Slot confirm -> Add-ons
+  lnk(c4,308,44,36,36,c44.id);           // Provider list compare btn
+  lnk(c44,20,700,140,40,c5.id);          // Compare -> Booking
+  lnk(c11,20,562,350,52,c45.id);         // Rate & Review -> Tip
+  lnk(c45,20,562,350,52,c12.id);         // Tip pay -> My Bookings
+  lnk(c45,20,628,350,44,c12.id);         // Skip tip -> My Bookings
+  lnk(c12,308,44,36,36,c46.id);          // Bookings rebook btn -> Quick Rebook
+  lnk(c46,20,686,350,52,c43.id);         // Rebook -> Slot picker
+  lnk(c33,110,404,214,32,c47.id);        // Explore offer claim -> Cart
+  lnk(c36,20,710,350,44,c47.id);         // Add-ons -> Cart
+  lnk(c47,20,790,350,44,c6.id);          // Cart -> Payment
+  lnk(c19,16,700,165,52,c48.id);         // Booking detail cancel btn
+  lnk(c48,20,720,350,52,c32.id);         // Cancel -> Refund Status
+  lnk(c18,20,134,164,94,c49.id);         // Browse -> Category Landing
+  lnk(c49,264,346,90,32,c5.id);          // Category Book Now -> Booking
+  lnk(c3,20,490,350,80,c50.id);          // Home flash deals banner -> Flash Sale
+  lnk(c50,262,282,88,32,c5.id);          // Flash deal grab -> Booking
+  lnk(c26,16,44,36,36,c51.id);           // Help -> Support Chat
+  lnk(c51,16,44,36,36,c26.id);           // Support Chat back
+  lnk(c25,16,44,36,36,c52.id);           // Settings -> Notification prefs
+  lnk(c52,16,44,36,36,c25.id);           // Notif prefs back
+  lnk(c25,20,500,350,52,c53.id);         // Settings -> Privacy
+  lnk(c53,16,44,36,36,c25.id);           // Privacy back
+  lnk(c27,16,50,318,44,c54.id);          // Map -> No providers (alternate path)
+  lnk(c54,20,776,350,44,c3.id);          // No providers -> Home
+  lnk(c10,0,100,W,44,c55.id);            // Confirmation -> Start OTP
+  lnk(c55,20,706,350,52,c7.id);          // OTP mark started -> Tracking
+  lnk(c11,20,588,350,52,c56.id);         // Rate -> Survey (alternate)
+  lnk(c56,20,588,350,52,c12.id);         // Survey -> My Bookings
+
+  // ── New Provider links (P27–P37) ────────────────────────
+  lnk(p2,20,350,350,44,p27.id);          // Dashboard incoming alert -> Job Alert
+  lnk(p27,20,548,350,72,p3.id);          // Accept Job -> Request Detail
+  lnk(p27,20,630,350,52,p28.id);         // Decline -> Decline Reason
+  lnk(p28,20,718,350,52,p2.id);          // Decline submitted -> Dashboard
+  lnk(p6,20,300,350,80,p29.id);          // Earnings -> Analytics charts
+  lnk(p29,16,44,36,36,p6.id);            // Analytics back
+  lnk(p2,300,44,36,36,p30.id);           // Dashboard toggle -> Availability
+  lnk(p30,16,44,36,36,p2.id);            // Availability back
+  lnk(p6,20,546,350,52,p31.id);          // Earnings -> Cash Out
+  lnk(p31,20,546,350,52,p6.id);          // Cash Out back
+  lnk(p18,20,400,350,52,p32.id);         // Performance -> Rating Response
+  lnk(p32,20,646,350,52,p18.id);         // Response back
+  lnk(p32,20,586,350,44,p33.id);         // Dispute review -> Dispute form
+  lnk(p33,20,776,350,52,p18.id);         // Dispute submitted
+  lnk(p19,20,370,350,52,p34.id);         // Provider Help -> Refer Partner
+  lnk(p34,16,44,36,36,p19.id);           // Refer back
+  lnk(p7,200,620,130,44,p35.id);         // KYC -> Document Manager
+  lnk(p35,16,44,36,36,p7.id);            // Docs back
+  lnk(p3,194,678,176,54,p36.id);         // Request Detail -> Pre-job Info
+  lnk(p36,20,714,350,52,p37.id);         // Pre-job -> Navigation
+  lnk(p37,20,716,350,52,p8.id);          // Navigation -> En Route
+  lnk(p37,16,44,36,36,p3.id);            // Navigation back
+
+  // ── New Admin links (A23–A33) ────────────────────────────
+  lnk(a23,20,498,350,52,a1.id);          // Admin Login -> Dashboard
+  lnk(a1,300,44,36,36,a23.id);           // Dashboard logout -> Login
+  lnk(a10,20,300,350,52,a24.id);         // Platform Settings -> City Mgmt
+  lnk(a24,16,44,36,36,a10.id);           // City back
+  lnk(a10,20,370,350,52,a25.id);         // Platform Settings -> Dynamic Pricing
+  lnk(a25,16,44,36,36,a10.id);           // Pricing back
+  lnk(a2,20,370,350,52,a26.id);          // User Mgmt -> Onboarding Pipeline
+  lnk(a26,16,44,36,36,a2.id);            // Pipeline back
+  lnk(a5,20,460,350,52,a27.id);          // Analytics -> Fraud Detection
+  lnk(a27,16,44,36,36,a5.id);            // Fraud back
+  lnk(a11,20,480,350,52,a28.id);         // Revenue -> Financial Overview
+  lnk(a28,16,44,36,36,a11.id);           // Financial back
+  lnk(a5,20,330,350,52,a29.id);          // Analytics -> Segmentation
+  lnk(a29,16,44,36,36,a5.id);            // Segmentation back
+  lnk(a13,20,440,350,52,a30.id);         // Support Tickets -> SLA Monitor
+  lnk(a30,16,44,36,36,a13.id);           // SLA back
+  lnk(a5,20,530,350,52,a31.id);          // Analytics -> A/B Tests
+  lnk(a31,16,44,36,36,a5.id);            // A/B back
+  lnk(a1,20,560,350,52,a32.id);          // Dashboard -> Roles
+  lnk(a32,16,44,36,36,a1.id);            // Roles back
+  lnk(a12,20,440,350,52,a33.id);         // Push Notifications -> Broadcast
+  lnk(a33,16,44,36,36,a12.id);           // Broadcast back
+
+  console.log('Prototype links added (126 screens)');
 } catch(e) {
   console.error('Links skipped (reactions API error):', e.message);
 }
@@ -4560,9 +6526,9 @@ try {
 figma.viewport.scrollAndZoomIntoView(pg.children);
 
 console.log('============================================================');
-console.log('ServiCo v5 — PRODUCTION COMPLETE! 84 screens on one page.');
+console.log('ServiCo v6 — WORLD-CLASS! 126 screens on one page.');
 console.log('');
-console.log('CUSTOMER (36 screens — Row y=0):');
+console.log('CUSTOMER (56 screens — Row y=0):');
 console.log('  C1  Login            C2  Register          C3  Home');
 console.log('  C4  Provider List    C5  Booking           C6  Payment');
 console.log('  C7  Tracking         C8  Profile           C9  Provider Detail');
@@ -4576,7 +6542,7 @@ console.log('  C28 Search Results   C29 Edit Profile      C30 Payment Methods');
 console.log('  C31 Complaint Filing C32 Refund Status     C33 Explore & Discover');
 console.log('  C34 Loyalty Rewards  C35 Invoice Receipt   C36 Booking Add-ons');
 console.log('');
-console.log('PROVIDER (26 screens — Row y=960):');
+console.log('PROVIDER (37 screens — Row y=960):');
 console.log('  P1  Login            P2  Dashboard         P3  Request Detail');
 console.log('  P4  Active Jobs      P5  Job Detail        P6  Earnings');
 console.log('  P7  KYC Step 2       P8  En Route          P9  Job Completion');
@@ -4587,7 +6553,7 @@ console.log('  P19 Help             P20 Availability Setup P21 Edit Profile');
 console.log('  P22 Service Editor   P23 Photo Docs        P24 Payout Detail');
 console.log('  P25 Incentives       P26 Training & Resources');
 console.log('');
-console.log('ADMIN (22 screens — Row y=1920):');
+console.log('ADMIN (33 screens — Row y=1920):');
 console.log('  A1  Dashboard        A2  User Management   A3  Orders Monitor');
 console.log('  A4  Complaints       A5  Analytics         A6  Provider Verify');
 console.log('  A7  Promo Management A8  Payout Management A9  Category Mgmt');
